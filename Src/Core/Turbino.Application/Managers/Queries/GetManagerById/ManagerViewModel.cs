@@ -15,23 +15,23 @@
 
         public string ReceptionDay { get; set; }
 
-        public static Expression<Func<Manager, ManagerViewModel>> Projection
-        {
-            get
-            {
-                return manager => new ManagerViewModel
-                {
-                    Id = manager.Id,
-                    FirstName = manager.FirstName,
-                    LastName = manager.LastName,
-                    ReceptionDay = manager.ReceptionDay.ToString()
-                };
-            }
-        }
+        //public static Expression<Func<Manager, ManagerViewModel>> Projection
+        //{
+        //    get
+        //    {
+        //        return manager => new ManagerViewModel
+        //        {
+        //            Id = manager.Id,
+        //            FirstName = manager.FirstName,
+        //            LastName = manager.LastName,
+        //            ReceptionDay = manager.ReceptionDay.ToString()
+        //        };
+        //    }
+        //}
 
-        public static ManagerViewModel Create(Manager manager)
-        {
-            return Projection.Compile().Invoke(manager);
-        }
+        //public static ManagerViewModel Create(Manager manager)
+        //{
+        //    return Projection.Compile().Invoke(manager);
+        //}
     }
 }

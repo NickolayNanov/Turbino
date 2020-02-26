@@ -14,8 +14,8 @@
         [Route("Home/Index")]
         public async Task<IActionResult> Index()
         {
-            var result = await Mediator.Send(new GetAllManagersListQuery());
-            return this.View(result);
+            //var result = await Mediator.Send(new GetAllManagersListQuery());
+            return this.View();
         }
 
         public IActionResult Privacy()

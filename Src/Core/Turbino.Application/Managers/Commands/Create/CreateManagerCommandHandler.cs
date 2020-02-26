@@ -23,18 +23,18 @@
 
         public async Task<Unit> Handle(CreateManagerCommand request, CancellationToken cancellationToken)
         {
-            var manager = new Manager
-            {                
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                ReceptionDay = Enum.Parse<WeekDay>(request.ReceptionDay),
-                CreatedOn = DateTime.UtcNow,
-                IsDeleted = false
-            };
-
-            this.context.Managers.Add(manager);
-
-            await this.context.SaveChangesAsync(cancellationToken);
+            //var manager = new Manager
+            //{                
+            //    FirstName = request.FirstName,
+            //    LastName = request.LastName,
+            //    ReceptionDay = Enum.Parse<WeekDay>(request.ReceptionDay),
+            //    CreatedOn = DateTime.UtcNow,
+            //    IsDeleted = false
+            //};
+            //
+            //this.context.Managers.Add(manager);
+            //
+            //await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

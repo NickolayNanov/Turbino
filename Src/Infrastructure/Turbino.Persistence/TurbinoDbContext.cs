@@ -8,13 +8,14 @@
     using Turbino.Persistence.Common;
     using Application.Common.Interfaces;
 
-    public class TurbinoDbContext : IdentityDbContext, ITurbinoDbContext
+    public class TurbinoDbContext : IdentityDbContext<TurbinoUser, TurbinoRole, string>, ITurbinoDbContext
     {
-        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Tour> Tours { get; set; }
+        public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<UserDestination> UserDestinations { get; set; }
 
-        public DbSet<TurbinoRole> TurbinoRoles { get; set; }
-
-        public DbSet<TurbinoUser> TurbinoUsers { get; set; }
 
         public TurbinoDbContext(DbContextOptions<TurbinoDbContext> options)
             : base(options)
@@ -24,7 +25,6 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             builder.ApplyConfigurationsFromAssembly(typeof(TurbinoDbContext).Assembly);            
         }
 
