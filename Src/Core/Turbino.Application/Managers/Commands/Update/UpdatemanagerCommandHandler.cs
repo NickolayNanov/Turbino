@@ -24,22 +24,22 @@
 
         public async Task<Unit> Handle(UpdateManagerCommand request, CancellationToken cancellationToken)
         {
-            var manager = await this.context.Managers
-                .SingleOrDefaultAsync(m => m.Id == request.Id && m.IsDeleted != true, cancellationToken);
-
-            if (manager == null)
-            {
-                throw new NotFoundException(Entity, request.Id);
-            }
-            
-            manager.FirstName = request.FirstName;
-            manager.LastName = request.LastName;
-            manager.ReceptionDay = Enum.Parse<WeekDay>(request.ReceptionDay);
-            manager.ModifiedOn = DateTime.UtcNow;
-
-            this.context.Managers.Update(manager);
-
-            await this.context.SaveChangesAsync(cancellationToken);
+            //var manager = await this.context.Managers
+            //    .SingleOrDefaultAsync(m => m.Id == request.Id && m.IsDeleted != true, cancellationToken);
+            //
+            //if (manager == null)
+            //{
+            //    throw new NotFoundException(Entity, request.Id);
+            //}
+            //
+            //manager.FirstName = request.FirstName;
+            //manager.LastName = request.LastName;
+            //manager.ReceptionDay = Enum.Parse<WeekDay>(request.ReceptionDay);
+            //manager.ModifiedOn = DateTime.UtcNow;
+            //
+            //this.context.Managers.Update(manager);
+            //
+            //await this.context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

@@ -29,10 +29,10 @@
 
                 try
                 {
-                    var financeContext = services.GetRequiredService<TurbinoDbContext>();
-                    financeContext.Database.Migrate();
+                    var turbinoDbContext = services.GetRequiredService<TurbinoDbContext>();
+                    turbinoDbContext.Database.Migrate();
 
-                    var mediator = services.GetRequiredService<IMediator>();
+                    IMediator mediator = services.GetRequiredService<IMediator>();
                     await mediator.Send(new SeedSampleDataCommand(), CancellationToken.None);
                 }
                 catch (Exception ex)

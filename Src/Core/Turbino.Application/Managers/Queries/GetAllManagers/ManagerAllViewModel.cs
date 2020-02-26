@@ -17,7 +17,7 @@
 
         public void CreateMappings(Profile configuration)
         {
-            configuration.CreateMap<Manager, ManagerAllViewModel>();
+            //configuration.CreateMap<Manager, ManagerAllViewModel>();
         }
     }
 }

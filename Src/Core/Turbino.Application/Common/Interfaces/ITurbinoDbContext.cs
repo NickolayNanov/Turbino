@@ -9,11 +9,17 @@
 
     public interface ITurbinoDbContext
     {
-         DbSet<Manager> Managers { get; set; }
+         //DbSet<Manager> Managers { get; set; }
 
-        DbSet<TurbinoUser> TurbinoUsers { get; set; }
+        DbSet<CreditCard> CreditCards { get; set; }
 
-        DbSet<TurbinoRole> TurbinoRoles { get; set; }
+        DbSet<Destination> Destinations { get; set; }
+
+        DbSet<Reservation> Reservations { get; set; }
+
+        DbSet<Tour> Tours { get; set; }
+
+        DbSet<UserDestination> UserDestinations { get; set; } 
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

@@ -2,14 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
-    using Interfaces;
+
     using Microsoft.AspNetCore.Identity;
 
-    public class TurbinoUser : IdentityUser, IAuditableEntity, IDeletableEntity
+    public class TurbinoUser : IdentityUser<string>
     {
         public TurbinoUser()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.UserDestinations = new HashSet<UserDestination>();
+            this.Cards = new HashSet<CreditCard>();
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
@@ -17,22 +19,14 @@
 
         public string FirstName { get; set; }
 
-        public string LastName { get; set; }
+        public string MiddleName { get; set; }
 
-        public bool IsTemporary { get; set; }
+        public string LastName { get; set; }      
 
-        public DateTime CreatedOn { get; set; }
-
-        public string CreatedBy { get; set; }
-
-        public DateTime? ModifiedOn { get; set; }
-
-        public string LastModifiedBy { get; set; }
-
-        public bool IsDeleted { get; set; }
-
-        public DateTime? DeletedOn { get; set; }
+        public virtual ICollection<CreditCard> Cards { get; set; }
         
+        public virtual ICollection<UserDestination> UserDestinations { get; private set; }
+
         public virtual ICollection<IdentityUserRole<string>> Roles { get; private set; }
 
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; private set; }
