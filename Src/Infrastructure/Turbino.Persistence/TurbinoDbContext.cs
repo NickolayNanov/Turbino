@@ -11,11 +11,12 @@
     public class TurbinoDbContext : IdentityDbContext<TurbinoUser, TurbinoRole, string>, ITurbinoDbContext
     {
         public DbSet<Tour> Tours { get; set; }
-        public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<UserDestination> UserDestinations { get; set; }
-
+        public DbSet<TourImage> TourImages { get; set; }
+        public DbSet<DestinationImage> DestinationImages { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         public TurbinoDbContext(DbContextOptions<TurbinoDbContext> options)
             : base(options)

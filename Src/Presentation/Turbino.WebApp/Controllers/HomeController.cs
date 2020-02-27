@@ -11,10 +11,9 @@
     {
         [HttpGet]
         [Route("/")]
-        [Route("Home/Index")]
-        public async Task<IActionResult> Index()
+        //[Route("Home/Index")]
+        public IActionResult Index()
         {
-            //var result = await Mediator.Send(new GetAllManagersListQuery());
             return this.View();
         }
 

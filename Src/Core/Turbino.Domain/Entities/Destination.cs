@@ -20,13 +20,19 @@
 
         public string Description { get; set; }
 
-        public string LanguageSpoken { get; set; }
+        public string SpokenLanguage { get; set; }
+
+        public string Visa { get; set; }
+
+        public string Currency { get; set; }
 
         public int SquareArea { get; set; }
 
         public virtual ICollection<Tour> Tours { get; private set; }
 
         public virtual ICollection<UserDestination> DestionationUsers { get; private set; }
+
+        public virtual ICollection<DestinationImage> Galery { get; private set; }
 
         public void Visit()
         {

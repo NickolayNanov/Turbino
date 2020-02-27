@@ -9,10 +9,6 @@
 
     public interface ITurbinoDbContext
     {
-         //DbSet<Manager> Managers { get; set; }
-
-        DbSet<CreditCard> CreditCards { get; set; }
-
         DbSet<Destination> Destinations { get; set; }
 
         DbSet<Reservation> Reservations { get; set; }
@@ -20,6 +16,12 @@
         DbSet<Tour> Tours { get; set; }
 
         DbSet<UserDestination> UserDestinations { get; set; } 
+
+        DbSet<TourImage> TourImages { get; set; }
+
+        DbSet<DestinationImage> DestinationImages { get; set; }
+
+        DbSet<Review> Reviews { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

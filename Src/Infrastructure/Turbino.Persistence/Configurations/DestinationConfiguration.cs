@@ -23,6 +23,12 @@
                 .HasForeignKey(d => d.DestinationId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(d => d.Galery)
+                .WithOne(i => i.Destination)
+                .HasForeignKey(i => i.DestinationId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
