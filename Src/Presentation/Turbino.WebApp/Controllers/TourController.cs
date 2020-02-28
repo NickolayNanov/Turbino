@@ -8,5 +8,10 @@ namespace Turbino.WebApp.Controllers
         {
             return this.View();
         }
+
+        public IActionResult Inquire(string tourId)
+        {
+            return this.View();
+        }
     }
 }
