@@ -17,6 +17,7 @@
         public DbSet<TourImage> TourImages { get; set; }
         public DbSet<DestinationImage> DestinationImages { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
 
         public TurbinoDbContext(DbContextOptions<TurbinoDbContext> options)
             : base(options)

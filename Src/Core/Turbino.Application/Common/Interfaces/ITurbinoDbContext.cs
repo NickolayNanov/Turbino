@@ -23,6 +23,8 @@
 
         DbSet<Review> Reviews { get; set; }
 
+        DbSet<TeamMember> TeamMembers { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

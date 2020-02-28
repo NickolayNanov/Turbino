@@ -16,5 +16,10 @@ namespace Turbino.WebApp.Controllers
         {
             return this.View();
         }
+
+        public IActionResult Filter(int start, int end, string range)
+        {
+            return this.View();
+        }
     }
 }
