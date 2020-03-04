@@ -25,6 +25,12 @@
 
         DbSet<TeamMember> TeamMembers { get; set; }
 
+        DbSet<TurbinoUser> Users { get; set; }
+
+        DbSet<TurbinoRole> Roles { get; set; }
+
+        DbSet<TurbinoUserRole> UserRoles { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

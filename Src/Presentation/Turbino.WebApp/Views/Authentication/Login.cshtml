@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model Turbino.Application.Authentication.Login.Commands.LoginTurbinoUserCommand
+}
+
+<section id="section3">
+    <div class="container formhome2 text-center justify-content-center align-items-center pb-4">
+
+        <form asp-controller="Authentication" asp-action="Login" method="post" class="text-center justify-content-center align-items-center pb-0 mt-5">
+            <input asp-for="@Model.Username" 
+                   type="text" 
+                   class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" 
+                   id="inlineFormInputName1" 
+                   placeholder="@nameof(Model.Username)">
+            <input asp-for="@Model.Password" 
+                   type="password" 
+                   class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" 
+                   id="inlineFormInputName1" 
+                   placeholder="@nameof(Model.Password)">
+
+            <button type="submit" class="btn btn-primary mb-2 mx-4 mx-md-0 mr-lg-2 py-2 form-control-inline3">Login</button>
+        </form>
+    </div>
+</section>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/popper.min.js"></script>
+
+<!-- Aditional scripts -->
+<script src="../js/jquery.magnific-popup.min.js"></script>
+<script src="../js/smooth-scroll.min.js"></script>
+<script src="../js/instafeed.min.js"></script>
+<script src="../js/ofi.js"></script>
+
+<!-- Main scripts -->
+<script src="js/main.js"></script>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" href="../css/font-awesome-animation.min.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/style.css" type="text/css">

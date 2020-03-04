@@ -14,7 +14,6 @@
     <meta name="description" content="Travel agency template for all types of tour agencies, travel bloggers, boostrap 4 based template">
     <meta name="keywords" content="Turbino, Turbino, travel agency, themeforest tour agency, travel, adventure, destinations,">
 
-    <!-- Bootstrap and Jquery scripts -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -37,13 +36,187 @@
 </head>
 
 <body class="home home2">
-    <partial name="_Header" />
-    <!-- End section 1-->
+    @using Microsoft.AspNetCore.Identity
+    @using Turbino.Domain.Entities
 
-    @this.RenderBody();
+    @inject SignInManager<TurbinoUser> SignInManager
+    @inject UserManager<TurbinoUser> UserManager
+    <header>
+
+        <div id="wrapper-navbar">
+            <nav id="top" class="navbar py-3 fixed-top navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand ml-sm-5" href="#"><img src="assets/images/logo.png" alt="image"></a>
+                <button class="navbar-toggler collapsed navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li>
+                            <a asp-controller="Home" asp-action="Index" class="nav-link mr-3 open my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown1" role="button" aria-haspopup="true" aria-expanded="false">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-controller="Destination" asp-action="Index" class="nav-link mr-3 open my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown2" role="button" aria-haspopup="true" aria-expanded="false">
+                                Destinations
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a asp-controller="Tour" asp-action="Index" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                Tours
+                            </a>
+                        </li>
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a asp-controller="Authentication" asp-action="Login" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Login
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a asp-controller="Authentication" asp-action="Register" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Register
+                                </a>
+                            </li>
+                        }
+                        else 
+                        {
+                            <li class="nav-item dropdown">
+                                <p class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown6" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Hello, @this.User.Identity.Name
+                                </p>
+                            </li>
+                        }
+                    </ul>
+
+                    <div class="row d-none d-lg-block sidebartop">
+                        <div class="col-12 mr-4 sidebar">
+                            <div class="mini-submenu">
+                                <span class="icon-bar2"></span>
+                                <span class="icon-bar2"></span>
+                                <span class="icon-bar2"></span>
+                            </div>
+                            <div class="list-group">
+                                <span class="list-group-item active">
+                                    <img class="svgcenter mt-4 logo-light" src="assets/svgs/logolight.svg" alt="image">
+                                    <span class="pull-right" id="slide-submenu">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+                                </span>
+                                <p class="white py-4 px-5 text-center  list-group-item light">
+                                    Lorem ipsum diocritatem eu, fierent molestie petentium id his. Ut aeterno nostrum nam, solet sapientem ea quo. Cum te meis illud, aeterno accusata ut vix.
+                                </p>
+                                <ul class="list-group-item py-4">
+                                    <li><h5 class="white text-center"><i class="white fas fa-map-marker-alt mr-2"></i>Mave Avenue, New York</h5></li>
+                                    <li><h5 class="white text-center"><i class="white fas fa-phone-square mr-2"></i>United States (+1) 3333.1111</h5></li>
+                                    <li><h5 class="white text-center"><i class="white fas fa-envelope mr-2"></i>hello@ourcompany.com</h5></li>
+                                </ul>
+                                <div class="list-group-item text-center pt-4 ">
+                                    <h6>Follow Us</h6>
+                                    <ul class="text-center py-3">
+                                        <li class="list-inline-item"><a href="http://www.facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li class="list-inline-item"><a href="http://www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+                                        <li class="list-inline-item"><a href="http://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                    <div class="list-group-item py-4">
+                                        <a href="#" class="d-block white py-2">
+                                            <i class="fa fa-users"></i> About Us
+                                        </a>
+                                        <a class="white d-block" href="#">
+                                            <i class="fa fa-envelope"></i> Contact Us
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+    </header>
+
+    <!-- End section 1-->
+    <main>
+        @this.RenderBody();
+    </main>
+
 
     <!-- Footer -->
-    <partial name="_Footer" />
+
+    <footer>
+        <section id="footer">
+
+            <div class="container">
+
+                <div class="row text-center text-xs-center text-sm-left text-md-left">
+
+                    <!-- Contact Information -->
+                    <div class="col-xs-12 col-md-6 col-lg-4">
+
+                        <h6 class="white mt-4">Contact Us</h6>
+
+                        <ul class="list-unstyled quick-links">
+                            <li><p class="white light">Lorem ipsum dolor sit amet, consectetur adipi. Suspend isse ultri sit amet, consectetur adipi. Suspend isse ultri t amet, consectetur adipi. </p></li>
+                            <li><h5><i class="fas fa-map-marker-alt mr-2"></i>Mave Avenue, New York</h5></li>
+                            <li><h5><i class="fas fa-phone-square mr-2"></i>United States (+1) 3333.1111</h5></li>
+                            <li><h5><i class="fas fa-envelope mr-2"></i>hello@ourcompany.com</h5></li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Networks -->
+                    <div class="col-xs-12 col-md-6 col-lg-4">
+
+                        <img class="svgcenter mt-4 logo-light" src="assets/svgs/logolight.svg" alt="">
+
+                        <ul class="list-unstyled list-inline mt-3 social text-center">
+                            <li class="list-inline-item"><a href="http://www.facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a href="http://www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="http://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+
+                        <ul class="list-unstyled text-center quick-links mt-3">
+                            <li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                            <li><a href="tour-search-2-cols-card.html"><i class="fa fa-angle-double-right"></i>See our Tours</a></li>
+                            <li><a href="about.html"><i class="fa fa-angle-double-right"></i>About Us</a></li>
+                            <li><a href="contact.html"><i class="fa fa-angle-double-right"></i>Contact Us</a></li>
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Instagram Feed -->
+                    <div id="instafeed" class="col-xs-12 col-md-6 col-lg-4 grid mx-auto">
+                        <h6 class="white mt-4 mb-3">Instagram Gallery</h6>
+                        <div class="grid-sizer"></div>
+                    </div>
+
+                </div>
+                <!-- GO UP rectangle -->
+                <div class="scale-up">
+                    <a class="smooth-scroll  rectangle-right" href="#">
+                        <div class="go-up px-1">
+                            <i class="fas mb-2 fa-arrow-up"></i><br>
+                            <h6 class="text-center letters-up">GO<br>UP</h6>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Copyright Info-->
+                <div class="row">
+                    <div class="col-12 mt-2 mt-sm-2 text-center text-white">
+                        <div class="separatorfullwidth"></div>
+                        <p class="white footer-bottom">© Copyright Turbino Demo - <a class="text-green ml-2" href="https://www.uxithemes.com" target="_blank">template by UxiThemes</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </footer>
 
 </body>
 </html>

@@ -1,13 +1,14 @@
 ﻿namespace Turbino.Domain.Entities
 {
     using System;
+    using System.Collections.Generic;
     using Microsoft.AspNetCore.Identity;
 
     public class TurbinoRole : IdentityRole<string>
     {
         public TurbinoRole()
-            : this(null)
         {
+            this.RoleUsers = new HashSet<TurbinoUserRole>();
         }
 
         public TurbinoRole(string name)
@@ -15,5 +16,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
         }
+
+        public virtual ICollection<TurbinoUserRole> RoleUsers { get; set; }
     }
 }

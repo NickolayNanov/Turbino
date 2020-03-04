@@ -18,6 +18,9 @@
         public DbSet<DestinationImage> DestinationImages { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<TurbinoUserRole> UserRoles { get; set; }
+        public DbSet<TurbinoUser> Users { get; set; }
+        public DbSet<TurbinoRole> Roles { get; set; }
 
         public TurbinoDbContext(DbContextOptions<TurbinoDbContext> options)
             : base(options)

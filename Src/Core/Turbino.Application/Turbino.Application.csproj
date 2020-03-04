@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="CloudinaryDotNet" Version="1.10.0" />
     <PackageReference Include="FluentValidation" Version="8.6.0" />
     <PackageReference Include="MediatR" Version="7.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -19,7 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="User\Queries\" />
+    <Folder Include="Authentication\Login\Queries\" />
+    <Folder Include="Authentication\Register\Queries\" />
   </ItemGroup>
 
 </Project>
