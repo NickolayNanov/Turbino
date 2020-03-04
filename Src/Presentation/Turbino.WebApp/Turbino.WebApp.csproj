@@ -24,4 +24,10 @@
     <ProjectReference Include="..\..\Infrastructure\Turbino.Persistence\Turbino.Persistence.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
 </Project>

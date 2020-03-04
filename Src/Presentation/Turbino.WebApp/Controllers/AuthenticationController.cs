@@ -10,12 +10,6 @@ namespace Turbino.WebApp.Controllers
 {
     public class AuthenticationController : BaseController
     {
-        private readonly RoleManager<TurbinoRole> roleManager;
-
-        public AuthenticationController(RoleManager<TurbinoRole> roleManager)
-        {
-            this.roleManager = roleManager;
-        }
         
         [HttpGet]
         public IActionResult Login()
@@ -31,9 +25,8 @@ namespace Turbino.WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-            await this.SeedRoles();
             return this.View();
         }
 
@@ -41,16 +34,7 @@ namespace Turbino.WebApp.Controllers
         public async Task<IActionResult> Register(CreateTurbinoUserCommand command)
         {
             await Mediator.Send(command);
-            return this.View(command);
-        }
-
-        private async Task SeedRoles()
-        {
-            if (!roleManager.Roles.Any())
-            {
-                await roleManager.CreateAsync(new TurbinoRole("Admin"));
-                await roleManager.CreateAsync(new TurbinoRole("User"));
-            }
+            return this.Redirect("/");
         }
     }
 }

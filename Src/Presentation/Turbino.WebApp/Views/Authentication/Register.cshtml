@@ -2,10 +2,15 @@
 @{
     @model Turbino.Application.Authentication.Register.Commands.Create.CreateTurbinoUserCommand
 }
+    <div class="tour-title not-fixed center-image">
 
+        <img class="w-100 h-100" src="../assets/images/search.jpg" alt="">
+        <h1 class="white text-center front shadow-text center-text">Create your account</h1>
+        <img class="curve2 d-none d-xl-block" src="../assets/svgs/curve.svg" alt="">
+    </div>
     <section id="section3">
         <div class="container formhome2 text-center justify-content-center align-items-center pb-4">
-            
+            <h4 class="black mx-2 mb-3 mt-0 pt-4 text-center bold  d-block">Register</h4>
             <form asp-controller="Authentication" asp-action="Register" method="post" class="text-center justify-content-center align-items-center pb-0 mt-5">
                 <input asp-for="@Model.Username" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Username)">
                 <input asp-for="@Model.FirstName" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.FirstName)">

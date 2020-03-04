@@ -70,7 +70,11 @@
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMvcWithAreas();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
