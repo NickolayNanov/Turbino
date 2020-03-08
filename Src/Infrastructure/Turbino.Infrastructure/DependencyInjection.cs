@@ -11,7 +11,7 @@
         {
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IDateTime, MachineDateTime>();
-            
+            services.AddScoped<ImageUploader>();
             return services;
         }
     }

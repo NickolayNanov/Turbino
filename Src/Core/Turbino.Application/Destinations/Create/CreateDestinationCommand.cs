@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Turbino.Application.Destinations.Create
 {
@@ -15,5 +16,7 @@ namespace Turbino.Application.Destinations.Create
         public string Currency { get; set; }
 
         public int SquareArea { get; set; }
+
+        public IFormFile ImgUrl { get; set; }
     }
 }

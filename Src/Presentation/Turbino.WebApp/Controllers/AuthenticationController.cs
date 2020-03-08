@@ -10,7 +10,13 @@ namespace Turbino.WebApp.Controllers
 {
     public class AuthenticationController : BaseController
     {
-        
+        private readonly SignInManager<TurbinoUser> signInManager;
+
+        public AuthenticationController(SignInManager<TurbinoUser> signInManager)
+        {
+            this.signInManager = signInManager;
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -34,6 +40,13 @@ namespace Turbino.WebApp.Controllers
         public async Task<IActionResult> Register(CreateTurbinoUserCommand command)
         {
             await Mediator.Send(command);
+            return this.Redirect("/");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
             return this.Redirect("/");
         }
     }

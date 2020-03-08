@@ -1,18 +1,22 @@
 ﻿using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Turbino.Application.Common.Interfaces;
 using Turbino.Domain.Entities;
+using Turbino.Infrastructure;
 
 namespace Turbino.Application.Destinations.Create
 {
     public class CreateDestinationHandler : IRequestHandler<CreateDestinationCommand, Unit>
     {
         private readonly ITurbinoDbContext context;
+        private readonly ImageUploader uploader;
 
-        public CreateDestinationHandler(ITurbinoDbContext context)
+        public CreateDestinationHandler(ITurbinoDbContext context, ImageUploader uploader)
         {
             this.context = context;
+            this.uploader = uploader;
         }
 
         public async Task<Unit> Handle(CreateDestinationCommand request, CancellationToken cancellationToken)
@@ -25,6 +29,8 @@ namespace Turbino.Application.Destinations.Create
                 Currency = request.Currency,
                 Visa = request.Visa
             };
+
+            destination.ImgUrl = uploader.UploadImage(request.ImgUrl, Guid.NewGuid().ToString());
 
             context.Destinations.Add(destination);
             await context.SaveChangesAsync(cancellationToken);
