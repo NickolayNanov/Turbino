@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Turbino.Application.Destinations.Create;
+using Turbino.Application.Destinations.Commands.Create;
 using Turbino.WebApp.Controllers;
 
 namespace Turbino.WebApp.Areas.Admin.Controllers

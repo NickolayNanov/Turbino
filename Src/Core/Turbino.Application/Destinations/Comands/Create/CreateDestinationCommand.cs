@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace Turbino.Application.Destinations.Create
+namespace Turbino.Application.Destinations.Commands.Create
 {
     public class CreateDestinationCommand : IRequest
     {

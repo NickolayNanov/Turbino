@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Turbino.Application.Destinations.Queries.GetAllDestinations;
+using Turbino.Application.Destinations.Queries.GetDestinationById;
 
 namespace Turbino.WebApp.Controllers
 {
@@ -6,15 +9,17 @@ namespace Turbino.WebApp.Controllers
     {
         [HttpGet]
         [Route("Destinations")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return this.View();
+            DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsListQuery());
+            return this.View(result);
         }
 
         [HttpGet]
-        public IActionResult Inquire(string destinationName)
+        public async Task<IActionResult> Inquire(string destinationId)
         {
-            return this.View();
+            DestinationViewModel result = await Mediator.Send(new GetDestinationByIdQuery(destinationId));
+            return this.View(result);
         }
 
         public IActionResult Filter(int start, int end, string range)

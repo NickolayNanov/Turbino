@@ -6,7 +6,7 @@ using Turbino.Application.Common.Interfaces;
 using Turbino.Domain.Entities;
 using Turbino.Infrastructure;
 
-namespace Turbino.Application.Destinations.Create
+namespace Turbino.Application.Destinations.Commands.Create
 {
     public class CreateDestinationHandler : IRequestHandler<CreateDestinationCommand, Unit>
     {

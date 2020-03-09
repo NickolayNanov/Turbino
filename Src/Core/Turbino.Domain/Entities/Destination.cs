@@ -38,5 +38,10 @@
         {
             this.TimesVisited++;
         }
+
+        public void SetGalery(ICollection<DestinationImage> images)
+        {
+            this.Galery = images;
+        }
     }
 }

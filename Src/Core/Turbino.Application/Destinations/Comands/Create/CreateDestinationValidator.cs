@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Turbino.Application.Destinations.Create
+namespace Turbino.Application.Destinations.Commands.Create
 {
     public class CreateDestinationValidator : AbstractValidator<CreateDestinationCommand>
     {
