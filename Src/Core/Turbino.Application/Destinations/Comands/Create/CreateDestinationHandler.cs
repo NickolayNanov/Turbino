@@ -27,7 +27,8 @@ namespace Turbino.Application.Destinations.Commands.Create
                 Description = request.Description,
                 SpokenLanguage = request.SpokenLanguage,
                 Currency = request.Currency,
-                Visa = request.Visa
+                Visa = request.Visa,
+                SquareArea = request.SquareArea
             };
 
             destination.ImgUrl = uploader.UploadImage(request.ImgUrl, Guid.NewGuid().ToString());

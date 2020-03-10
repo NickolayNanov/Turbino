@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     @model Turbino.Application.Destinations.Queries.GetAllDestinations.DestinationsListViewModel
 }
 
@@ -140,126 +140,101 @@
                 </div>
                 <a href="#"><img src="assets/images/promotion.jpg" class="w-100 img-fluid mx-auto d-block mt-4" alt=""></a>
             </div>
-           
+
             <div class="col-lg-3 col-md-4 col-12">
-                @foreach (var destination in Model.Destinations)
+                @while (Model.Destinations.Any())
                 {
-                    <div class="complete-image mb-4">
-                        <a asp-controller="Destination" asp-action="Inquire" asp-route-destinationId="@destination.Id">
+                    int skip = 0;
+                    int take = 3;
+
+                    @foreach (var one in Model.Destinations.Skip(skip).Take(take))
+                    {
+                        <div class="complete-image mb-4">
+                            <a asp-controller="Destination" asp-action="Inquire" asp-route-destinationId="@one.Id">
+                                <div class="destination-item">
+                                    <img src="@one.ImgUrl" class="img-fluid destination-item" alt="costarica">
+                                    <h6 class="white front">@one.Name</h6>
+                                </div>
+                            </a>
+                        </div>
+                        //Model.Destinations.Remove(one);
+                        skip += take;
+                    }
+                }
+
+            </div>
+
+            @*<div class="complete-image mb-4">
+                        <a class="" href="#" target="_blank">
                             <div class="destination-item">
-                                <img src="@destination.ImgUrl" class="img-fluid destination-item" alt="costarica">
-                                <h6 class="white front">@destination.Name</h6>
+                                <img src="assets/images/japan.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">Japan</h6>
                             </div>
                         </a>
                     </div>
-                }
+                    <div class="complete-image mb-4">
+                        <a class="" href="#" target="_blank">
+                            <div class="destination-item">
+                                <img src="https://res.cloudinary.com/olympiacloudinary/image/upload/v1583685736/mgrrcusblirdxhqepppm.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">Gornik</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="complete-image mb-4">
+                        <a class="" href="#" target="_blank">
+                            <div class="destination-item">
+                                <img src="assets/images/london.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">England</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="complete-image mb-lg-0 mb-4">
+                        <a class="" href="#" target="_blank">
+                            <div class="destination-item">
+                                <img src="assets/images/chinadestination.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">China</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
-                @*<div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/japan.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">Japan</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="https://res.cloudinary.com/olympiacloudinary/image/upload/v1583685736/mgrrcusblirdxhqepppm.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">Gornik</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/london.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">England</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-lg-0 mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/chinadestination.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">China</h6>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-12">
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/switzerland2.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">Switzerland</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/california.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">California, U.S.A.</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/peru.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">Peru</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-lg-0 mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/australia.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">Australia</h6>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-12">
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/netherlands.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">Netherlands</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/newyork.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">New York, U.S.A</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-4">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/india.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">India</h6>
-                        </div>
-                    </a>
-                </div>
-                <div class="complete-image mb-lg-0 mb-5">
-                    <a class="" href="#" target="_blank">
-                        <div class="destination-item">
-                            <img src="assets/images/argentina.jpg" class="img-fluid destination-item" alt="costarica">
-                            <h6 class="white front">Argentina</h6>
-                        </div>
-                    </a>
-                </div>
-            </div>*@
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div class="complete-image mb-4">
+                        <a class="" href="#" target="_blank">
+                            <div class="destination-item">
+                                <img src="assets/images/netherlands.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">Netherlands</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="complete-image mb-4">
+                        <a class="" href="#" target="_blank">
+                            <div class="destination-item">
+                                <img src="assets/images/newyork.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">New York, U.S.A</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="complete-image mb-4">
+                        <a class="" href="#" target="_blank">
+                            <div class="destination-item">
+                                <img src="assets/images/india.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">India</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="complete-image mb-lg-0 mb-5">
+                        <a class="" href="#" target="_blank">
+                            <div class="destination-item">
+                                <img src="assets/images/argentina.jpg" class="img-fluid destination-item" alt="costarica">
+                                <h6 class="white front">Argentina</h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>*@
         </div>
-    </div>
 
 </section><!-- End section 3 tours-->
-
 <!-- Bootstrap and Jquery scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
