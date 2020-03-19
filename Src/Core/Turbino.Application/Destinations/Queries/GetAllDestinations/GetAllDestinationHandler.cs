@@ -2,9 +2,13 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Turbino.Application.Common.Interfaces;
+using Turbino.Domain.Common;
+using Turbino.Domain.Entities;
 
 namespace Turbino.Application.Destinations.Queries.GetAllDestinations
 {
@@ -20,10 +24,14 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinations
         }
 
         public async Task<DestinationsListViewModel> Handle(GetAllDestinationsListQuery request, CancellationToken cancellationToken)
-            => new DestinationsListViewModel
+        {
+            return new DestinationsListViewModel
             {
-                Destinations = await context.Destinations.ProjectTo<DestinationsAllListModel>(this.mapper.ConfigurationProvider)
-                                                         .ToListAsync()
+                Destinations = await this.mapper
+                                        .ProjectTo<DestinationsAllListModel>(
+                                             PaginatedList<Destination>.Create(context.Destinations, request.PageIndex ?? 1, 12)).ToListAsync(),
+                PageIndex = request.PageIndex.HasValue ? request.PageIndex.Value : 0
             };
+        } 
     }
 }

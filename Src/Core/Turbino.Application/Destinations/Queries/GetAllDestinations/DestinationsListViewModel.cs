@@ -8,5 +8,7 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinations
     public class DestinationsListViewModel
     {
         public IList<DestinationsAllListModel> Destinations { get; set; }
+
+        public int PageIndex { get; set; } = 1;
     }
 }

@@ -9,9 +9,9 @@ namespace Turbino.WebApp.Controllers
     {
         [HttpGet]
         [Route("Destinations")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
-            DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsListQuery());
+            DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsListQuery() { PageIndex = pageNumber});
             return this.View(result);
         }
 
