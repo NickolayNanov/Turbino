@@ -30,7 +30,7 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinations
                 Destinations = await this.mapper
                                         .ProjectTo<DestinationsAllListModel>(
                                              PaginatedList<Destination>.Create(context.Destinations, request.PageIndex ?? 1, 12)).ToListAsync(),
-                PageIndex = request.PageIndex.HasValue ? request.PageIndex.Value : 0
+                PageIndex = request.PageIndex ?? 0
             };
         } 
     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Turbino.Application.Destinations.Queries.GetAllDestinations;
+using Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered;
 using Turbino.Application.Destinations.Queries.GetDestinationById;
 
 namespace Turbino.WebApp.Controllers
@@ -9,7 +10,7 @@ namespace Turbino.WebApp.Controllers
     {
         [HttpGet]
         [Route("Destinations")]
-        public async Task<IActionResult> Index(int? pageNumber)
+        public async Task<IActionResult> Index(int? pageNumber = 1)
         {
             DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsListQuery() { PageIndex = pageNumber});
             return this.View(result);
@@ -22,9 +23,11 @@ namespace Turbino.WebApp.Controllers
             return this.View(result);
         }
 
-        public IActionResult Filter(int start, int end, string range)
+        [HttpGet]
+        public async Task<IActionResult> Filter(string searchQuery, string priceRange)
         {
-            return this.View();
+            DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsWithFilterQuery() { DestinationName = searchQuery });
+            return this.View("Index", 1);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using System.Collections.Generic;
 using Turbino.Application.Interfaces.Mapping;
 using Turbino.Domain.Entities;
 

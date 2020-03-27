@@ -18,11 +18,15 @@
             <div class="col-md-12 col-lg-3 order-lg-first order-last mt-3 mt-lg-0">
                 <div class="form-container py-3">
                     <h4 class="black bold mt-3 px-4 pb-2 text-center">Search your Destination</h4>
-                    <form id="sidebar-form" class="px-xl-5 px-lg-3 px-4">
+                    <form id="sidebar-form" class="px-xl-5 px-lg-3 px-4"
+                          asp-controller="Destination"
+                          asp-action="Filter"
+                          asp-route-searchQuery="@Model.Filter.SearchQuery"
+                          asp-route-priceRange="@Model.Filter.PriceRange">
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <div class="input-group">
-                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Search Destinations">
+                                    <input asp-for="@Model.Filter.SearchQuery" type="text" class="form-control" id="inputEmail3" placeholder="Search Destinations">
                                     <div class="input-group-append">
                                         <div class="input-group-text">
                                             <i class="fa fa-search"></i>
@@ -33,86 +37,10 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <div class="input-group">
-                                    <select class="form-control" id="inlineFormInputName32">
-                                        <option selected>Any month</option>
-                                        <option value="1">January</option>
-                                        <option value="2">February</option>
-                                        <option value="3">March</option>
-                                        <option value="1">April</option>
-                                        <option value="2">May</option>
-                                        <option value="3">June</option>
-                                        <option value="1">July</option>
-                                        <option value="2">August</option>
-                                        <option value="3">September</option>
-                                        <option value="3">Octuber</option>
-                                        <option value="3">November</option>
-                                        <option value="3">December</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-calendar"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <select class="form-control" id="inlineFormInputName1">
-                                        <option selected>Tour Type</option>
-                                        <option value="1">Adventure</option>
-                                        <option value="2">Romantic</option>
-                                        <option value="3">Vacation</option>
-                                        <option value="3">Explore</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <select class="form-control" id="inlineFormInputName4">
-                                        <option selected>Sort by Name</option>
-                                        <option value="1">Price low to high</option>
-                                        <option value="2">Price high to low</option>
-                                        <option value="3">Sort by Date</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-sort-amount-up"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <div class="input-group">
-                                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Destination" id="example-search-input">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="far fa-compass"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-sm-12">
                                 <div class="d-block">
                                     <p class=" text-center">
                                         <label class="text-center" for="amount">Price range:</label>
-                                        <input class="text-center" type="text" id="amount" readonly>
+                                        <input asp-for="@Model.Filter.PriceRange" class="text-center" type="text" id="amount" readonly>
                                     </p>
                                 </div>
                                 <div id="slider-range"></div>
@@ -121,7 +49,9 @@
 
                         <div class="form-group row">
                             <div class="col-sm-12">
-                                <button type="submit" class="btn col-sm-12 my-2 btn-primary">Search</button>
+                                <button type="submit" class="btn col-sm-12 my-2 btn-primary">
+                                    Search
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -168,23 +98,29 @@
                     numberToClose = 0;
                 }
             }
-
-
+        </div>
+    </div>
 </section>
 
 <div class="mr-5 d-flex flex-row-reverse">
-    <a asp-controller="Destinations"
-       asp-action="Index"
-       asp-route-pageNumber="@(Model.PageIndex + 1)"
-       class="p-2 btn my-2 btn-primary ml-2">
-        Next
-    </a>
-    <a asp-controller="Destinations"
-       asp-action="Index"
-       asp-route-pageNumber="@(Model.PageIndex - 1)"
-       class="p-2 btn my-2 btn-primary ml-2">
-        Previous
-    </a>
+    @if (Model.Destinations.Count >= 12)
+    {
+        <a asp-controller="Destinations"
+           asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="p-2 btn my-2 btn-primary ml-2">
+            Next
+        </a>
+    }
+    @if (Model.PageIndex - 1 >= 1)
+    {
+        <a asp-controller="Destinations"
+           asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="p-2 btn my-2 btn-primary ml-2">
+            Previous
+        </a>
+    }
 </div>
 <!-- End section 3 tours-->
 <!-- Bootstrap and Jquery scripts -->
@@ -199,7 +135,7 @@
 <script src="js/initslider.js"></script>
 <script src="js/instafeed.min.js"></script>
 <script src="js/jquery.ui.touch-punch.min.js"></script>
-
+<script src="js/destinationsFilter.js"></script>
 <!-- Stylesheets -->
 <link rel="stylesheet" href="css/jquery-ui.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
