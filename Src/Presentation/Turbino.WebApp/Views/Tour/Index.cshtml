@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "Index";
+    @model Turbino.Application.Tours.Queries.GetAllDestinations.GetAllToursListViewModel
 }
 
 <div class="tour-title not-fixed center-image">
@@ -141,49 +142,56 @@
                 <a href="#"><img src="../assets/images/promotion.jpg" class="w-100 img-fluid mx-auto d-block mt-4" alt=""></a>
 
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+            @{int counter = 0; int numberToClose = 0;}
+            @for (int i = 0; i < Model.Tours.Count; i++)
+            {
+                @if (counter == 0 || counter % 4 == 0)
+                {
+                    @Html.Raw("<div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-3\">");
+                }
+
                 <div class="card mb-4">
-                    <a asp-controller="Tour" asp-action="Inquire" asp-route-tourId="asdasdasdasd" class="img-card">
-                        <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>3<br>days</small>
-                        <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                    <a class="img-card" asp-controller="Tour" asp-action="Inquire" asp-route-tourId="@Model.Tours[i].Id">
+                        <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>@Model.Tours[i].Duration<br>day</small>
+                        <div class="review-card">
+                            @for (int j = 0; j < Model.Tours[i].Rating; j++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                            <span class="tiny white">@Model.Tours[i].Reviews reviews</span>
+                        </div>
                         <div class="bottom-tour-background"></div>
-                        <img src="../assets/images/china.jpg" alt="" />
+                        <img src="@Model.Tours[i].ImgUrl" alt="" />
                     </a>
                     <div class="card-content">
                         <div class="row align-items-center">
                             <div class="col-7">
-                                <h6 class="black mb-2"><a href="#" target="_blank">Delightful China</a></h6>
+                                <h6 class="black mb-2"><a href="#" target="_blank">@Model.Tours[i].Name</a></h6>
                             </div>
                             <div class="col-5 align-middle">
-                                <h6 class="primary-color text-right ">$3200</h6>
+                                <h6 class="primary-color text-right ">$@Model.Tours[i].Price</h6>
                             </div>
                             <div>
-                                <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">Vacation</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">travel</a>
+                                <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a>
+                                <a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">@Model.Tours[i].Type</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <a class="img-card" href="#">
-                        <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>1<br>day</small>
-                        <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
-                        <div class="bottom-tour-background"></div>
-                        <img src="../assets/images/machupichu.jpg" alt="" />
-                    </a>
-                    <div class="card-content">
-                        <div class="row align-items-center">
-                            <div class="col-7">
-                                <h6 class="black mb-2"><a href="#" target="_blank">Mystical Machu Picchu </a></h6>
-                            </div>
-                            <div class="col-5 align-middle">
-                                <h6 class="primary-color text-right ">$1900</h6>
-                            </div>
-                            <div>
-                                <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">travel</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                counter++;
+                numberToClose++;
+
+                @if (numberToClose == 4)
+                {
+                    @Html.Raw("</div>")
+                    counter = 0;
+                    numberToClose = 0;
+                }
+            }
+
+            @*<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                
                 <div class="card mb-4">
                     <a class="img-card" href="#">
                         <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>4<br>days</small>
@@ -336,18 +344,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-lg-0 mb-4 float-right">
-                    <div class="col-12 mt-3">
-                        <div class='pagination'>
-                            <div class='current'><h6>1</h6></div>
-                            <a class="" href="#"><h6>2</h6></a>
-                            <a href="#"><h6>3</h6></a>
-                            <a href="#"><h6 class="arrow-offset">›</h6></a>
-                            <a href="#"><h6 class="arrow-offset">»</h6></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>*@
         </div>
     </div>
 

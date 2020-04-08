@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 using Turbino.Application.Authentication.Login.Commands;
 using Turbino.Application.Authentication.Register.Commands.Create;
@@ -20,7 +19,7 @@ namespace Turbino.WebApp.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return this.View();
+            return this.View(new LoginTurbinoUserCommand());
         }
 
         [HttpPost]
@@ -33,7 +32,7 @@ namespace Turbino.WebApp.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return this.View();
+            return this.View(new CreateTurbinoUserCommand());
         }
 
         [HttpPost]

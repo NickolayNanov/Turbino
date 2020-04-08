@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,8 +27,9 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinations
             {
                 Destinations = await this.mapper
                                         .ProjectTo<DestinationsAllListModel>(
-                                             PaginatedList<Destination>.Create(context.Destinations, request.PageIndex ?? 1, 12)).ToListAsync(),
-                PageIndex = request.PageIndex ?? 0
+                                             PaginatedList<Destination>.Create(context.Destinations.AsNoTracking(), request.PageIndex ?? 1, 12)).ToListAsync(),
+                PageIndex = request.PageIndex ?? 0,
+                HaveMoreDestinations = context.Destinations.Count() > (request.PageIndex ?? 1) * 12
             };
         } 
     }

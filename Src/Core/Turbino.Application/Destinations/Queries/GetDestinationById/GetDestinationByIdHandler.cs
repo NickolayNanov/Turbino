@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,10 +22,8 @@ namespace Turbino.Application.Destinations.Queries.GetDestinationById
         {
             Destination destination = await context.Destinations.FindAsync(request.DestinationId);
             if(destination == null)
-            {
                 throw new NotFoundException(nameof(Destination), request.DestinationId);
-            }
-            destination.SetGalery(context.DestinationImages.Where(d => d.DestinationId == destination.Id).ToList());
+            destination.SetGalery(context.DestinationImages.AsNoTracking().Where(d => d.DestinationId == destination.Id).ToList());
             return DestinationViewModel.Create(destination);
         }
     }

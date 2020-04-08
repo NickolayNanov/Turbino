@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Turbino.Application.Tours.Queries.GetAllDestinations;
 
 namespace Turbino.WebApp.Controllers
 {
@@ -6,9 +8,10 @@ namespace Turbino.WebApp.Controllers
     {
         [HttpGet]
         [Route("Tours")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? pageNumber = 1)
         {
-            return this.View();
+            GetAllToursListViewModel result = await Mediator.Send(new GetAllToursListQuery() { PageIndex = pageNumber });
+            return this.View(result);
         }
 
         [HttpGet]

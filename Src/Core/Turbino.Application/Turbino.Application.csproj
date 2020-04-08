@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Authentication\Login\Queries\" />
     <Folder Include="Authentication\Register\Queries\" />
+    <Folder Include="Tours\Commands\" />
   </ItemGroup>
 
 </Project>

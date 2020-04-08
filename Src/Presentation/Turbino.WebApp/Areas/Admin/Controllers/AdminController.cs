@@ -5,7 +5,6 @@ using Turbino.WebApp.Controllers;
 
 namespace Turbino.WebApp.Areas.Admin.Controllers
 {
-
     [Area("Admin")]
     [Route("Admin")]
     public class AdminController : BaseController
@@ -20,7 +19,7 @@ namespace Turbino.WebApp.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult CreateDestination()
         {
-            return this.View();
+            return this.View(new CreateDestinationCommand());
         }
 
         [HttpPost]        

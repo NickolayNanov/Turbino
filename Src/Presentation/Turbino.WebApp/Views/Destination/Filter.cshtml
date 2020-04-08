@@ -7,6 +7,7 @@
     <img class="w-100 h-100" src="assets/images/destinations.jpg" alt="">
     <h1 class="white text-center front shadow-text center-text">Find your destination</h1>
     <img class="curve2 d-none d-xl-block" src="assets/svgs/curve.svg" alt="">
+
 </div>
 <!-- End section 1-->
 <!-- Section 3 Tours-->
@@ -21,9 +22,7 @@
                           method="get"
                           asp-controller="Destination"
                           asp-action="Filter"
-                          asp-route-searchQuery="@Model.SearchQuery"
-                          asp-route-priceRange="@Model.PriceRange"
-                          asp-route-pageIndex="@Model.PageIndex">
+                          asp-route-searchQuery="@Model.SearchQuery">
                         <div class="form-group row">
                             <div class="col-sm-12">
                                 <div class="input-group">
@@ -36,16 +35,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if (!string.IsNullOrEmpty(Model.SearchQuery))
-                        {
-                            <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <a asp-controller="Destination" asp-action="Index" class="btn col-sm-12 my-2 btn-primary">
-                                        Remove Filter
-                                    </a>
-                                </div>
-                            </div>
-                        }
+
                         @*<div class="form-group row">
                                 <div class="col-sm-12">
                                     <div class="d-block">
@@ -58,13 +48,24 @@
                                 </div>
                             </div>*@
 
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn col-sm-12 my-2 btn-primary">
-                                    Search
-                                </button>
+                        @if (!string.IsNullOrEmpty(Model.SearchQuery))
+                        {
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <a asp-controller="Destination" asp-action="Index" class="btn col-sm-12 my-2 btn-primary">Remove Filter</a>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn col-sm-12 my-2 btn-primary">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        }
                     </form>
                 </div>
                 @if (this.User.IsInRole("Admin"))
@@ -114,10 +115,12 @@
 </section>
 
 <div class="mr-5 d-flex flex-row-reverse">
-    @if (Model.Destinations.Count >= 12)
+    @if (Model.Destinations.Count >= 12 && Model.HaveMoreDestinations)
     {
-        <a asp-controller="Destinations"
-           asp-action="Index"
+        <a asp-controller="Destination"
+           asp-action="Filter"
+           asp-route-searchQuery="@(Model.SearchQuery)"
+           asp-route-priceRange="@(Model.PriceRange)"
            asp-route-pageNumber="@(Model.PageIndex + 1)"
            class="p-2 btn my-2 btn-primary ml-2">
             Next
@@ -125,8 +128,10 @@
     }
     @if (Model.PageIndex - 1 >= 1)
     {
-        <a asp-controller="Destinations"
-           asp-action="Index"
+        <a asp-controller="Destination"
+           asp-action="Filter"
+           asp-route-searchQuery="@(Model.SearchQuery)"
+           asp-route-priceRange="@(Model.PriceRange)"
            asp-route-pageNumber="@(Model.PageIndex - 1)"
            class="p-2 btn my-2 btn-primary ml-2">
             Previous

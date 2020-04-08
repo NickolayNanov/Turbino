@@ -12,11 +12,11 @@ namespace Turbino.Application.Destinations.Commands.Create
                 .MinimumLength(3)
                 .MaximumLength(70);
 
-            RuleFor(d => d.Description)
-                .NotEmpty()
-                .NotNull()
-                .MinimumLength(5)
-                .MaximumLength(255);
+            //RuleFor(d => d.Description)
+            //    .NotEmpty()
+            //    .NotNull()
+            //    .MinimumLength(5)
+            //    .MaximumLength(255);
 
             RuleFor(d => d.SpokenLanguage)
                 .NotEmpty()

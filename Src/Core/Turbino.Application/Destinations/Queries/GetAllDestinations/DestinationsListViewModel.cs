@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using System.Collections.Generic;
-using Turbino.Application.Interfaces.Mapping;
-using Turbino.Domain.Entities;
+﻿using System.Collections.Generic;
 
 namespace Turbino.Application.Destinations.Queries.GetAllDestinations
 {
@@ -10,13 +7,20 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinations
         public DestinationsListViewModel()
         {
             this.Filter = new Filter();
+            this.PageIndex = 1;
         }
 
         public IList<DestinationsAllListModel> Destinations { get; set; }
 
         public Filter Filter { get; set; }
 
-        public int PageIndex { get; set; } = 1;
+        public int? PageIndex { get; set; } = 1;
+
+        public string SearchQuery { get; set; }
+
+        public string PriceRange { get; set; }
+
+        public bool HaveMoreDestinations { get; set; }
     }
 
     public class Filter 

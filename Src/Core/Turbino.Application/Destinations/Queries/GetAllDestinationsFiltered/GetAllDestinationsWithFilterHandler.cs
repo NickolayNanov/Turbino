@@ -29,9 +29,12 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
                 Destinations = await this.mapper
                                             .ProjectTo<DestinationsAllListModel>(
                                                 PaginatedList<Destination>.Create(this.context.Destinations
-                                                                                    .Where(d => d.Name.StartsWith(request.DestinationName)),  
+                                                                                    .AsNoTracking()
+                                                                                    .Where(d => d.Name.ToLower().StartsWith(request.DestinationName.ToLower())),
                                                                                   request.PageIndex ?? 1, 12)).ToListAsync(),
-                PageIndex = request.PageIndex ?? 0
+                PageIndex = request.PageIndex ?? 0,
+                SearchQuery = request.DestinationName,
+                HaveMoreDestinations = context.Destinations.Where(d => d.Name.StartsWith(request.DestinationName)).Count() > (request.PageIndex ?? 1) * 12
             };
         }
     }

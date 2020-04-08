@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Turbino.Application.Destinations.Queries.GetAllDestinations;
 using Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered;
@@ -17,6 +18,7 @@ namespace Turbino.WebApp.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Inquire(string destinationId)
         {
             DestinationViewModel result = await Mediator.Send(new GetDestinationByIdQuery(destinationId));
@@ -24,10 +26,11 @@ namespace Turbino.WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Filter(string searchQuery, string priceRange)
+        [Route("FilteredDestinations")]
+        public async Task<IActionResult> Filter(string searchQuery, int? pageNumber = 1)
         {
-            DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsWithFilterQuery() { DestinationName = searchQuery });
-            return this.View("Index", 1);
+            DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsWithFilterQuery() { DestinationName = searchQuery, PageIndex = pageNumber });
+            return this.View(result);
         }
     }
 }

@@ -5,25 +5,23 @@
 }
 
 <div class="tour-title not-fixed center-image">
-
     <img class="w-100 h-100" src="../assets/images/destinations.jpg" alt="">
     <h1 class="white text-center front shadow-text center-text">Create Destination</h1>
     <img class="curve2 d-none d-xl-block" src="../assets/svgs/curve.svg" alt="">
-
 </div>
+
 <section id="section3">
     <div class="container formhome2 text-center justify-content-center align-items-center pb-4">
         <h4 class="black mx-2 mb-3 mt-0 pt-4 text-center bold d-block">Register</h4>
         <form asp-antiforgery="true" asp-area="Admin" asp-controller="Admin" asp-action="CreateDestination" method="post" enctype="multipart/form-data" class="text-center justify-content-center align-items-center pb-0 mt-5">
             <input asp-for="@Model.Name" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Name)...">
-            <input asp-for="@Model.Description" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Description)...">
             <input asp-for="@Model.SpokenLanguage" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.SpokenLanguage)...">
 
-            <div class="input-group">
+            <div class="input-group mb-2">
                 <select asp-for="@Model.Currency" class="form-control" id="inlineFormInputName1">
-                    <option selected>EUR</option>
-                    <option value="1">BGN</option>
-                    <option value="2">Dollar</option>
+                    <option value="EUR" selected>EUR</option>
+                    <option value="BGN">BGN</option>
+                    <option value="Dollar">Dollar</option>
                 </select>
                 <div class="input-group-append">
                     <div class="input-group-text">
@@ -34,8 +32,33 @@
 
             <input asp-for="@Model.Visa" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Visa)...">
             <input asp-for="@Model.SquareArea" type="number" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.SquareArea)...">
-            <input type="file" asp-for="@Model.ImgUrl" class="form-control-file" placeholder="Destination picture..."/>
+            
+            <h6 class="text-center">Destination Description</h6>
+            <input asp-for="@Model.DestinationNameHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Name Header">
+            <input asp-for="@Model.DestinationNameParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Name Paragraph">
+            
+            <input asp-for="@Model.DestinationFirstHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination First Header">
+            <input asp-for="@Model.DestinationFirstParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination First Paragraph">
 
+            <input asp-for="@Model.DestinationSecondHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Second Header">
+            <input asp-for="@Model.DestinationSecondParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Second Paragraph">
+
+            <input asp-for="@Model.DestinationThirdHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Third Header">
+            <input asp-for="@Model.DestinationThirdParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Third Paragraph">
+
+            <input asp-for="@Model.DestinationForthHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Forth Header">
+            <input asp-for="@Model.DestinationForthParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Forth Paragraph">
+
+            <input asp-for="@Model.DestinationFifthHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Header">
+            <input asp-for="@Model.DestinationFifthParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Paragraph">
+
+            <input type="file" asp-for="@Model.FirstImg" class="form-control-file" placeholder="First Destination picture..." />
+            First Destination Description Image
+            <input type="file" asp-for="@Model.SecondImg" class="form-control-file" placeholder="Second Destination picture..." />
+            Second Destination Description Image
+            <input type="file" asp-for="@Model.ImgUrl" class="form-control-file" placeholder="Destination Image" />
+            Main Destination Image
+            <br />
             <button type="submit" class="btn btn-primary mb-2 mx-4 mx-md-0 mr-lg-2 py-2 form-control-inline3">Create</button>
         </form>
     </div>
