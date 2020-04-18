@@ -267,3 +267,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 gtag('config', 'UA-12XXXXXXX-1'); //paste only your numbers here too, if you paste full code from google it will break
+// Material Select Initialization
+$(document).ready(function () {
+    $('.mdb-select').materialSelect();
+});
+
+$('select').selectpicker();

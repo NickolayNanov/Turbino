@@ -1,0 +1,128 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    this.ViewData["Title"] = "Create Tour";
+    @model Turbino.Application.Tours.Commands.CreateTour.CreateTourCommand
+}
+
+
+<div class="tour-title not-fixed center-image">
+    <img class="w-100 h-100" src="../assets/images/destinations.jpg" alt="">
+    <h1 class="white text-center front shadow-text center-text">Create Tour</h1>
+    <img class="curve2 d-none d-xl-block" src="../assets/svgs/curve.svg" alt="">
+</div>
+
+<section id="section3">
+    <div class="container formhome2 text-center justify-content-center align-items-center pb-4">
+        <h4 class="black mx-2 mb-3 mt-0 pt-4 text-center bold d-block">Register</h4>
+        <form asp-antiforgery="true" asp-area="Admin" asp-controller="Admin" asp-action="CreateTour" method="post" enctype="multipart/form-data" class="text-center justify-content-center align-items-center pb-0 mt-5">
+            <input asp-for="@Model.Name" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Name)...">
+            <input asp-for="@Model.PricePerPerson" type="number" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.PricePerPerson)...">
+            <input asp-for="@Model.RequiredAge" type="number" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.RequiredAge)...">
+            <input asp-for="@Model.Duration" type="number" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Duration)...">
+
+            <div class="input-group mb-2">
+                <select asp-for="@Model.Location" class="selectpicker form-control">
+                    <option disabled>Choose your country</option>
+                    @foreach (var destination in Model.Destinations)
+                    {
+                        <option value="@destination.Id">@destination.Name</option>
+                    }
+                </select>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <input asp-for="@Model.Dates" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Dates)...">
+            <input asp-for="@Model.Departure" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Departure)...">
+            <input asp-for="@Model.NextDeparture" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.NextDeparture)...">
+            <input asp-for="@Model.Accommodation" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Accommodation)...">
+
+            <div class="input-group mb-2">
+                <select asp-for="@Model.Included" class="selectpicker form-control" multiple>
+                    <option disabled>Choose what is included</option>
+                    @foreach (var opt in Model.IncludeOptions)
+                    {
+                        <option value="@opt">@opt</option>
+                    }
+                </select>
+            </div>
+
+            <div class="input-group mb-2">
+                <select asp-for="@Model.NotIncluded" class="selectpicker form-control" multiple>
+                    <option value="" disabled>Choose what is NOT included</option>
+                    @foreach (var option in Model.NotIncludeOption)
+                    {
+                        <option value="@option">@option</option>
+                    }
+                </select>
+            </div>
+
+            <h6 class="text-center">Destination Description</h6>
+            <input asp-for="@Model.MainHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Name Header">
+            <input asp-for="@Model.MainHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Name Paragraph">
+
+            <input asp-for="@Model.FirstHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination First Header">
+            <input asp-for="@Model.FirstHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination First Paragraph">
+
+            <input asp-for="@Model.SecondHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Second Header">
+            <input asp-for="@Model.SecondHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Second Paragraph">
+
+            <input asp-for="@Model.ThirdHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Third Header">
+            <input asp-for="@Model.ThirdHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Third Paragraph">
+
+            <input asp-for="@Model.ForthHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Forth Header">
+            <input asp-for="@Model.ForthHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Forth Paragraph">
+
+            <input asp-for="@Model.FifthHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Header">
+            <input asp-for="@Model.FifthHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Paragraph">
+            
+            <input asp-for="@Model.SixthHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Header">
+            <input asp-for="@Model.SixthHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Paragraph">
+
+            <input type="file" asp-for="@Model.FirstImg" class="form-control-file" placeholder="First Tour picture..." />
+            First Tour Description Image
+            <input type="file" asp-for="@Model.SecondImg" class="form-control-file" placeholder="Second Tour picture..." />
+            Second Tour Description Image
+            <input type="file" asp-for="@Model.MainImg" class="form-control-file" placeholder="Main Tour Image" />
+            Main Tour Image
+            <br />
+            <button type="submit" class="btn btn-primary mb-2 mx-4 mx-md-0 mr-lg-2 py-2 form-control-inline3">Create</button>
+        </form>
+    </div>
+</section>
+
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/popper.min.js"></script>
+
+<!-- Aditional scripts -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+<script src="../js/jquery.magnific-popup.min.js"></script>
+<script src="../js/smooth-scroll.min.js"></script>
+<script src="../js/instafeed.min.js"></script>
+<script src="../js/ofi.js"></script>
+
+<!-- Main scripts -->
+<script src="js/main.js"></script>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" href="../css/font-awesome-animation.min.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/style.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">

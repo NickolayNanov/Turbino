@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Turbino.Domain.Entities.Common;
 using Turbino.Domain.Enumerations;
 
@@ -12,21 +13,35 @@ namespace Turbino.Domain.Entities
             this.Reviews = new HashSet<Review>();
         }
 
-        public DateTime From { get; set; }
+        public string Name { get; set; }
 
-        public DateTime To { get; set; }
-
-        public TourType TourType { get; set; }
-
-        public int Duration { get; set; }
+        public decimal PricePerPerson { get; set; }
 
         public int RequiredAge { get; set; }
 
-        public int Included { get; set; }
+        public int Duration { get; set; }
 
-        public decimal Price { get; set; }
+        public string Location { get; set; }
+
+        public string Dates { get; set; }
+
+        public string Departure { get; set; }
+
+        public string NextDeparture { get; set; }
+
+        public string Accommodation { get; set; }
+
+        public string Included { get; set; }
+
+        public string NotIncluded { get; set; }
+
+        public TourType TourType { get; set; }
+
+        public string Description { get; set; }
 
         public string DestinationId { get; set; }
+
+        public string ImgUrl { get; set; }
 
         public Destination Destination { get; set; }
 
