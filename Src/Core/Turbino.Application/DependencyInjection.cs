@@ -8,6 +8,7 @@
     using MediatR;
 
     using Application.Common.Logging;
+    using Turbino.Application.Common.CommonService;
 
     public static class DependencyInjection
     {
@@ -17,6 +18,7 @@
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            services.AddScoped<ICommonService, CommonService>();
 
             return services;
         }

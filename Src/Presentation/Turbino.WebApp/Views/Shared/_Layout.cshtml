@@ -1,52 +1,198 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Turbino.WebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>Home - Turbino template</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Seo meta tags for Search Engine Optimization -->
+    <meta name="author" content="Turbino template">
+    <meta name="description" content="Travel agency template for all types of tour agencies, travel bloggers, boostrap 4 based template">
+    <meta name="keywords" content="Turbino, Turbino, travel agency, themeforest tour agency, travel, adventure, destinations,">
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
+
+    <!-- Aditional scripts -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/instafeed.min.js"></script>
+    <script src="js/ofi.js"></script>
+
+    <!-- Main scripts -->
+    <script src="js/main.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font-awesome-animation.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
-<body>
+
+<body class="home home2">
+    @using Microsoft.AspNetCore.Identity
+    @using Turbino.Domain.Entities
+
+    @inject SignInManager<TurbinoUser> SignInManager
+    @inject UserManager<TurbinoUser> UserManager
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Turbino.WebApp</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+
+        <div id="wrapper-navbar">
+            <nav id="top" class="navbar py-3 fixed-top navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand ml-sm-5" href="#"><img src="assets/images/logo.png" alt="image"></a>
+                <button class="navbar-toggler collapsed navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                    <span class="sr-only">Toggle navigation</span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li>
+                            <a asp-controller="Home" asp-action="Index" class="nav-link mr-3 open my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown1" role="button" aria-haspopup="true" aria-expanded="false">
+                                Home
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li>
+                            <a asp-controller="Destination" asp-action="Index" class="nav-link mr-3 open my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown2" role="button" aria-haspopup="true" aria-expanded="false">
+                                Destinations
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Manager" asp-action="Create">Create Manager</a>
+                        <li class="nav-item dropdown">
+                            <a asp-controller="Tour" asp-action="Index" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                Tours
+                            </a>
                         </li>
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a asp-controller="Authentication" asp-action="Login" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Login
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a asp-controller="Authentication" asp-action="Register" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Register
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a asp-area="Admin" asp-controller="Admin" asp-action="AdminPanel" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                        Admin Panel
+                                    </a>
+                                </li>
+                            }
+                            <li class="nav-item dropdown">
+                                <a asp-controller="Reservation" asp-action="Index" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                    My Reservations
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <p class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown6" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Hello, @this.User.Identity.Name
+                                </p>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a asp-controller="Authentication" asp-action="Logout" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Logout
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - Turbino.WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </nav>
         </div>
+
+    </header>
+
+    <!-- End section 1-->
+    <main>
+        @this.RenderBody();
+    </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+        <section id="footer">
+
+            <div class="container">
+
+                <div class="row text-center text-xs-center text-sm-left text-md-left">
+
+                    <!-- Contact Information -->
+                    <div class="col-xs-12 col-md-6 col-lg-4">
+
+                        <h6 class="white mt-4">Contact Us</h6>
+
+                        <ul class="list-unstyled quick-links">
+                            <li><p class="white light">Lorem ipsum dolor sit amet, consectetur adipi. Suspend isse ultri sit amet, consectetur adipi. Suspend isse ultri t amet, consectetur adipi. </p></li>
+                            <li><h5><i class="fas fa-map-marker-alt mr-2"></i>Mave Avenue, New York</h5></li>
+                            <li><h5><i class="fas fa-phone-square mr-2"></i>United States (+1) 3333.1111</h5></li>
+                            <li><h5><i class="fas fa-envelope mr-2"></i>hello@ourcompany.com</h5></li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Networks -->
+                    <div class="col-xs-12 col-md-6 col-lg-4">
+
+                        <img class="svgcenter mt-4 logo-light" src="assets/svgs/logolight.svg" alt="">
+
+                        <ul class="list-unstyled list-inline mt-3 social text-center">
+                            <li class="list-inline-item"><a href="http://www.facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a href="http://www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a href="http://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+
+                        <ul class="list-unstyled text-center quick-links mt-3">
+                            <li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+                            <li><a href="tour-search-2-cols-card.html"><i class="fa fa-angle-double-right"></i>See our Tours</a></li>
+                            <li><a href="about.html"><i class="fa fa-angle-double-right"></i>About Us</a></li>
+                            <li><a href="contact.html"><i class="fa fa-angle-double-right"></i>Contact Us</a></li>
+                        </ul>
+
+                    </div>
+
+
+                    <!-- Instagram Feed -->
+                    <div id="instafeed" class="col-xs-12 col-md-6 col-lg-4 grid mx-auto">
+                        <h6 class="white mt-4 mb-3">Instagram Gallery</h6>
+                        <div class="grid-sizer"></div>
+                    </div>
+
+                </div>
+                <!-- GO UP rectangle -->
+                <div class="scale-up">
+                    <a class="smooth-scroll  rectangle-right" href="#">
+                        <div class="go-up px-1">
+                            <i class="fas mb-2 fa-arrow-up"></i><br>
+                            <h6 class="text-center letters-up">GO<br>UP</h6>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Copyright Info-->
+                <div class="row">
+                    <div class="col-12 mt-2 mt-sm-2 text-center text-white">
+                        <div class="separatorfullwidth"></div>
+                        <p class="white footer-bottom">© Copyright Turbino Demo - <a class="text-green ml-2" href="https://www.uxithemes.com" target="_blank">template by UxiThemes</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

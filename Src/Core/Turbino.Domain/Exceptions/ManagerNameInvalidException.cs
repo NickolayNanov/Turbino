@@ -1,8 +1,7 @@
 ﻿namespace Turbino.Domain.Exceptions
 {
     using System;
-
-    using Common.GlobalContants;
+    using Turbino.Common.GlobalContants;
 
     public class ManagerNameInvalidException : Exception
     {

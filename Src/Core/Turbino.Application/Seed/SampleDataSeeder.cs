@@ -8,6 +8,7 @@
     using Common.Interfaces;
     using Domain.Entities;
     using Domain.Enumerations;
+    using Microsoft.AspNetCore.Identity;
 
     public class SampleDataSeeder
     {
@@ -19,7 +20,7 @@
         }
 
         public async Task SeedAllAsync(CancellationToken cancellationToken)
-        {
+        {           
            //if (context.TurbinoRoles.Any())
            //{
            //    return;

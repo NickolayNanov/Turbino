@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Turbino.Application.Infrastructure.AutoMapper
+namespace Turbino.Application.Common.Mapping
 {
     using System.Reflection;
 

@@ -1,0 +1,161 @@
+﻿@{
+    @model Turbino.Application.Destinations.Queries.GetAllDestinations.DestinationsListViewModel
+}
+
+<div class="tour-title not-fixed center-image">
+
+    <img class="w-100 h-100" src="assets/images/destinations.jpg" alt="">
+    <h1 class="white text-center front shadow-text center-text">Find your destination</h1>
+    <img class="curve2 d-none d-xl-block" src="assets/svgs/curve.svg" alt="">
+
+</div>
+<!-- End section 1-->
+<!-- Section 3 Tours-->
+
+<section id="section3" class="tour-list-sidebar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-3 order-lg-first order-last mt-3 mt-lg-0">
+                <div class="form-container py-3">
+                    <h4 class="black bold mt-3 px-4 pb-2 text-center">Search your Destination</h4>
+                    <form id="sidebar-form" class="px-xl-5 px-lg-3 px-4"
+                          method="get"
+                          asp-controller="Destination"
+                          asp-action="Filter"
+                          asp-route-searchQuery="@Model.SearchQuery">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input asp-for="@Model.SearchQuery" type="text" class="form-control" id="inputEmail3" placeholder="Search Destinations">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-search"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="form-group row">
+                                <div class="col-sm-12">
+                                    <div class="d-block">
+                                        <p class=" text-center">
+                                            <label class="text-center" for="amount">Price range:</label>
+                                            <input asp-for="@Model.PriceRange" class="text-center" type="text" id="amount" readonly>
+                                        </p>
+                                    </div>
+                                    <div id="slider-range"></div>
+                                </div>
+                            </div>*@
+
+                        @if (!string.IsNullOrEmpty(Model.SearchQuery))
+                        {
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <a asp-controller="Destination" asp-action="Index" class="btn col-sm-12 my-2 btn-primary">Remove Filter</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn col-sm-12 my-2 btn-primary">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </form>
+                </div>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="CreateDestination" class="btn col-sm-12 my-2 btn-primary">Add new</a>
+                }
+                <div class="more-info mx-auto my-4">
+                    <h6 class="black semibold text-center mx-4 mt-3 mb-3 info-title">Quick Contact</h6>
+                    <div class="pb-2">
+                        <a href="tel:+133331111"><h5 class="grey text-center tel-info"><i class="fas primary-color fa-phone faa-tada animated mr-2 grey my-lg-0 mb-1"></i>(+1) 3333.1111</h5></a>
+                        <a href="mailto:hello@ourcompany.com"><h5 class="grey text-center mail-info"><i class="fas fa-envelope faa-horizontal animated primary-color mr-2"></i>hello@ourcompany.com</h5></a>
+                    </div>
+                </div>
+                <a href="#"><img src="assets/images/promotion.jpg" class="w-100 img-fluid mx-auto d-block mt-4" alt=""></a>
+            </div>
+            @{int counter = 0; int numberToClose = 0;}
+            @for (int i = 0; i < Model.Destinations.Count; i++)
+            {
+                @if (counter == 0 || counter % 4 == 0)
+                {
+                    @Html.Raw("<div class=\"col-lg-3 col-md-4 col-12\">")
+                }
+
+                <div class="complete-image mb-4">
+                    <a asp-controller="Destination"
+                       asp-action="Inquire"
+                       asp-route-destinationId="@Model.Destinations[i].Id">
+                        <div class="destination-item">
+                            <img src="@Model.Destinations[i].ImgUrl" class="img-fluid destination-item" alt="costarica">
+                            <h6 class="white front">@Model.Destinations[i].Name</h6>
+                        </div>
+                    </a>
+                </div>
+
+                counter++;
+                numberToClose++;
+
+                @if (numberToClose == 4)
+                {
+                    @Html.Raw("</div>")
+                    counter = 0;
+                    numberToClose = 0;
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<div class="mr-5 d-flex flex-row-reverse">
+    @if (Model.Destinations.Count >= 12 && Model.HaveMoreDestinations)
+    {
+        <a asp-controller="Destination"
+           asp-action="Filter"
+           asp-route-searchQuery="@(Model.SearchQuery)"
+           asp-route-priceRange="@(Model.PriceRange)"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="p-2 btn my-2 btn-primary ml-2">
+            Next
+        </a>
+    }
+    @if (Model.PageIndex - 1 >= 1)
+    {
+        <a asp-controller="Destination"
+           asp-action="Filter"
+           asp-route-searchQuery="@(Model.SearchQuery)"
+           asp-route-priceRange="@(Model.PriceRange)"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="p-2 btn my-2 btn-primary ml-2">
+            Previous
+        </a>
+    }
+</div>
+<!-- End section 3 tours-->
+<!-- Bootstrap and Jquery scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/popper.min.js"></script>
+
+<!-- Aditional scripts -->
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/smooth-scroll.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/initslider.js"></script>
+<script src="js/instafeed.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<script src="js/destinationsFilter.js"></script>
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" href="css/font-awesome-animation.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/style.css" type="text/css">

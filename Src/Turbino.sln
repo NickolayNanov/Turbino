@@ -13,17 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A5423622-3530-482C-B89F-B1E1E7C76C6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turbino.Common", "Common\Turbino.Common\Turbino.Common.csproj", "{26D103A0-E6C8-4417-922A-2856B5233E5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.Common", "Common\Turbino.Common\Turbino.Common.csproj", "{26D103A0-E6C8-4417-922A-2856B5233E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turbino.Application", "Core\Turbino.Application\Turbino.Application.csproj", "{357EB5EC-B3D7-4CFD-8DF8-FD8AA1C3097D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.Application", "Core\Turbino.Application\Turbino.Application.csproj", "{357EB5EC-B3D7-4CFD-8DF8-FD8AA1C3097D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turbino.Domain", "Core\Turbino.Domain\Turbino.Domain.csproj", "{97F4891C-568B-4A79-AF6F-6D413165F533}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.Domain", "Core\Turbino.Domain\Turbino.Domain.csproj", "{97F4891C-568B-4A79-AF6F-6D413165F533}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turbino.Persistence", "Infrastructure\Turbino.Persistence\Turbino.Persistence.csproj", "{96192E44-B6FB-4451-B199-5B6B55F74D33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.Persistence", "Infrastructure\Turbino.Persistence\Turbino.Persistence.csproj", "{96192E44-B6FB-4451-B199-5B6B55F74D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turbino.Infrastructure", "Infrastructure\Turbino.Infrastructure\Turbino.Infrastructure.csproj", "{A79FA730-788B-43E1-BD09-DE02ADEBFAF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.Infrastructure", "Infrastructure\Turbino.Infrastructure\Turbino.Infrastructure.csproj", "{A79FA730-788B-43E1-BD09-DE02ADEBFAF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Turbino.WebApp", "Presentation\Turbino.WebApp\Turbino.WebApp.csproj", "{0A1B9B02-29EB-4D22-8E30-FA7557A46674}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.WebApp", "Presentation\Turbino.WebApp\Turbino.WebApp.csproj", "{0A1B9B02-29EB-4D22-8E30-FA7557A46674}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

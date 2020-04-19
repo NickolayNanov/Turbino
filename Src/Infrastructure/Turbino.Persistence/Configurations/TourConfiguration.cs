@@ -17,6 +17,12 @@ namespace Turbino.Persistence.Configurations
                 .HasForeignKey(t => t.DestinationId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(t => t.Galery)
+                .WithOne(i => i.Tour)
+                .HasForeignKey(i => i.TourId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

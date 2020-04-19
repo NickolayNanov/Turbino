@@ -10,8 +10,10 @@
         public TurbinoUser()
         {
             this.Id = Guid.NewGuid().ToString();
+
+            this.Reviews = new HashSet<Review>();
             this.UserDestinations = new HashSet<UserDestination>();
-            this.Cards = new HashSet<CreditCard>();
+            this.UserRoles = new HashSet<TurbinoUserRole>();
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
@@ -21,11 +23,15 @@
 
         public string MiddleName { get; set; }
 
-        public string LastName { get; set; }      
+        public string LastName { get; set; }
 
-        public virtual ICollection<CreditCard> Cards { get; set; }
-        
+        public string FullName { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; private set; }
+ 
         public virtual ICollection<UserDestination> UserDestinations { get; private set; }
+
+        public virtual ICollection<TurbinoUserRole> UserRoles { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; private set; }
 

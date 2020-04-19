@@ -1,0 +1,376 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    @model Turbino.Application.Tours.Queries.GetAllDestinations.GetAllToursListViewModel
+}
+
+<div class="tour-title not-fixed center-image">
+
+    <img class="w-100 h-100" src="../assets/images/search.jpg" alt="">
+    <h1 class="white text-center front shadow-text center-text">Find your Tour</h1>
+    <img class="curve2 d-none d-xl-block" src="../assets/svgs/curve.svg" alt="">
+
+</div>
+<!-- End section 1-->
+<!-- Section 3 Tours-->
+
+<section id="section3" class="tour-list-sidebar tour-search-3-cols-card">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-3 order-lg-first order-last mt-4 mt-lg-0">
+                <div class="form-container py-3">
+                    <h4 class="black bold mt-3 px-4 pb-2 text-center">Search your Tour</h4>
+                    <form id="sidebar-form" class="px-xl-5 px-lg-3 px-4">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Search Tours">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-search"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <select class="form-control" id="inlineFormInputName1">
+                                        <option selected>Any month</option>
+                                        <option value="1">January</option>
+                                        <option value="2">February</option>
+                                        <option value="3">March</option>
+                                        <option value="1">April</option>
+                                        <option value="2">May</option>
+                                        <option value="3">June</option>
+                                        <option value="1">July</option>
+                                        <option value="2">August</option>
+                                        <option value="3">September</option>
+                                        <option value="3">Octuber</option>
+                                        <option value="3">November</option>
+                                        <option value="3">December</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-calendar"></i>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <select class="form-control" id="inlineFormInputName2">
+                                        <option selected>Tour Type</option>
+                                        <option value="1">Adventure</option>
+                                        <option value="2">Romantic</option>
+                                        <option value="3">Vacation</option>
+                                        <option value="3">Explore</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text"><i class="fas fa-chevron-down"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <select class="form-control" id="inlineFormInputName3">
+                                        <option selected>Sort by Name</option>
+                                        <option value="1">Price low to high</option>
+                                        <option value="2">Price high to low</option>
+                                        <option value="3">Sort by Date</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="fas fa-sort-amount-up"></i>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input class="form-control py-2 border-right-0 border" type="search" placeholder="Destination" id="example-search-input">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <i class="far fa-compass"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <div class="d-block">
+                                    <p class=" text-center">
+                                        <label class="text-center" for="amount">Price range:</label>
+                                        <input class="text-center" type="text" id="amount" readonly>
+                                    </p>
+                                </div>
+                                <div id="slider-range"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn col-sm-12 my-2 btn-primary">Search</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a asp-area="Admin" asp-controller="Admin" asp-action="CreateTour" class="btn col-sm-12 my-2 btn-primary">Add New</a>
+                }
+
+                <div class="more-info mx-auto my-4">
+                    <h6 class="black semibold text-center mx-4 mt-3 mb-3 info-title">Quick Contact</h6>
+                    <div class="pb-2">
+
+                        <a href="tel:+133331111"><h5 class="grey text-center tel-info"><i class="fas primary-color fa-phone faa-tada animated mr-2 grey my-lg-0 mb-1"></i>(+1) 3333.1111</h5></a>
+                        <a href="mailto:hello@ourcompany.com"><h5 class="grey text-center mail-info"><i class="fas fa-envelope faa-horizontal animated primary-color mr-2"></i>hello@ourcompany.com</h5></a>
+                    </div>
+                </div>
+
+                <a href="#"><img src="../assets/images/promotion.jpg" class="w-100 img-fluid mx-auto d-block mt-4" alt=""></a>
+
+            </div>
+            @{int counter = 0; int numberToClose = 0;}
+            @for (int i = 0; i < Model.Tours.Count; i++)
+            {
+                @if (counter == 0 || counter % 4 == 0)
+                {
+                    @Html.Raw("<div class=\"col-xs-12 col-sm-12 col-md-4 col-lg-3\">");
+                }
+
+                <div class="card mb-4">
+                    <a class="img-card" asp-controller="Tour" asp-action="Inquire" asp-route-tourId="@Model.Tours[i].Id">
+                        <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>@Model.Tours[i].Duration<br>day</small>
+                        <div class="review-card">
+                            @for (int j = 0; j < Model.Tours[i].Rating; j++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                            <span class="tiny white">@Model.Tours[i].Reviews reviews</span>
+                        </div>
+                        <div class="bottom-tour-background"></div>
+                        <img src="@Model.Tours[i].ImgUrl" alt="" />
+                    </a>
+                    <div class="card-content">
+                        <div class="row align-items-center">
+                            <div class="col-7">
+                                <h6 class="black mb-2"><a href="#" target="_blank">@Model.Tours[i].Name</a></h6>
+                            </div>
+                            <div class="col-5 align-middle">
+                                <h6 class="primary-color text-right ">$@Model.Tours[i].Price</h6>
+                            </div>
+                            <div>
+                                <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a>
+                                <a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">@Model.Tours[i].Type</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                counter++;
+                numberToClose++;
+
+                @if (numberToClose == 4)
+                {
+                    @Html.Raw("</div>")
+                    counter = 0;
+                    numberToClose = 0;
+                }
+            }
+
+            @*<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+
+                    <div class="card mb-4">
+                        <a class="img-card" href="#">
+                            <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>4<br>days</small>
+                            <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                            <div class="bottom-tour-background"></div>
+                            <img src="../assets/images/california.jpg" alt="" />
+                        </a>
+                        <div class="card-content">
+                            <div class="row align-items-center">
+                                <div class="col-7">
+                                    <h6 class="black mb-2"><a href="#" target="_blank">East Coast Fun, U.S.A. </a></h6>
+                                </div>
+                                <div class="col-5 align-middle">
+                                    <h6 class="primary-color text-right ">$1400</h6>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">Explore</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">travel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                    <div class="card mb-4">
+                        <a class="img-card" href="#">
+                            <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>1<br>day</small>
+                            <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                            <div class="bottom-tour-background"></div>
+                            <img src="../assets/images/cubasmall.jpg" alt="" />
+                        </a>
+                        <div class="card-content">
+                            <div class="row align-items-center">
+                                <div class="col-7">
+                                    <h6 class="black mb-2"><a href="#" target="_blank">Dream the Bahamas</a></h6>
+                                </div>
+                                <div class="col-5 align-middle">
+                                    <h6 class="primary-color text-right ">$2900</h6>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">vacation</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">travel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <a class="img-card" href="#">
+                            <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>9<br>days</small>
+                            <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                            <div class="bottom-tour-background"></div>
+                            <img src="../assets/images/netherlandsmall.jpg" alt="" />
+                        </a>
+                        <div class="card-content">
+                            <div class="row align-items-center">
+                                <div class="col-7">
+                                    <h6 class="black mb-2"><a href="#" target="_blank">Amsterdam with love </a></h6>
+                                </div>
+                                <div class="col-5 align-middle">
+                                    <h6 class="primary-color text-right ">$1900</h6>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">Romantic</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">vacation</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <a class="img-card" href="#">
+                            <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>1<br>day</small>
+                            <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                            <div class="bottom-tour-background"></div>
+                            <img src="../assets/images/valicoloradosmall.jpg" alt="" />
+                        </a>
+                        <div class="card-content">
+                            <div class="row align-items-center">
+                                <div class="col-7">
+                                    <h6 class="black mb-2"><a href="#" target="_blank">Vail Ski Resort</a></h6>
+                                </div>
+                                <div class="col-5 align-middle">
+                                    <h6 class="primary-color text-right">$2900</h6>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">sports</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                    <div class="card mb-4">
+                        <a class="img-card" href="#">
+                            <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>7<br>days</small>
+                            <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                            <div class="bottom-tour-background"></div>
+                            <img src="../assets/images/parissmall.jpg" alt="" />
+                        </a>
+                        <div class="card-content">
+                            <div class="row align-items-center">
+                                <div class="col-7">
+                                    <h6 class="black mb-2"><a href="#" target="_blank">Midnight in Paris </a></h6>
+                                </div>
+                                <div class="col-5 align-middle">
+                                    <h6 class="primary-color text-right ">$2900</h6>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">romantic</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">travel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <a class="img-card" href="#">
+                            <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>8<br>days</small>
+                            <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                            <div class="bottom-tour-background"></div>
+                            <img src="../assets/images/patagoniasmall.jpg" alt="" />
+                        </a>
+                        <div class="card-content">
+                            <div class="row align-items-center">
+                                <div class="col-7">
+                                    <h6 class="black mb-2"><a href="#" target="_blank">Vast Patagonias </a></h6>
+                                </div>
+                                <div class="col-5 align-middle">
+                                    <h6 class="primary-color text-right ">$1900</h6>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">travel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2 mb-lg-4">
+                        <a class="img-card" href="#">
+                            <small class="white front tiny"><span class="far fa-clock mr-2 white"></span>7<br>days</small>
+                            <div class="review-card"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i><i class="fas fa-star-half"></i> <span class="tiny white">2 reviews</span></div>
+                            <div class="bottom-tour-background"></div>
+                            <img src="../assets/images/costarica.jpg" alt="" />
+                        </a>
+                        <div class="card-content">
+                            <div class="row align-items-center">
+                                <div class="col-7">
+                                    <h6 class="black mb-2"><a href="#" target="_blank">Surf Santa Teresita </a></h6>
+                                </div>
+                                <div class="col-5 align-middle">
+                                    <h6 class="primary-color text-right ">$1900</h6>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a><a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">sports</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+
+
+</section><!-- End section 3 tours-->
+<!-- Bootstrap and Jquery scripts -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/popper.min.js"></script>
+
+<!-- Aditional scripts -->
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/smooth-scroll.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/initslider.js"></script>
+<script src="js/instafeed.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" href="css/font-awesome-animation.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/style.css" type="text/css">

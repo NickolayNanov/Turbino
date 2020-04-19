@@ -1,11 +1,11 @@
-﻿namespace Turbino.Application.Infrastructure.AutoMapper
+﻿namespace Turbino.Application.Common.Mapping
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Interfaces.Mapping;
-       
+    using Turbino.Application.Interfaces.Mapping;
+
     public static class MapperProfileHelper
     {
         public static IList<Map> LoadStandardMappings(Assembly rootAssembly)
