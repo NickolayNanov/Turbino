@@ -57,7 +57,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                         </div>
@@ -84,7 +83,6 @@
                                         <option selected>Sort by Name</option>
                                         <option value="1">Price low to high</option>
                                         <option value="2">Price high to low</option>
-                                        <option value="3">Sort by Date</option>
                                     </select>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -192,17 +190,23 @@
                     numberToClose = 0;
                 }
             }
+
         </div>
     </div>
-
-
-
+</section>
+    
 <div class="mr-5 d-flex flex-row-reverse">
     @if (Model.Tours.Count >= 12)
     {
         <a asp-controller="Tour"
-           asp-action="Index"
+           asp-action="Filter"
            asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-priceStr="@Model.PriceStr"
+           asp-route-tourName="@Model.TourType"
+           asp-route-month="@Model.Month"
+           asp-route-tourType="@Model.TourType"
+           asp-route-sortOrder="@Model.SortOrder"
+           asp-route-destinationName="@Model.DestinationName"
            class="p-2 btn my-2 btn-primary ml-2">
             Next
         </a>
@@ -210,30 +214,35 @@
     @if (Model.PageIndex - 1 >= 1)
     {
         <a asp-controller="Tour"
-           asp-action="Index"
+           asp-action="Filter"
            asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-priceStr="@Model.PriceStr"
+           asp-route-tourName="@Model.TourType"
+           asp-route-month="@Model.Month"
+           asp-route-tourType="@Model.TourType"
+           asp-route-sortOrder="@Model.SortOrder"
+           asp-route-destinationName="@Model.DestinationName"
            class="p-2 btn my-2 btn-primary ml-2">
             Previous
         </a>
-    }
-</section><!-- End section 3 tours-->
-<!-- Bootstrap and Jquery scripts -->
-<script src="js/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/popper.min.js"></script>
+    }<!-- End section 3 tours-->
+    <!-- Bootstrap and Jquery scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
 
-<!-- Aditional scripts -->
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/smooth-scroll.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/initslider.js"></script>
-<script src="js/instafeed.min.js"></script>
-<script src="js/jquery.ui.touch-punch.min.js"></script>
+    <!-- Aditional scripts -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/smooth-scroll.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/initslider.js"></script>
+    <script src="js/instafeed.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
 
-<!-- Stylesheets -->
-<link rel="stylesheet" href="css/jquery-ui.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<link rel="stylesheet" href="css/font-awesome-animation.min.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-<link rel="stylesheet" href="css/style.css" type="text/css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font-awesome-animation.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">

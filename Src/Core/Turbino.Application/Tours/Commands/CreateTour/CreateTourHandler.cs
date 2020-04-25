@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Turbino.Application.Common.Interfaces;
 using Turbino.Domain.Entities;
+using Turbino.Domain.Enumerations;
 using Turbino.Infrastructure;
 
 namespace Turbino.Application.Tours.Commands.CreateTour
@@ -24,6 +25,7 @@ namespace Turbino.Application.Tours.Commands.CreateTour
 
         public async Task<Unit> Handle(CreateTourCommand request, CancellationToken cancellationToken)
         {
+            var destination = await context.Destinations.FindAsync(request.Location);
             string[] imgUrls = new string[]
             {
                 imageUploader.UploadImage(request.FirstImg, Guid.NewGuid().ToString()),
@@ -34,10 +36,16 @@ namespace Turbino.Application.Tours.Commands.CreateTour
             Tour tour = mapper.Map<Tour>(request);
             tour.ImgUrl = imgUrls[0];
             tour.Description = GetDesctiption(request, imgUrls);
+            tour.Included = string.Join(", ", request.Included);
+            tour.NotIncluded = string.Join(", ", request.NotIncluded);
+            tour.DestinationId = request.Location;
+            tour.TourType = Enum.Parse<TourType>(request.TourType);
+            tour.Location = destination.Name;
+
+            context.Tours.Add(tour);
+            await context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
-
-
 
         private string GetDesctiption(CreateTourCommand request, string[] imgUrls)
         {

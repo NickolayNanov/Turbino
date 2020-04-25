@@ -1,6 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    @model Turbino.Application.Tours.Queries.GetAllDestinations.GetAllToursListViewModel
+    @model Turbino.Application.Tours.Queries.SelectById.TourViewModel
 }
 <div class="tour-title">
     <img class="w-100 h-100" src="../assets/images/amsterdamtitle.jpg" alt="">
@@ -112,12 +112,12 @@
             </div>
 
             <div class="col-xs-12 col-md-12 col-lg-8   single-tour">
-                <h4 id="read-tour" class="black text-left mb-3  bold">Amsterdam with love</h4>
+                <h4 id="read-tour" class="black text-left mb-3  bold">@Model.Name</h4>
 
                 <div class="row">
 
                     <div class="col-lg-3 col-sm-4 col-12 text-left">
-                        <h6 class="primary-color semibold price-big">$1900<span class="semibold subtitle">&nbsp;/ Per Person</span> </h6>
+                        <h6 class="primary-color semibold price-big">$@Model.PricePerPerson<span class="semibold subtitle">&nbsp;/ Per Person</span> </h6>
                     </div>
 
                     <div class="col-sm-6 col-12 text-left ml-sm-0">
@@ -145,16 +145,16 @@
                         <img class="svgcenter mt-3 mb-2 calendar-icon" src="assets/svgs/calendar.svg" alt="">
                     </div>
                     <div class="col-lg-3 col-6 order-3 order-lg-5">
-                        <p class="grey text-center">Age<br><span class="black bold">+12</span></p>
+                        <p class="grey text-center">Age<br><span class="black bold">+@Model.RequiredAge</span></p>
                     </div>
                     <div class="col-lg-3 col-6 order-4 order-lg-6">
-                        <p class="grey text-center">Duration<br><span class="black bold">12 Days</span></p>
+                        <p class="grey text-center">Duration<br><span class="black bold">@Model.Duration Days</span></p>
                     </div>
                     <div class="col-lg-3 col-6 order-7 order-lg-7">
-                        <p class="grey text-center">Location<br><span class="black bold">Netherlands</span></p>
+                        <p class="grey text-center">Location<br><span class="black bold">@Model.Location</span></p>
                     </div>
                     <div class="col-lg-3 col-6 order-8 order-lg-8">
-                        <p class="grey text-center mx-2">Dates<br><span class="black bold">May, August, September, October</span></p>
+                        <p class="grey text-center mx-2">Dates<br><span class="black bold">@Model.Dates</span></p>
                     </div>
                 </div>
 
@@ -163,90 +163,41 @@
                 <ul class="single-tour-container">
                     <li>
                         <div class="tour-item-title list-font">Departure</div>
-                        <div class="tour-item-description list-font">Los Angeles International Airport</div>
+                        <div class="tour-item-description list-font">@Model.Departure</div>
                     </li>
 
                     <li>
                         <div class="tour-item-title list-font">Next Departure</div>
-                        <div class="tour-item-description list-font">Sunday 14 of May, 20:30 hs</div>
+                        <div class="tour-item-description list-font">@Model.NextDeparture</div>
                     </li>
 
                     <li>
                         <div class="tour-item-title list-font">Accommodation</div>
-                        <div class="tour-item-description list-font">All Inclusive</div>
+                        <div class="tour-item-description list-font">@Model.Accommodation</div>
                     </li>
 
                     <li>
                         <div class="tour-item-title list-font">What´s Included </div>
                         <div class="tour-item-description list-font">
-                            <div><i class="fas fa-check-circle"></i>Travel Insurance</div>
-                            <div><i class="fas fa-check-circle"></i>Non-stop flight to Amsterdam</div>
-                            <div><i class="fas fa-check-circle"></i>Two days long City tour</div>
-                            <div><i class="fas fa-check-circle"></i>Anne Frank Museum ticket	</div>
+                            @foreach (var included in Model.Included)
+                            {
+                                <div><i class="fas fa-check-circle"></i>@included</div>
+                            }
                         </div>
                     </li>
 
                     <li>
                         <div class="tour-item-title list-font">Not Included</div>
                         <div class="tour-item-description list-font">
-                            <div> <i class="fas fa-times-circle"></i>Reservation Fees (U$D25)</div>
-                            <div class=""><i class="fas fa-times-circle"></i>Aerial Fees (U$D55)</div>
+                            @foreach (var notIncluded in Model.NotIncluded)
+                            {
+                                <div><i class="fas fa-times-circle"></i>@notIncluded</div>
+                            }
                         </div>
                     </li>
-
                 </ul>
-
-                <div class="">
-                    <div class="tour-schedule">
-                        <h6 class="black bold mt-4 mb-3">Amsterdam, the Perfect Schedule: 1st Week</h6>
-
-                        <p>Spend your first day in Amsterdam getting to know the lay of the land and looking at the city’s rich history.</p>
-
-                        <div class="list-font semibold mt-3">Cruise the canals</div>
-
-                        <p>
-                            A canal cruise is a great way to get acquainted with the city. During your trip, you can also jot down a few places
-                            that you might want to visit later. A few of the most notable canal cruise operators include Lovers, Canal and Holland International.
-                        </p>
-
-                        <div class="list-font semibold mt-3">Rent a Bike</div>
-
-                        <p>It’s time to start exploring on your own. Go to a reputable bike rental shop like MacBike or Yellow Bike and hire Amsterdam’s preferred form of transportation for 24 hours or more.</p>
-
-                        <img class="img-fluid my-3" src="assets/images/netherlands2.jpg" alt="">
-
-                        <h6 class="black bold mt-5 mb-3">Amsterdam, the Perfect Schedule: 2nd Week</h6>
-
-                        <p>
-                            After your canal cruise, walk to the Amsterdam Museum and delve into 800 years of local history. Once you’re done, walk around the corner to the Spuiplein and enter the Begijnhof
-                            through a barely noticeable door. Take a peaceful stroll around this courtyard -- once home to the faithful Beguine order.
-                        </p>
-
-                        <div class="list-font semibold mt-3">Cruise the canals</div>
-
-                        <p>
-                            A canal cruise is a great way to get acquainted with the city. During your trip, you can also jot down a few places
-                            that you might want to visit later. A few of the most notable canal cruise operators include Lovers, Canal and Holland International.
-                        </p>
-
-                        <img class="img-fluid my-3" src="assets/images/amsterdam3.jpg" alt="">
-
-                        <div class="list-font semibold mt-3">Drink with a Touch of Glass</div>
-
-                        <p>Finish your day at one of Amsterdam’s best cocktail bars – both the ingredients are the creative presentations are sure to impress. </p>
-
-
-                        <div class="list-font semibold mt-3">A night on Town</div>
-
-                        <p>
-                            If you’ve still got energy to spare, treat yourself to a night out at one of Amsterdam's many bars and clubs. If you’d prefer a concert,
-                            play or dance performance, visit the Last Minute Ticket Shop (open daily 10:00 – 17:00) and spontaneously pick a show at up to 50% off.
-                        </p>
-
-                    </div>
-                </div>
-
-
+                
+                @Html.Raw(Model.Description)
                 <div class="comments-container">
                     <h6 class="bold mt-5 black">Tour Reviews </h6>
 

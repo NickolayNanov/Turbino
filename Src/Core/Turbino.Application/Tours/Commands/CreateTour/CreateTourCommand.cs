@@ -21,6 +21,8 @@ namespace Turbino.Application.Tours.Commands.CreateTour
 
         public string Location { get; set; }
 
+        public string TourType { get; set; }
+
         public string Dates { get; set; }
 
         public string Departure { get; set; }

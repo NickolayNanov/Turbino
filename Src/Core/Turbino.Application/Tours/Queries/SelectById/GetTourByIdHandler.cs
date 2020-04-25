@@ -1,10 +1,8 @@
 ﻿using MediatR;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Turbino.Application.Common.Interfaces;
-using Turbino.Application.Tours.Commands.CreateTour;
 
 namespace Turbino.Application.Tours.Queries.SelectById
 {
@@ -28,7 +26,7 @@ namespace Turbino.Application.Tours.Queries.SelectById
                 Departure = tour.Departure,
                 Accommodation = tour.Accommodation,
                 NextDeparture = tour.NextDeparture,
-                Description = destination.Name,
+                Description = destination.Description,
                 Dates = tour.Dates,
                 Duration = tour.Duration,
                 Included = tour.Included.Split(", ").ToList(),

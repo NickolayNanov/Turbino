@@ -28,7 +28,9 @@
         public string FullName { get; set; }
 
         public virtual ICollection<Review> Reviews { get; private set; }
- 
+
+        public virtual ICollection<CreditCard> Cards { get; private set; }
+
         public virtual ICollection<UserDestination> UserDestinations { get; private set; }
 
         public virtual ICollection<TurbinoUserRole> UserRoles { get; set; }

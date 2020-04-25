@@ -127,6 +127,45 @@ namespace Turbino.Persistence.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Turbino.Domain.Entities.CreditCard", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardOwner")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Cvc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CreditCard");
+                });
+
             modelBuilder.Entity("Turbino.Domain.Entities.Destination", b =>
                 {
                     b.Property<string>("Id")
@@ -362,6 +401,9 @@ namespace Turbino.Persistence.Migrations
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Included")
                         .HasColumnType("nvarchar(max)");
@@ -620,6 +662,13 @@ namespace Turbino.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Turbino.Domain.Entities.CreditCard", b =>
+                {
+                    b.HasOne("Turbino.Domain.Entities.TurbinoUser", "User")
+                        .WithMany("Cards")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Turbino.Domain.Entities.DestinationImage", b =>

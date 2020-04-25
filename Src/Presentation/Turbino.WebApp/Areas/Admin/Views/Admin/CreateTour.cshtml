@@ -35,6 +35,21 @@
                 </div>
             </div>
 
+            <div class="input-group mb-2">
+                <select asp-for="@Model.TourType" class="selectpicker form-control">
+                    <option disabled>Choose the Tour Type</option>
+                    <option value="Romantic">Romantic</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Vacation">Vacation</option>
+                    <option value="Explore">Explore</option>
+                </select>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
             <input asp-for="@Model.Dates" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Dates)...">
             <input asp-for="@Model.Departure" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Departure)...">
             <input asp-for="@Model.NextDeparture" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.NextDeparture)...">
@@ -78,7 +93,7 @@
 
             <input asp-for="@Model.FifthHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Header">
             <input asp-for="@Model.FifthHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Paragraph">
-            
+
             <input asp-for="@Model.SixthHeader" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Header">
             <input asp-for="@Model.SixthHeaderParagraph" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Destination Fifth Paragraph">
 

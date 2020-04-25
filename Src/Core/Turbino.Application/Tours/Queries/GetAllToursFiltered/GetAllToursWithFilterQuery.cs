@@ -1,16 +1,13 @@
-﻿using System.Collections.Generic;
-using Turbino.Application.Tours.Queries.GetAllToursFiltered;
+﻿using MediatR;
 
-namespace Turbino.Application.Tours.Queries.GetAllDestinations
+namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
 {
-    public class GetAllToursListViewModel
+    public class GetAllToursWithFilterQuery : IRequest<GetAllToursWithFilterListViewModel>
     {
-        public GetAllToursListViewModel()
+        public GetAllToursWithFilterQuery()
         {
             this.PageIndex = 1;
         }
-
-        public IList<GetAllToursListModel> Tours { get; set; }
 
         public string TourName { get; set; }
 

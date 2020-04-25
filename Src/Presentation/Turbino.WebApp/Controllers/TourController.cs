@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Turbino.Application.Tours.Queries.GetAllDestinations;
+using Turbino.Application.Tours.Queries.GetAllToursFiltered;
+using Turbino.Application.Tours.Queries.SelectById;
 
 namespace Turbino.WebApp.Controllers
 {
@@ -15,9 +17,18 @@ namespace Turbino.WebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Inquire(string tourId)
+        public async Task<IActionResult> Inquire(string tourId)
         {
-            return this.View();
+            TourViewModel model = await Mediator.Send(new GetTourByIdQuery(tourId));
+            return this.View(model);
+        }
+
+        [HttpGet]
+        [Route("FilteredTours")]
+        public async Task<IActionResult> Filter(GetAllToursListViewModel query, int? pageNumber = 1)
+        {
+            GetAllToursWithFilterListViewModel tours = await Mediator.Send(new GetAllToursWithFilterQuery() { TourName = query.TourName, TourType = query.TourType, DestinationName = query.DestinationName, SortOrder = query.SortOrder, Month = query.Month, PriceStr = query.PriceStr, PageIndex = pageNumber });
+            return this.View(tours);
         }
     }
 }

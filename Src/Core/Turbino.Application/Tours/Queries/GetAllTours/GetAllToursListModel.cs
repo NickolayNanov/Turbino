@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Turbino.Application.Interfaces.Mapping;
 using Turbino.Domain.Entities;
 
@@ -29,6 +26,7 @@ namespace Turbino.Application.Tours.Queries.GetAllDestinations
         public void CreateMappings(Profile configuration)
         {
             configuration.CreateMap<Tour, GetAllToursListModel>()
+                .ForMember(x => x.Price, y => y.MapFrom(z => z.PricePerPerson))
                 .ForMember(x => x.Rating, y => y.MapFrom(z => (int)z.Reviews.Average(r => (int)r.Rating)))
                 .ForMember(x => x.Reviews, y => y.MapFrom(z => z.Reviews.Count))
                 .ForMember(x => x.Type, y => y.MapFrom(z => z.TourType.ToString()));

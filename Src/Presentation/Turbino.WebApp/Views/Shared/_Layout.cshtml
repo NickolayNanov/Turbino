@@ -84,14 +84,6 @@
                         }
                         else
                         {
-                            @if (this.User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item dropdown">
-                                    <a asp-area="Admin" asp-controller="Admin" asp-action="AdminPanel" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
-                                        Admin Panel
-                                    </a>
-                                </li>
-                            }
                             <li class="nav-item dropdown">
                                 <a asp-controller="Reservation" asp-action="Index" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
                                     My Reservations
