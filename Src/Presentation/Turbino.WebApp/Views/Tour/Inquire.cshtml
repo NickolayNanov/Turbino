@@ -198,67 +198,50 @@
                 </ul>
                 
                 @Html.Raw(Model.Description)
+
                 <div class="comments-container">
                     <h6 class="bold mt-5 black">Tour Reviews </h6>
 
                     <ul id="comments-list" class="comments-list">
-                        <li>
-                            <div class="comment-main-level mb-4">
+                        @foreach (var review in Model.Reviews.Reviews)
+	                    {
+                            <li>
+                                <div class="comment-main-level mb-4">
 
-                                <div class="comment-avatar d-none d-md-block"><img src="assets/images/chadblog.jpg" alt=""></div>
-                                <div class="comment-box">
-                                    <div class="comment-head">
-                                        <h6 class="comment-name "><a href="#">Chad Guideaur</a></h6>
-                                        <div class="text-left">
-                                            <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i>
-                                            <br class="hidebr">
-                                            <span class="time-review">3 hours ago</span>
+                                    <div class="comment-box">
+                                        <div class="comment-head">
+                                            <h6 class="comment-name "><a href="#">@review.AuthorName</a></h6>
+                                            <div class="text-left">
+                                                @for (int i = 0; i < review.Rating; i++)
+                                                {
+                                                    <i class="fas fa-star"></i>
+                                                }   
+                                                <br class="hidebr">
+                                                <span class="time-review">@review.TimeAgo</span>
+                                            </div>
+
                                         </div>
-
-                                    </div>
-                                    <div class="comment-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipising elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                                        <div class="comment-content">
+                                            @review.Content
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="comment-main-level">
-                                <div class="comment-avatar  d-none d-md-block"><img src="assets/images/chadblog.jpg" alt=""></div>
-                                <div class="comment-box">
-                                    <div class="comment-head">
-                                        <h6 class="comment-name"><a href="#">Chad Guideaur</a></h6>
-                                        <div class="text-left">
-                                            <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>  <i class="fas fa-star"></i>
-                                            <br class="hidebr">
-                                            <span class="time-review text-left">3 hours ago</span>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="comment-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
+                            </li> 
+	                    }
                     </ul>
-
                 </div>
 
                 <div class="mt-5  mx-auto my-auto">
                     <h6 class="black bold mt-5 ml-md-0 ml-4 text-center">Leave a Review</h6>
-                    <form class="form-comment ratings pt-2 ">
+                    <form asp-controller="Tour" asp-action="CreateReview" asp-antiforgery="true" asp-route-tourId="@Model.Id" class="form-comment ratings pt-2 ">
                         <div class="row ">
                             <div class="col-md-6 col-12 text-center">
                                 <label for="inputname2">Your Name</label>
-                                <input type="text" id="inputname2" class="form-control mb-3" placeholder="John Doe">
+                                <input asp-for="@Model.AuthorName" type="text" id="inputname2" class="form-control mb-3" placeholder="Name...">
                             </div>
                             <div class="col-md-6 col-12  text-center">
                                 <label for="inputemail2">Email Adress</label>
-                                <input type="text" class="form-control" id="inputemail2" placeholder="Johndoe@gmail.com">
+                                <input asp-for="@Model.Email" type="text" class="form-control" id="inputemail2" placeholder="Email...">
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -266,12 +249,12 @@
                                 <label for="inlineFormInputName32">Rating</label>
 
                                 <div class="input-group">
-                                    <select class="form-control" id="inlineFormInputName32">
-                                        <option selected>4 Stars (Very Good)</option>
-                                        <option value="1">1 Star (Bad)</option>
-                                        <option value="2">2 Stars</option>
-                                        <option value="3">3 Stars (Regular)</option>
-                                        <option value="3">5 Stars (Superb)</option>
+                                    <select asp-for="@Model.Rating" class="form-control" id="inlineFormInputName32">
+                                        <option value="VeryGood" selected>4 Stars (Very Good)</option>
+                                        <option value="Bad">1 Star (Bad)</option>
+                                        <option value="Normal">2 Stars</option>
+                                        <option value="Regular">3 Stars (Regular)</option>
+                                        <option value="Superb">5 Stars (Superb)</option>
                                     </select>
                                     <div class="input-group-append">
                                         <div class="input-group-text">
@@ -287,7 +270,7 @@
                             <div class="col-12 ">
                                 <div class="form-group text-center">
                                     <label for="exampleFormControlTextarea1">Additional comments</label>
-                                    <textarea class="form-control" placeholder="Write a detailed review" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea asp-for="@Model.Content" class="form-control" placeholder="Write a detailed review..." id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>

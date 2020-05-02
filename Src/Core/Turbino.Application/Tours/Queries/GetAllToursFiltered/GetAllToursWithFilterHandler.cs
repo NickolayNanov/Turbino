@@ -82,7 +82,8 @@ namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
                 Month = request.Month,
                 PriceStr = request.PriceStr,
                 SortOrder = request.SortOrder,
-                HaveMoreTours = context.Tours.Where(t => t.Name.StartsWith(request.TourName)).Count() > (request.PageIndex ?? 1) * 12
+                HaveMoreTours = tours.Skip((request.PageIndex == null ? 1 : request.PageIndex.Value) * 12)
+                                     .Take((request.PageIndex == null ? 1 : request.PageIndex.Value + 1) * 12).Count() >= 0
             };
         }
     }

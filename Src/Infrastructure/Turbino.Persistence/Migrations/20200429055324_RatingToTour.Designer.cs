@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Turbino.Persistence;
 
 namespace Turbino.Persistence.Migrations
 {
     [DbContext(typeof(TurbinoDbContext))]
-    partial class TurbinoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200429055324_RatingToTour")]
+    partial class RatingToTour
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -320,12 +322,6 @@ namespace Turbino.Persistence.Migrations
 
                     b.Property<int>("Rating")
                         .HasColumnType("int");
-
-                    b.Property<string>("ReviewerEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReviewerName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TourId")
                         .HasColumnType("nvarchar(450)");

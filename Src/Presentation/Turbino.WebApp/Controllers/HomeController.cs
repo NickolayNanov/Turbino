@@ -4,7 +4,6 @@
     using System.Diagnostics;
 
     using Models;
-    using Turbino.Application.Managers.Queries.GetAllManagers;
     using System.Threading.Tasks;
     using Turbino.Domain.Entities;
     using Microsoft.AspNetCore.Identity;
@@ -23,7 +22,6 @@
 
         [HttpGet]
         [Route("/")]
-        //[Route("Home/Index")]
         public async  Task<IActionResult> Index()
         {
             await SeedRoles();
@@ -40,6 +38,7 @@
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         private async Task SeedRoles()
         {
             if (!roleManager.Roles.Any())

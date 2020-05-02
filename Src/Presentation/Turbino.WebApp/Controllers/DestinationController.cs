@@ -14,15 +14,15 @@ namespace Turbino.WebApp.Controllers
         public async Task<IActionResult> Index(int? pageNumber = 1)
         {
             DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsListQuery() { PageIndex = pageNumber});
-            return this.View(result);
+            return View(result);
         }
 
-        [HttpGet]
         [Authorize]
+        [HttpGet]
         public async Task<IActionResult> Inquire(string destinationId)
         {
             DestinationViewModel result = await Mediator.Send(new GetDestinationByIdQuery(destinationId));
-            return this.View(result);
+            return View(result);
         }
 
         [HttpGet]
@@ -30,7 +30,7 @@ namespace Turbino.WebApp.Controllers
         public async Task<IActionResult> Filter(string searchQuery, int? pageNumber = 1)
         {
             DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsWithFilterQuery() { DestinationName = searchQuery, PageIndex = pageNumber });
-            return this.View(result);
+            return View(result);
         }
     }
 }

@@ -5,6 +5,10 @@
 
     public class Review : BaseDeletableModel
     {
+        public string ReviewerName { get; set; }
+
+        public string ReviewerEmail { get; set; }
+
         public string Content { get; set; }
 
         public Rating Rating { get; set; }

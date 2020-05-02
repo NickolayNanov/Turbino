@@ -196,7 +196,7 @@
 </section>
     
 <div class="mr-5 d-flex flex-row-reverse">
-    @if (Model.Tours.Count >= 12)
+    @if (Model.Tours.Count >= 12 && Model.HaveMoreTours )
     {
         <a asp-controller="Tour"
            asp-action="Filter"

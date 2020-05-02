@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Turbino.Application.Common.CommonService;
 using Turbino.Application.Destinations.Commands.Create;
@@ -9,6 +10,7 @@ namespace Turbino.WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : BaseController
     {
         private readonly ICommonService commonService;

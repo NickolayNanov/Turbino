@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using Turbino.Domain.Entities;
+﻿using System.Collections.Generic;
+using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
 
 namespace Turbino.Application.Tours.Queries.SelectById
 {
     public class TourViewModel
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public decimal PricePerPerson { get; set; }
@@ -30,8 +29,18 @@ namespace Turbino.Application.Tours.Queries.SelectById
 
         public string Description { get; set; }
 
+        public string AuthorName { get; set; }
+
+        public string Email { get; set; }
+
+        public double Rating { get; set; }
+
+        public string Content { get; set; }
+
         public IList<string> Included { get; set; }
 
         public IList<string> NotIncluded { get; set; }
+
+        public GetAllReviewsByTourIdListViewModel Reviews { get; set; }
     }
 }

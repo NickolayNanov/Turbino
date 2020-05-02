@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using Turbino.Domain.Entities.Common;
 using Turbino.Domain.Enumerations;
 
@@ -42,6 +40,8 @@ namespace Turbino.Domain.Entities
         public string DestinationId { get; set; }
 
         public string ImgUrl { get; set; }
+
+        public double Rating { get; set; }
 
         public Destination Destination { get; set; }
 
