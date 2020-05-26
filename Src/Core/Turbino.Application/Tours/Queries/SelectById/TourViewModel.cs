@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
 
 namespace Turbino.Application.Tours.Queries.SelectById
@@ -42,5 +43,11 @@ namespace Turbino.Application.Tours.Queries.SelectById
         public IList<string> NotIncluded { get; set; }
 
         public GetAllReviewsByTourIdListViewModel Reviews { get; set; }
+
+        public string ReserverName { get; set; }
+
+        public DateTime? ArrivalDate { get; set; }
+
+        public DateTime? DateOfLeaving { get; set; }
     }
 }

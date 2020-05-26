@@ -20,7 +20,7 @@ namespace Turbino.Application.Destinations.Commands.Create
 
         public string Currency { get; set; }
 
-        public int SquareArea { get; set; }
+        public int? SquareArea { get; set; }
 
         public IFormFile ImgUrl { get; set; }
 

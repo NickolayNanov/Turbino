@@ -20,6 +20,7 @@ namespace Turbino.WebApp.Controllers
 
         [Authorize]
         [HttpGet]
+        [Route("InquireTour")]
         public async Task<IActionResult> Inquire(string tourId)
         {
             TourViewModel model = await Mediator.Send(new GetTourByIdQuery(tourId));

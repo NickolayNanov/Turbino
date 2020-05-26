@@ -35,7 +35,7 @@ namespace Turbino.Application.Destinations.Commands.Create
                 SpokenLanguage = request.SpokenLanguage,
                 Currency = request.Currency,
                 Visa = request.Visa,
-                SquareArea = request.SquareArea,
+                SquareArea = request.SquareArea.Value,
                 ImgUrl = imgUrls[2]
             };
 

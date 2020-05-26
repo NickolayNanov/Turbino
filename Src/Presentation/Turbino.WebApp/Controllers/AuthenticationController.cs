@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Turbino.Application.Authentication.Login.Commands;
 using Turbino.Application.Authentication.Register.Commands.Create;
+using Turbino.Common.GlobalContants;
 using Turbino.Domain.Entities;
 
 namespace Turbino.WebApp.Controllers
@@ -20,7 +21,15 @@ namespace Turbino.WebApp.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View(new LoginTurbinoUserCommand());
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View(new LoginTurbinoUserCommand());
+            }
+            else
+            {
+                ViewData["Error"] = WebConstants.AlreadyAuthenticated;
+                return View("Error");
+            }
         }
 
         [HttpPost]
@@ -33,7 +42,15 @@ namespace Turbino.WebApp.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View(new CreateTurbinoUserCommand());
+            if (!User.Identity.IsAuthenticated)
+            {
+                return View(new CreateTurbinoUserCommand());
+            }
+            else
+            {
+                ViewData["Error"] = WebConstants.AlreadyAuthenticated;
+                return View("Error");
+            }
         }
 
         [HttpPost]

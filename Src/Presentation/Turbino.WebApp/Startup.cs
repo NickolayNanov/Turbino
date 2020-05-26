@@ -13,6 +13,7 @@
     using Turbino.Infrastructure;
     using Turbino.Application.Common.Interfaces;
     using Turbino.WebApp.Middleware;
+    using Microsoft.AspNetCore.Authentication.Cookies;
 
     public class Startup
     {
@@ -34,12 +35,12 @@
             services.AddHealthChecks()
                 .AddDbContextCheck<TurbinoDbContext>();
 
-            services.AddHttpContextAccessor();            
-
+            services.AddHttpContextAccessor();
+            
             services
                .AddMvc(options => options.EnableEndpointRouting = false)
                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ITurbinoDbContext>())
-               .AddRazorPagesOptions(options => options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout"));
+               /*.AddRazorPagesOptions(opt => opt.Conventions.addpage("/Authentication/Login"))*/;
 
             services.AddControllersWithViews();
 

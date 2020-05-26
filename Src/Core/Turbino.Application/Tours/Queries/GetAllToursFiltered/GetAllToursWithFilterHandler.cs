@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,48 +27,8 @@ namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
         public async Task<GetAllToursWithFilterListViewModel> Handle(GetAllToursWithFilterQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Tour> tours = context.Tours.Include(t => t.Destination).AsNoTracking();
+            tours = FilterTours(request, tours);
 
-            if (!string.IsNullOrEmpty(request.DestinationName))
-            {
-                tours = tours.Where(t => t.Destination.Name.ToLower().StartsWith(request.DestinationName.ToLower()));
-            }
-            if (!string.IsNullOrEmpty(request.TourName))
-            {
-                tours = tours.Where(t => t.Name.ToLower().StartsWith(request.TourName.ToLower()));
-            }
-            if (!string.IsNullOrEmpty(request.TourType))
-            {
-                TourType type = Enum.Parse<TourType>(request.TourType);
-                tours = tours.Where(t => t.TourType == type);
-            }
-            if (!string.IsNullOrEmpty(request.Month))
-            {
-                tours = tours.Where(t => t.Dates.ToLower().Contains(request.Month.ToLower()));
-            }
-            if (!string.IsNullOrEmpty(request.PriceStr))
-            {
-                //"$1000 - $2500"
-                string[] values = request.PriceStr.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
-                decimal minValue = decimal.Parse(values[0].Replace("$", ""));
-                decimal maxValue = decimal.Parse(values[1].Replace("$", ""));
-                tours = tours.Where(t => t.PricePerPerson > minValue && t.PricePerPerson < maxValue);
-            }
-            if(request.SortOrder != 0)
-            {
-                switch (request.SortOrder)
-                {
-                    case 1:
-                        tours = tours.OrderBy(x => x.PricePerPerson);
-                        break;
-                    case 2:
-                        tours = tours.OrderByDescending(x => x.PricePerPerson);
-                        break;
-                    case 3:
-                        tours = tours.OrderBy(x => x.Dates);
-                        break;
-                    default: break;
-                }
-            }
             return new GetAllToursWithFilterListViewModel
             {
                 Tours = await this.mapper.ProjectTo<GetAllToursListModel>(
@@ -85,6 +44,54 @@ namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
                 HaveMoreTours = tours.Skip((request.PageIndex == null ? 1 : request.PageIndex.Value) * 12)
                                      .Take((request.PageIndex == null ? 1 : request.PageIndex.Value + 1) * 12).Count() >= 0
             };
+        }
+
+        private static IQueryable<Tour> FilterTours(GetAllToursWithFilterQuery request, IQueryable<Tour> tours)
+        {
+            if (!string.IsNullOrEmpty(request.DestinationName))
+            {
+                tours = tours.Where(t => t.Destination.Name.ToLower().StartsWith(request.DestinationName.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(request.TourName))
+            {
+                tours = tours.Where(t => t.Name.ToLower().StartsWith(request.TourName.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(request.TourType))
+            {
+                TourType type;
+                Enum.TryParse<TourType>(request.TourType, out type);
+                tours = tours.Where(t => t.TourType == type);
+            }
+            if (!string.IsNullOrEmpty(request.Month))
+            {
+                tours = tours.Where(t => t.Dates.ToLower().Contains(request.Month.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(request.PriceStr))
+            {
+                //"$1000 - $2500"
+                string[] values = request.PriceStr.Split(" - ", StringSplitOptions.RemoveEmptyEntries);
+                decimal minValue = decimal.Parse(values[0].Replace("$", ""));
+                decimal maxValue = decimal.Parse(values[1].Replace("$", ""));
+                tours = tours.Where(t => t.PricePerPerson > minValue && t.PricePerPerson < maxValue);
+            }
+            if (request.SortOrder != 0)
+            {
+                switch (request.SortOrder)
+                {
+                    case 1:
+                        tours = tours.OrderBy(x => x.PricePerPerson);
+                        break;
+                    case 2:
+                        tours = tours.OrderByDescending(x => x.PricePerPerson);
+                        break;
+                    case 3:
+                        tours = tours.OrderBy(x => x.Dates);
+                        break;
+                    default: break;
+                }
+            }
+
+            return tours;
         }
     }
 }

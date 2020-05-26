@@ -21,5 +21,9 @@
         public Tour Tour { get; set; }
 
         public DateTime ReservedOn { get; set; }
+
+        public DateTime DepartureDate { get; set; }
+
+        public DateTime? DateOfLeaving { get; set; }
     }
 }

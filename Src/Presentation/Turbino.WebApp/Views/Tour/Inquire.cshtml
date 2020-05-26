@@ -23,69 +23,42 @@
         <div class="row">
             <div class="col-xs-12 col-md-6 col-lg-3 ml-lg-5 ml-sm-3 order-lg-first order-last mt-3 mt-lg-0">
 
-                <div class="mb-lg-3 mb-4 mt-lg-0 mt-4 text-center">
-                    <a href="#gallery-1" role="button" class="btn-gallery mb-2 d-lg-inline-block d-block">
-                        <span id="btnFA" class="btn btn-outline-danger pt-2 mr-1  px-3">
-                            View Gallery
-                            <i class="ml-2 fas fa-images"></i>
-                        </span>
-                    </a>
-
-                    <a href="#test-popup" role="button" class="open-popup-link d-lg-inline-block d-block">
-                        <span id="btnFA2" class="btn btn-outline-danger pt-2 px-3 ">
-                            Share Tour
-                            <i class="ml-2 fas fa-share-alt"></i>
-                        </span>
-                    </a>
-
-                    <div id="test-popup" class="white-popup mfp-hide text-center">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=http://uxithemes.com/Turbino" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a> &nbsp;
-
-                        <a href="https://twitter.com/intent/tweet?text=Uxithemes&url=http%3A%2F%2Fwww.uxithemes.com/Turbino" target="_blank">
-                            <i class="fab fa-twitter"></i>
-                        </a>&nbsp;
-
-                        <a href="https://plus.google.com/share?url=http%3A%2F%2Fwww.uxithemes.com%2FTurbino">
-                            <i class="fab fa-google-plus-g"></i>
-                        </a>
-
-                        <a href="mailto:support@uxithemes.com">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-
-
                 <div class="form-container px-3 py-3">
 
                     <h4 class="black bold mt-3 px-4 pb-2 text-center">Book this tour</h4>
 
-                    <form id="sidebar-form" class="px-xl-3 px-lg-3 px-3">
+                    <form asp-controller="Reservation"
+                          asp-action="Reserve"
+                          method="post"
+                          asp-route-tourId="@Model.Id"
+                          asp-route-arrivalDate="@Model.ArrivalDate"
+                          asp-route-dateOfLeaving="@Model.DateOfLeaving"
+                          asp-route-reserverName="@Model.ReserverName"
+                          id="sidebar-form" class="px-xl-3 px-lg-3 px-3">
 
                         <div class="form-group text-center">
-                            <label class="" for="inputname">Your Name</label>
-                            <input type="text" class="form-control" id="inputname" placeholder="John Doe">
-                        </div>
-
-                        <div class="form-group text-center">
-                            <label class="" for="inputmail">Email Adress</label>
-                            <input type="text" class="form-control" id="inputmail" placeholder="johndoe@gmail.com">
-                        </div>
-
-                        <div class="form-group text-center">
-                            <label class="text-center" for="inputtours">Tour Interested In</label>
-                            <input type="text" class="form-control" id="inputtours" placeholder="Mystical Machu Picchu">
+                            <label class="" for="inputname">Sir/Madam</label>
+                            <input asp-for="@Model.ReserverName" type="text" class="form-control" id="inputname" placeholder="John Doe">
                         </div>
 
                         <div class="form-group text-center departure">
                             <label class="" for="datepicker">Departure Date</label>
                             <div class="input-group">
-                                <input type="text" id="datepicker" placeholder="Choose your Date" class="form-control">
-                                <div class="input-group-append">
-                                    <div class="input-group-text"><i class="fas fa-calendar"></i> </div>
-                                </div>
+                                <input asp-for="@Model.ArrivalDate" type="date" id="datepicker" placeholder="Choose your Date" class="form-control">
+                                @*<div class="input-group-append">
+                    <div class="input-group-text"><i class="fas fa-calendar"></i> </div>
+                </div>*@
+                            </div>
+
+                        </div>
+
+                        <div class="form-group text-center departure">
+                            <label class="" for="datepicker">Date of Leaving</label>
+                            <div class="input-group">
+                                <input asp-for="@Model.DateOfLeaving" type="date" id="datepicker" placeholder="Choose your Date of leaving" class="form-control">
+                                @*<div class="input-group-append">
+                    <div class="input-group-text"><i class="fas fa-calendar"></i> </div>
+                </div>*@
                             </div>
 
                         </div>
@@ -230,22 +203,13 @@
 	                    }
                     </ul>
                 </div>
-
+              
                 <div class="mt-5  mx-auto my-auto">
                     <h6 class="black bold mt-5 ml-md-0 ml-4 text-center">Leave a Review</h6>
                     <form asp-controller="Tour" asp-action="CreateReview" asp-antiforgery="true" asp-route-tourId="@Model.Id" class="form-comment ratings pt-2 ">
-                        <div class="row ">
-                            <div class="col-md-6 col-12 text-center">
-                                <label for="inputname2">Your Name</label>
-                                <input asp-for="@Model.AuthorName" type="text" id="inputname2" class="form-control mb-3" placeholder="Name...">
-                            </div>
-                            <div class="col-md-6 col-12  text-center">
-                                <label for="inputemail2">Email Adress</label>
-                                <input asp-for="@Model.Email" type="text" class="form-control" id="inputemail2" placeholder="Email...">
-                            </div>
-                        </div>
+                        
                         <div class="row mt-3">
-                            <div class="col-md-6 col-12 text-center">
+                            <div class="col-12 text-center">
                                 <label for="inlineFormInputName32">Rating</label>
 
                                 <div class="input-group">
@@ -302,7 +266,7 @@
 <script src="../js/jquery-ui.js"></script>
 <script src="../js/initslider.js"></script>
 <script src="../js/instafeed.min.js"></script>
-
+<script src="../js/main.js"></script>
 <!-- Main scripts -->
 <script src="js/main.js"></script>
 

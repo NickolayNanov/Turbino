@@ -1,11 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    @model Turbino.Application.Reservations.Queries.GetAllReservationsByUser.GetAllReservationsByUserList
 }
-    <div class="tour-title not-fixed center-image">
+<div class="tour-title not-fixed center-image">
 
-        <img class="w-100 h-100" src="../assets/images/search.jpg" alt="">
-        <h1 class="white text-center front shadow-text center-text">Log in to your profile</h1>
-        <img class="curve2 d-none d-xl-block" src="../assets/svgs/curve.svg" alt="">
-    </div>
+    <img class="w-100 h-100" src="../assets/images/search.jpg" alt="">
+    <h1 class="white text-center front shadow-text center-text">Your reservations</h1>
+    <img class="curve2 d-none d-xl-block" src="../assets/svgs/curve.svg" alt="">
+</div>
+
+@if (Model.Reservations.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Where</th>
+                <th scope="col">Arrival Date</th>
+                <th scope="col">Leaving Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Reservations.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@Model.Reservations[i].DestinationName, @Model.Reservations[i].TourName</td>
+                    <td>@Model.Reservations[i].ArrivalDate.ToString("d")</td>
+                    <td>@Model.Reservations[i].LeavingDate.ToString("d")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 class="text-danger text-center mt-5 mb-4">You don't have any reservations yet!</h3>
+}

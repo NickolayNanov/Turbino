@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home - Turbino template</title>
+    <title>Home - Turbino</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
@@ -90,9 +90,9 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <p class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown6" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a asp-controller="Home" asp-action="Profile" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">
                                     Hello, @this.User.Identity.Name
-                                </p>
+                                </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a asp-controller="Authentication" asp-action="Logout" class="nav-link mr-3 my-lg-0 my-2 ml-lg-0 ml-3" id="navbarDropdown3" role="button" aria-haspopup="true" aria-expanded="false">

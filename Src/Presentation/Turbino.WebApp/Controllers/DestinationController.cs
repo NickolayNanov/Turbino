@@ -19,6 +19,7 @@ namespace Turbino.WebApp.Controllers
 
         [Authorize]
         [HttpGet]
+        [Route("InquireDestination")]
         public async Task<IActionResult> Inquire(string destinationId)
         {
             DestinationViewModel result = await Mediator.Send(new GetDestinationByIdQuery(destinationId));
