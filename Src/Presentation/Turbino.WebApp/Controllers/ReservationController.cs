@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Turbino.Application.Reservations.Commands.CreateReservation;
 using Turbino.Application.Reservations.Queries.GetAllReservationsByUser;
+using Turbino.Common.GlobalContants;
 
 namespace Turbino.WebApp.Controllers
 {
@@ -18,11 +19,16 @@ namespace Turbino.WebApp.Controllers
             return View(reservations);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Reserve(string reserverName, DateTime arrivalDate, DateTime dateOfLeaving, string tourId)
-        {
-            await Mediator.Send(new CreateReservationCommand() { Name = reserverName, UserName = User.Identity.Name, TourId = tourId, DepartureDate = arrivalDate, DateOfLeaving = dateOfLeaving});
-            return this.RedirectToAction("Index", "Reservation");
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Reserve(string reserverName, DateTime arrivalDate, DateTime dateOfLeaving, string tourId)
+        //{
+        //    string errors = await Mediator.Send(new CreateReservationCommand() { Name = reserverName, UserName = User.Identity.Name, TourId = tourId, DepartureDate = arrivalDate, DateOfLeaving = dateOfLeaving});
+        //    if(errors != string.Empty)
+        //    {
+        //        ViewData["Error"] = errors;
+        //        return RedirectToAction("Inquire", "Tour", new { tourId });
+        //    }
+        //    return this.RedirectToAction("Index", "Reservation");
+        //}
     }
 }

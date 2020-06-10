@@ -35,7 +35,12 @@ namespace Turbino.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginTurbinoUserCommand command)
         {
-            await Mediator.Send(command);
+            string error = await Mediator.Send(command);
+            if (!string.IsNullOrEmpty(error))
+            {
+                ViewData["Errors"] = error;
+                return View(new LoginTurbinoUserCommand());
+            }
             return Redirect("/");
         }
 
@@ -56,7 +61,12 @@ namespace Turbino.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(CreateTurbinoUserCommand command)
         {
-            await Mediator.Send(command);
+            string error = await Mediator.Send(command);
+            if (!string.IsNullOrEmpty(error))
+            {
+                ViewData["Errors"] = error;
+                return View(new CreateTurbinoUserCommand());
+            }
             return Redirect("/");
         }
 

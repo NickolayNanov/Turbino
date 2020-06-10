@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Turbino.Application.Destinations.Commands.Create
 {
-    public class CreateDestinationCommand : IRequest
+    public class CreateDestinationCommand : IRequest<string[]>
     {
         public CreateDestinationCommand()
         {

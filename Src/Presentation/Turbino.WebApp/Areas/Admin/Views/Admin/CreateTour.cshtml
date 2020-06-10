@@ -14,6 +14,13 @@
 <section id="section3">
     <div class="container formhome2 text-center justify-content-center align-items-center pb-4">
         <h4 class="black mx-2 mb-3 mt-0 pt-4 text-center bold d-block">Register</h4>
+        @if (ViewData["Errors"] != null)
+        {
+            @foreach (var error in (string[])ViewData["Errors"])
+            {
+                <p class="text-danger">@error</p>
+            }
+        }
         <form asp-antiforgery="true" asp-area="Admin" asp-controller="Admin" asp-action="CreateTour" method="post" enctype="multipart/form-data" class="text-center justify-content-center align-items-center pb-0 mt-5">
             <input asp-for="@Model.Name" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.Name)...">
             <input asp-for="@Model.PricePerPerson" type="number" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="@nameof(Model.PricePerPerson)...">

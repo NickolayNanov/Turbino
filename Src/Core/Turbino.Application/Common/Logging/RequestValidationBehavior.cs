@@ -30,7 +30,7 @@
 
             if (failures.Count != 0)
             {
-                throw new ValidationException(failures);
+                //throw new ValidationException(failures);
             }
 
             return next();

@@ -38,7 +38,13 @@ namespace Turbino.WebApp.Areas.Admin.Controllers
         [Route("CreateDestination")]
         public async Task<IActionResult> CreateDestination(CreateDestinationCommand command)
         {
-            await Mediator.Send(command);
+            string[] errors = await Mediator.Send(command);
+            if (errors.Length != 0)
+            {
+                ViewData["Errors"] = errors;
+                return View(new CreateDestinationCommand());
+            }
+
             return Redirect("/Destinations");
         }
 
@@ -53,7 +59,12 @@ namespace Turbino.WebApp.Areas.Admin.Controllers
         [Route("CreateTour")]
         public async Task<IActionResult> CreateTour(CreateTourCommand command)
         {
-            await Mediator.Send(command);
+            string[] errors = await Mediator.Send(command);
+            if(errors.Length != 0)
+            {
+                ViewData["Errors"] = errors;
+                return View(commonService.GetCommand());
+            }
             return Redirect("/Tours");
         }
     }

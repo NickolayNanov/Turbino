@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Turbino.Application.Common.Interfaces;
@@ -8,19 +10,28 @@ using Turbino.Infrastructure;
 
 namespace Turbino.Application.Destinations.Commands.Create
 {
-    public class CreateDestinationHandler : IRequestHandler<CreateDestinationCommand, Unit>
+    public class CreateDestinationHandler : IRequestHandler<CreateDestinationCommand, string[]>
     {
         private readonly ITurbinoDbContext context;
+        private readonly IValidator<CreateDestinationCommand> validator;
         private readonly ImageUploader uploader;
 
-        public CreateDestinationHandler(ITurbinoDbContext context, ImageUploader uploader)
+        public CreateDestinationHandler(ITurbinoDbContext context, IValidator<CreateDestinationCommand> validator, ImageUploader uploader)
         {
             this.context = context;
+            this.validator = validator;
             this.uploader = uploader;
         }
 
-        public async Task<Unit> Handle(CreateDestinationCommand request, CancellationToken cancellationToken)
+        public async Task<string[]> Handle(CreateDestinationCommand request, CancellationToken cancellationToken)
         {
+            var validation = await validator.ValidateAsync(request);
+
+            if (!validation.IsValid)
+            {
+                return validation.Errors.Select(x => x.ErrorMessage).ToArray();
+            }
+
             string[] imgUrls = new string[]
             {
                 uploader.UploadImage(request.FirstImg, Guid.NewGuid().ToString()),
@@ -48,7 +59,7 @@ namespace Turbino.Application.Destinations.Commands.Create
             }
 
             await context.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
+            return new string[0];
         }
 
         private string CreateDescription(CreateDestinationCommand request, string[] imgUrls)

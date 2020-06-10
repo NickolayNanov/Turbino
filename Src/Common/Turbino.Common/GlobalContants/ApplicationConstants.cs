@@ -9,5 +9,7 @@
         public const string NumberBetweenErrorMsg = "The {0} field must has value between {1} and {2}!";
 
         public const string PositiveNumberErrorMsg = "The {0}'s value must be possitive!";
+
+        public const string InvalidDepartureDateErrorMsg = "The field Departure Date cannot be before the field Date of Leaving!";
     }
 }

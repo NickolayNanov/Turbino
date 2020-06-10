@@ -21,6 +21,8 @@ namespace Turbino.Application.Tours.Queries.GetAllDestinations
 
         public int Duration { get; set; }
 
+        public string Description { get; set; }
+
         public string ImgUrl { get; set; }
 
         public void CreateMappings(Profile configuration)
@@ -29,7 +31,8 @@ namespace Turbino.Application.Tours.Queries.GetAllDestinations
                 .ForMember(x => x.Price, y => y.MapFrom(z => z.PricePerPerson))
                 .ForMember(x => x.Rating, y => y.MapFrom(z => (int)z.Reviews.Average(r => (int)r.Rating)))
                 .ForMember(x => x.Reviews, y => y.MapFrom(z => z.Reviews.Count))
-                .ForMember(x => x.Type, y => y.MapFrom(z => z.TourType.ToString()));
+                .ForMember(x => x.Type, y => y.MapFrom(z => z.TourType.ToString()))
+                .ForMember(x => x.Description, y => y.MapFrom(z => string.Join("", z.Description.Take(30))));
         }
     }
 }

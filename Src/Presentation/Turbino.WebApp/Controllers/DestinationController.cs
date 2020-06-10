@@ -31,6 +31,10 @@ namespace Turbino.WebApp.Controllers
         public async Task<IActionResult> Filter(string searchQuery, int? pageNumber = 1)
         {
             DestinationsListViewModel result = await Mediator.Send(new GetAllDestinationsWithFilterQuery() { DestinationName = searchQuery, PageIndex = pageNumber });
+            if(result.Errors.Length != 0)
+            {
+                ViewData["Errors"] = result.Errors;
+            }
             return View(result);
         }
     }

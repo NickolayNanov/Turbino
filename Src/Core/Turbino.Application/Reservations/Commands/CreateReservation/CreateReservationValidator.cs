@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using System;
+using Turbino.Domain.Interfaces;
 
 namespace Turbino.Application.Reservations.Commands.CreateReservation
 {
@@ -6,22 +8,23 @@ namespace Turbino.Application.Reservations.Commands.CreateReservation
     {
         public CreateReservationValidator()
         {
-            RuleFor(r => r.Name)
-                .NotEmpty()
+            RuleFor(r => r.ReserverName)
                 .NotNull()
                 .WithMessage("Your name must not be empty!");
 
-            RuleFor(r => r.DepartureDate)
-                .NotNull()
-                .NotEmpty()
-                .LessThan(r => r.DateOfLeaving)
-                .WithMessage("The departure date is required and must be before the leaving date!");
-
             RuleFor(r => r.DateOfLeaving)
                 .NotNull()
-                .NotEmpty()
-                .GreaterThan(r => r.DepartureDate)
-                .WithMessage("The date of leaving is requried and must be greater than the departure date!");
+                .WithMessage("The date of leaving is requried!");
+
+            RuleFor(r => r.ArrivalDate)
+                .NotNull()
+                .WithMessage("The arrival date is requried!");
+
+            RuleFor(r => r.ArrivalDate)
+                .LessThan(r => r.DateOfLeaving)
+                .When(r => r.ArrivalDate != null && r.DateOfLeaving != null)
+                .WithMessage("The date of the arrival must be before the living date!");
+
         }
     }
 }

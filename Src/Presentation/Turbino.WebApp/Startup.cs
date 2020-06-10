@@ -60,7 +60,7 @@
                 app.UseHsts();
             }
 
-            app.UseCustomExceptionHandler();
+            //app.UseCustomExceptionHandler();
             app.UseHealthChecks("/health");
 
             app.UseHttpsRedirection();

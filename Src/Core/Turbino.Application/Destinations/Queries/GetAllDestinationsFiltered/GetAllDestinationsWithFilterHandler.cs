@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,27 +17,45 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
     {
         private readonly ITurbinoDbContext context;
         private readonly IMapper mapper;
+        private readonly IValidator<GetAllDestinationsWithFilterQuery> validator;
 
-        public GetAllDestinationsWithFilterHandler(ITurbinoDbContext context, IMapper mapper)
+        public GetAllDestinationsWithFilterHandler(ITurbinoDbContext context, IMapper mapper, IValidator<GetAllDestinationsWithFilterQuery> validator)
         {
             this.context = context;
             this.mapper = mapper;
+            this.validator = validator;
         }
 
         public async Task<GetAllDestinationsWithFilterListViewModel> Handle(GetAllDestinationsWithFilterQuery request, CancellationToken cancellationToken)
         {
-            return new GetAllDestinationsWithFilterListViewModel()
+            var validation = await validator.ValidateAsync(request);
+            if (validation.IsValid)
             {
-                Destinations = await this.mapper
-                                            .ProjectTo<DestinationsAllListModel>(
-                                                PaginatedList<Destination>.Create(this.context.Destinations
-                                                                                    .AsNoTracking()
-                                                                                    .Where(d => d.Name.ToLower().StartsWith(request.DestinationName.ToLower())),
-                                                                                  request.PageIndex ?? 1, 12)).ToListAsync(),
-                PageIndex = request.PageIndex ?? 0,
-                SearchQuery = request.DestinationName,
-                HaveMoreDestinations = context.Destinations.Where(d => d.Name.StartsWith(request.DestinationName)).Count() > (request.PageIndex ?? 1) * 12
-            };
+
+                return new GetAllDestinationsWithFilterListViewModel()
+                {
+                    Destinations = await this.mapper
+                                                .ProjectTo<DestinationsAllListModel>(
+                                                    PaginatedList<Destination>.Create(this.context.Destinations
+                                                                                        .AsNoTracking()
+                                                                                        .Where(d => d.Name.ToLower().StartsWith(request.DestinationName.ToLower())),
+                                                                                      request.PageIndex ?? 1, 12)).ToListAsync(),
+                    PageIndex = request.PageIndex ?? 0,
+                    SearchQuery = request.DestinationName,
+                    HaveMoreDestinations = context.Destinations.Where(d => d.Name.StartsWith(request.DestinationName)).Count() > (request.PageIndex ?? 1) * 12
+                };
+            }
+            else
+            {
+                return new GetAllDestinationsWithFilterListViewModel()
+                {
+                    Destinations = new List<DestinationsAllListModel>(),
+                    PageIndex = request.PageIndex ?? 0,
+                    SearchQuery = request.DestinationName,
+                    HaveMoreDestinations = context.Destinations.Where(d => d.Name.StartsWith(request.DestinationName)).Count() > (request.PageIndex ?? 1) * 12,
+                    Errors = validation.Errors.Select(x => x.ErrorMessage).ToArray()
+                };
+            }
         }
     }
 }

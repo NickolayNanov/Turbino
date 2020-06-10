@@ -7,9 +7,10 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinations
         public DestinationsListViewModel()
         {
             this.PageIndex = 1;
+            Errors = new string[0];
         }
 
-        public IList<DestinationsAllListModel> Destinations { get; set; }
+        public string[] Errors { get; set; }
 
         public int? PageIndex { get; set; } = 1;
 
@@ -18,5 +19,7 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinations
         public string PriceRange { get; set; }
 
         public bool HaveMoreDestinations { get; set; }
+
+        public IList<DestinationsAllListModel> Destinations { get; set; }
     }
 }

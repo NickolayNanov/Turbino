@@ -7,7 +7,7 @@ using Turbino.Domain.Entities;
 
 namespace Turbino.Application.Tours.Commands.CreateTour
 {
-    public class CreateTourCommand : IRequest, IHaveCustomMapping
+    public class CreateTourCommand : IRequest<string[]>, IHaveCustomMapping
     {
         public string Name { get; set; }
 

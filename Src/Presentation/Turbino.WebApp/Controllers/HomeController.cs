@@ -10,6 +10,8 @@
     using System.Linq;
     using Turbino.Application.Home.GetProfile;
     using Turbino.Application.Home.Commands.UpdateUserProfile;
+    using Turbino.Application.Tours.Queries.GetAllDestinations;
+    using Turbino.Application.Home.Queries.GetIndex;
 
     public class HomeController : BaseController
     {
@@ -27,7 +29,8 @@
         public async  Task<IActionResult> Index()
         {
             await SeedRoles();
-            return this.View();
+            IndexHolderViewModel tours = await Mediator.Send(new GetIndexQuery());
+            return View(tours);
         }
 
         public IActionResult Privacy()
@@ -55,6 +58,15 @@
             var state = this.ModelState.IsValid;
             GetProfileViewModel userData = await Mediator.Send(new UpdateUserProfileCommand() { UserName = User.Identity.Name, FirstName = firstName, MiddleName = middleName, LastName = lastName, PhoneNumber = phone });
             return RedirectToAction("Profile", "Home", userData);
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+        public IActionResult ContactUs()
+        {
+            return View();
         }
 
         private async Task SeedRoles()

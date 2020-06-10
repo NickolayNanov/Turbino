@@ -6,7 +6,7 @@ using Turbino.Domain.Entities;
 
 namespace Turbino.Application.Authentication.Login.Commands
 {
-    public class LoginTurbinoUserHandler : IRequestHandler<LoginTurbinoUserCommand, Unit>
+    public class LoginTurbinoUserHandler : IRequestHandler<LoginTurbinoUserCommand, string>
     {
         private readonly SignInManager<TurbinoUser> signInManager;
         private readonly UserManager<TurbinoUser> userManager;
@@ -17,10 +17,18 @@ namespace Turbino.Application.Authentication.Login.Commands
             this.userManager = userManager;
         }
 
-        public async Task<Unit> Handle(LoginTurbinoUserCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(LoginTurbinoUserCommand request, CancellationToken cancellationToken)
         {
-            var asd = await signInManager.PasswordSignInAsync(request.Username, request.Password, true, false);
-            return Unit.Value;
+            try
+            {
+                var result = await signInManager.PasswordSignInAsync(request.Username, request.Password, true, false);
+            }
+            catch
+            {
+                return "Invalid login attempt!";
+            }
+
+            return string.Empty;
         }
     }
 }

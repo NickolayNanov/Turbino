@@ -1,4 +1,5 @@
 ﻿@{
+    @model Turbino.Application.Home.Queries.GetIndex.IndexHolderViewModel
     ViewData["Title"] = "Home Page";
 }
 
@@ -62,31 +63,31 @@
 <section id="section3">
     <div class="container formhome2 text-center justify-content-center align-items-center pb-4">
         <h4 class="black mx-2 mb-3 mt-0 pt-4 text-center bold  d-block">Find the place it suits you best</h4>
-        <form class="form-inline text-center justify-content-center align-items-center pb-0">
-            <input type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Search Tours">
+        <form asp-antiforgery="true" asp-controller="Tour" asp-action="Filter" method="get" class="form-inline text-center justify-content-center align-items-center pb-0">
+            <input asp-for="@Model.TourViewModel.TourName" type="text" class="form-control-inline2 form-control mb-2 mr-lg-2 mx-md-0 mx-4 py-2" id="inlineFormInputName1" placeholder="Search Tours">
             <span class="fas fa-search iconform"></span>
 
-            <select class="mb-2 mr-lg-2 mx-4 mx-md-0 form-control form-control-inline2" id="inlineFormInputName2">
+            <select asp-for="@Model.TourViewModel.Month" class="mb-2 mr-lg-2 mx-4 mx-md-0 form-control form-control-inline2" id="inlineFormInputName2">
                 <option selected>Any month</option>
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="1">April</option>
-                <option value="2">May</option>
-                <option value="3">June</option>
-                <option value="1">July</option>
-                <option value="2">August</option>
-                <option value="3">September</option>
-                <option value="3">Octuber</option>
-                <option value="3">November</option>
-                <option value="3">December</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="Octuber">Octuber</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
             </select>
             <span class="fas fa-calendar iconform"></span>
 
-            <select class=" mb-2 mr-lg-2 mx-4 mx-md-0 form-control form-control-inline2" id="inlineFormInputName3">
+            <select asp-for="@Model.TourViewModel.TourType" class=" mb-2 mr-lg-2 mx-4 mx-md-0 form-control form-control-inline2" id="inlineFormInputName3">
                 <option selected>Tour Type</option>
-                <option value="1">Adventure</option>
-                <option value="2">Romantic</option>
+                <option value="1">Romantic</option>
+                <option value="2">Adventure</option>
                 <option value="3">Vacation</option>
                 <option value="3">Explore</option>
             </select>
@@ -106,87 +107,64 @@
                 <div class="text-center">
                     <h3 class="black front bold text-center">Popular Destinations</h3>
                     <div class="separator text-center svgcenter"></div>
-                    <h5 class="primary-color text-center mb-5 ">Occaecat sunt elit quis id commodo ullamco dolor fugiat ullamco culpa </h5>
+                    <h5 class="primary-color text-center mb-5 ">Check out some of our most popular destinations down here! </h5>
                 </div>
 
                 <div class="gal">
-                    <div class="masonry-full mb-3">
-                        <div class="masonry-hover">
-                            <div class="masonry-item">
-                                <img class="masonry-image" src="assets/images/valicoloradosmall.jpg" alt="">
-                                <div class="masonry-info text-center front">
-                                    <h6 class="white front">Colorado</h6>
-                                    <a class="btn btn-outline-light px-3 front" href="#" role="button">SEE MORE</a>
+                    @for (int i = 0; i < Model.Destinations.Destinations.Count; i++)
+                    {
+                        if (i == 4)
+                        {
+                            <div class="masonry-full  mb-3">
+                                <div class="masonry-hover">
+                                    <div class="masonry-item">
+                                        <img class="masonry-image" src="@Model.Destinations.Destinations[i].ImgUrl" alt="">
+                                        <div class="masonry-info text-center front">
+                                            <h6 class="white shadow-text front">@Model.Destinations.Destinations[i].Name</h6>
+                                            <a asp-controller="Destination" 
+                                               asp-action="Inquire" 
+                                               asp-route-destinationId="@Model.Destinations.Destinations[i].Id"
+                                               class="btn btn-outline-light px-3 front" role="button">SEE MORE</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="masonry-full mb-3">
-                        <div class="masonry-hover">
-                            <div class="masonry-item">
-                                <img class="masonry-image" src="assets/images/thailand.jpg" alt="">
-                                <div class="masonry-info text-center front">
-                                    <h6 class="white shadow-text front">Thailand</h6>
-                                    <a class="btn btn-outline-light px-3 front" href="#" role="button">SEE MORE</a>
+                        }
+                        else if (i == 5)
+                        {
+                            <div class="masonry-full">
+                                <div class="masonry-hover">
+                                    <div class="masonry-item">
+                                        <img class="masonry-image" src="@Model.Destinations.Destinations[i].ImgUrl" alt="">
+                                        <div class="masonry-info text-center front">
+                                            <h6 class="white shadow-text front">@Model.Destinations.Destinations[i].Name</h6>
+                                            <a asp-controller="Destination" 
+                                               asp-action="Inquire" 
+                                               asp-route-destinationId="@Model.Destinations.Destinations[i].Id"
+                                               class="btn btn-outline-light px-3 front" role="button">SEE MORE</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="masonry-full mb-md-0 mb-3">
-                        <div class="masonry-hover">
-                            <div class="masonry-item">
-                                <img class="masonry-image" src="assets/images/california-santa.jpg" alt="">
-                                <div class="masonry-info text-center front">
-                                    <h6 class="white shadow-text front">Cali</h6>
-                                    <a class="btn btn-outline-light px-3 front" href="#" role="button">SEE MORE</a>
+                        }
+                        else
+                        {
+                            <div class="masonry-full mb-3">
+                                <div class="masonry-hover">
+                                    <div class="masonry-item">
+                                        <img class="masonry-image" src="@Model.Destinations.Destinations[i].ImgUrl" alt="">
+                                        <div class="masonry-info text-center front">
+                                            <h6 class="white front">@Model.Destinations.Destinations[i].Name</h6>
+                                            <a asp-controller="Destination" 
+                                               asp-action="Inquire" 
+                                               asp-route-destinationId="@Model.Destinations.Destinations[i].Id"
+                                               class="btn btn-outline-light px-3 front" role="button">SEE MORE</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="masonry-full  mb-3">
-                        <div class="masonry-hover">
-                            <div class="masonry-item">
-                                <img class="masonry-image" src="assets/images/london.jpg" alt="">
-                                <div class="masonry-info text-center front">
-                                    <h6 class="white shadow-text front">England</h6>
-                                    <a class="btn btn-outline-light px-3 front" href="#" role="button">SEE MORE</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="masonry-full mb-md-0 mb-3">
-                        <div class="masonry-hover">
-                            <div class="masonry-item">
-                                <img class="masonry-image" src="assets/images/patagoniasmall.jpg" alt="">
-                                <div class="masonry-info text-center front">
-                                    <h6 class="white shadow-text front">Argentinian Patagonias</h6>
-                                    <a class="btn btn-outline-light px-3 front" href="#" role="button">SEE MORE</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="masonry-full  mb-3">
-                        <div class="masonry-hover">
-                            <div class="masonry-item">
-                                <img class="masonry-image" src="assets/images/indian-woman.jpg" alt="">
-                                <div class="masonry-info text-center front">
-                                    <h6 class="white shadow-text front">India</h6>
-                                    <a class="btn btn-outline-light px-3 front" href="#" role="button">SEE MORE</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="masonry-full">
-                        <div class="masonry-hover">
-                            <div class="masonry-item">
-                                <img class="masonry-image" src="assets/images/chinadestination.jpg" alt="">
-                                <div class="masonry-info text-center front">
-                                    <h6 class="white shadow-text front">China</h6>
-                                    <a class="btn btn-outline-light px-3 front" href="#" role="button">SEE MORE</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -201,124 +179,27 @@
             <div class="text-center">
                 <h3 class="black front bold text-center">Popular Tours to discover</h3>
                 <div class="separator text-center svgcenter"></div>
-                <h5 class="primary-color text-center mb-5">Occaecat sunt elit quis id commodo ullamco dolor fugiat ullamco culpa </h5>
-            </div>
-            <div class="row ">
-                <div class="col-xs-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card ">
-                        <small class="white front"><span class="far fa-clock mr-2 white"></span><strong>9</strong><br>days</small>
-                        <a class="img-card" href="#">
-                            <img src="assets/images/switzerland.jpg" alt="" />
-                        </a>
-                        <div class="card-content">
-                            <div>
-                                <a class="btn btn-primary px-3 btn-sm float-left" href="#" role="button">adventure</a>
-                            </div>
-                            <h6 class="primary-color text-right">$3300</h6>
-                            <h6 class="black"><a href="#" target="_blank">Great Switzerland</a></h6>
-                            <p class="">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id ligula aliquam, malesuada ex ac, auctor nibh. Nunc <a href="#" target="_blank"><span>... See more</span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6 col-lg-4 mb-4">
-                    <div class="card">
-                        <small class="white front"><span class="far fa-clock mr-2 white"></span><strong>8</strong><br>days</small>
-                        <a class="img-card" href="#">
-                            <img src="assets/images/china.jpg" alt="" />
-                        </a>
-                        <div class="card-content">
-                            <div>
-                                <a class="btn btn-primary px-3 btn-sm float-left" href="#" role="button">city tour</a>
-                            </div>
-                            <h6 class="primary-color text-right">$3900</h6>
-                            <h6 class="black"><a href="#" target="_blank">Delightful China</a></h6>
-                            <p class="">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusc dolor ing elit. Fusce id ligula aliquam, malesuada ex ac, <a href="#" target="_blank"><span>... See more</span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6 col-lg-4 mx-auto mb-4">
-                    <div class="card">
-                        <small class="white front"><span class="far fa-clock mr-2 white"></span><strong>7</strong><br>days</small>
-                        <a class="img-card" href="#">
-                            <img src="assets/images/machupichu.jpg" alt="" />
-                        </a>
-                        <div class="card-content">
-                            <div class="special-offer ">
-                                <div class="arrow_box text-center">
-                                    <span class="white subtitle bold"> 25% OFF</span>
-                                </div>
-                            </div>
-                            <div>
-                                <a class="btn btn-primary px-3 btn-sm float-left" href="#" role="button">adventure</a>
-                            </div>
-                            <h6 class="primary-color text-right">$1900</h6>
-                            <h6 class="black"><a href="#" target="_blank">Mystical Machu Picchu</a></h6>
-                            <p class="">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id ligula aliquam, malesuada ex ac, auctor nibh. Nunc <a href="#" target="_blank"><span>... See more</span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <h5 class="primary-color text-center mb-5">Travel with Turbino and have fun! </h5>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-lg-4 mb-lg-0 mb-4">
-                    <div class="card">
-                        <small class="white front"><span class="far fa-clock mr-2 white"></span><strong>9</strong><br>days</small>
-                        <a class="img-card" href="#">
-                            <img src="assets/images/newyorksmall.jpeg" alt="" />
-                        </a>
-                        <div class="card-content">
-                            <div>
-                                <a class="btn btn-primary px-3 btn-sm float-left" href="#" role="button">adventure</a>
+                @foreach (var tour in Model.TourViewModel.Tours)
+                {
+                    <div class="col-xs-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card ">
+                            <small class="white front"><span class="far fa-clock mr-2 white"></span><strong>9</strong><br>days</small>
+                            <a class="img-card" asp-controller="Tour" asp-action="Inquire" asp-route-tourId="@tour.Id">
+                                <img src="@tour.ImgUrl" alt="" />
+                            </a>
+                            <div class="card-content">
+                                <div>
+                                    <a class="btn btn-primary px-3 btn-sm float-left" href="#" role="button">@tour.Type</a>
+                                </div>
+                                <h6 class="primary-color text-right">$3300</h6>
+                                <h6 class="black"><a href="#" target="_blank">@tour.Name</a></h6>
                             </div>
-                            <h6 class="primary-color text-right">$3300</h6>
-                            <h6 class="black"><a href="#" target="_blank">New York, New York</a></h6>
-                            <p class="">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id ligula aliquam, scing elit. Fusce id ligula aliquam, <a href="#" target="_blank"><span>... See more</span></a>
-                            </p>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-md-6 col-lg-4 mb-lg-0 mb-4">
-                    <div class="card">
-                        <small class="white front"><span class="far fa-clock mr-2 white"></span><strong>8</strong><br>days</small>
-                        <a class="img-card" href="#">
-                            <img src="assets/images/netherlandsmall.jpg" alt="" />
-                        </a>
-                        <div class="card-content">
-                            <div>
-                                <a class="btn btn-primary px-3 btn-sm float-left" href="#" role="button">city tour</a>
-                            </div>
-                            <h6 class="primary-color text-right">$3900</h6>
-                            <h6 class="black"><a href="#" target="_blank">Amsterdam with Love</a></h6>
-                            <p class="">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusc dolor ing elit. Fusce id ligula aliquam, malesuada ex<a href="#" target="_blank"><span>... See more</span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6 col-lg-4 mx-auto ">
-                    <div class="card">
-                        <small class="white front"><span class="far fa-clock mr-2 white"></span><strong>7</strong><br>days</small>
-                        <a class="img-card" href="#">
-                            <img src="assets/images/cubasmall.jpg" alt="" />
-                        </a>
-                        <div class="card-content">
-                            <div>
-                                <a class="btn btn-primary px-3 btn-sm float-left" href="#" role="button">adventure</a>
-                            </div>
-                            <h6 class="primary-color text-right">$1900</h6>
-                            <h6 class="black"><a href="#" target="_blank">Dream the Bahamas</a></h6>
-                            <p class="">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id ligula aliquam, malesuada ex ac, auctor nibh.  <a href="#" target="_blank"><span>... See more</span></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

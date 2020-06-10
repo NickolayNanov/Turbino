@@ -8,6 +8,7 @@ namespace Turbino.Application.Tours.Queries.GetAllDestinations
         public GetAllToursListViewModel()
         {
             this.PageIndex = 1;
+            Errors = new string[0];
         }
 
         public IList<GetAllToursListModel> Tours { get; set; }
@@ -27,5 +28,7 @@ namespace Turbino.Application.Tours.Queries.GetAllDestinations
         public int? PageIndex { get; set; }
 
         public bool HaveMoreTours { get; set; }
+
+        public string[] Errors { get; set; }
     }
 }

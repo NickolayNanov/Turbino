@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MediatR;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Turbino.Application.Common.Interfaces;
@@ -10,21 +12,29 @@ using Turbino.Infrastructure;
 
 namespace Turbino.Application.Tours.Commands.CreateTour
 {
-    public class CreateTourHandler : IRequestHandler<CreateTourCommand, Unit>
+    public class CreateTourHandler : IRequestHandler<CreateTourCommand, string[]>
     {
         private readonly ITurbinoDbContext context;
         private readonly IMapper mapper;
+        private readonly IValidator<CreateTourCommand> validator;
         private readonly ImageUploader imageUploader;
+        
 
-        public CreateTourHandler(ITurbinoDbContext context, IMapper mapper, ImageUploader imageUploader)
+        public CreateTourHandler(ITurbinoDbContext context, IMapper mapper, IValidator<CreateTourCommand> validator, ImageUploader imageUploader)
         {
             this.context = context;
             this.mapper = mapper;
+            this.validator = validator;
             this.imageUploader = imageUploader;
         }
 
-        public async Task<Unit> Handle(CreateTourCommand request, CancellationToken cancellationToken)
+        public async Task<string[]> Handle(CreateTourCommand request, CancellationToken cancellationToken)
         {
+            var validation = await validator.ValidateAsync(request);
+            if (!validation.IsValid)
+            {
+                return validation.Errors.Select(x => x.ErrorMessage).ToArray();
+            }
             var destination = await context.Destinations.FindAsync(request.Location);
             string[] imgUrls = new string[]
             {
@@ -44,7 +54,7 @@ namespace Turbino.Application.Tours.Commands.CreateTour
 
             context.Tours.Add(tour);
             await context.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
+            return new string[0];
         }
 
         private string GetDesctiption(CreateTourCommand request, string[] imgUrls)

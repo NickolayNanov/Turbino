@@ -6,7 +6,7 @@ using Turbino.Domain.Entities;
 
 namespace Turbino.Application.Authentication.Register.Commands.Create
 {
-    public class CreateTurbinoUserHandler : IRequestHandler<CreateTurbinoUserCommand, Unit>
+    public class CreateTurbinoUserHandler : IRequestHandler<CreateTurbinoUserCommand, string>
     {
         private readonly UserManager<TurbinoUser> userManager;
         private readonly SignInManager<TurbinoUser> signInManager;
@@ -17,7 +17,7 @@ namespace Turbino.Application.Authentication.Register.Commands.Create
             this.signInManager = signInManager;
         }
 
-        public async Task<Unit> Handle(CreateTurbinoUserCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateTurbinoUserCommand request, CancellationToken cancellationToken)
         {
             TurbinoUser user = new TurbinoUser()
             {
@@ -27,11 +27,18 @@ namespace Turbino.Application.Authentication.Register.Commands.Create
                 FullName = request.FirstName,
                 UserName = request.Username
             };
+            try
+            {
+                await userManager.CreateAsync(user, request.Password);
+                await userManager.AddToRoleAsync(user, "User");
+                await signInManager.SignInAsync(user, true);
+            }
+            catch
+            {
+                return "Invalid register attempt";
+            }
 
-            await userManager.CreateAsync(user, request.Password);
-            await userManager.AddToRoleAsync(user, "User");
-            await signInManager.SignInAsync(user, true);
-            return Unit.Value;
+            return string.Empty;
         }
     }
 }
