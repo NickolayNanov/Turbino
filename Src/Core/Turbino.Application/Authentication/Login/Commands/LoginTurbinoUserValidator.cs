@@ -7,11 +7,9 @@ namespace Turbino.Application.Authentication.Login.Commands
         public LoginTurbinoUserValidator()
         {
             RuleFor(l => l.Username)
-                .NotEmpty()
                 .NotNull();
 
             RuleFor(l => l.Password)
-                .NotEmpty()
                 .NotNull();
         }
     }

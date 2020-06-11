@@ -120,12 +120,13 @@ namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
 
         private bool isValid(GetAllToursWithFilterQuery request)
         {
-            if(request.PriceStr == "$1000 - $2500" 
-                && string.IsNullOrEmpty(request.DestinationName) 
-                && request.Month == "Any month" 
-                && request.SortOrder == 0 
+            if ((request.PriceStr == "$1000 - $2500"
+                && string.IsNullOrEmpty(request.DestinationName)
+                && request.Month == "Any month"
+                && request.SortOrder == 0
                 && request.TourType == "Tour Type"
-                && string.IsNullOrEmpty(request.TourName))
+                && string.IsNullOrEmpty(request.TourName)) ||
+                (request.TourType == "Tour Type" && request.Month == "Any month" && string.IsNullOrEmpty(request.TourName)))
             {
                 return false;
             }
