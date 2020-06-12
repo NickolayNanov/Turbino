@@ -24,7 +24,7 @@
             {
                 <tr>
                     <th scope="row">@(i + 1)</th>
-                    <td>@Model.Reservations[i].DestinationName, @Model.Reservations[i].TourName</td>
+                    <td>@Model.Reservations[i].TourName, @Model.Reservations[i].DestinationName</td>
                     <td>@Model.Reservations[i].ArrivalDate.ToString("d")</td>
                     <td>@Model.Reservations[i].LeavingDate.ToString("d")</td>
                 </tr>

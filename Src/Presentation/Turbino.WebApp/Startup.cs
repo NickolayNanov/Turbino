@@ -14,6 +14,7 @@
     using Turbino.Application.Common.Interfaces;
     using Turbino.WebApp.Middleware;
     using Microsoft.AspNetCore.Authentication.Cookies;
+    using System;
 
     public class Startup
     {
@@ -36,11 +37,21 @@
                 .AddDbContextCheck<TurbinoDbContext>();
 
             services.AddHttpContextAccessor();
-            
+
             services
                .AddMvc(options => options.EnableEndpointRouting = false)
-               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ITurbinoDbContext>())
-               /*.AddRazorPagesOptions(opt => opt.Conventions.addpage("/Authentication/Login"))*/;
+               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ITurbinoDbContext>());
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Authentication/Login";
+                options.AccessDeniedPath = "/Home/Error";
+                options.SlidingExpiration = true;
+            });
 
             services.AddControllersWithViews();
 
