@@ -7,6 +7,11 @@ namespace Turbino.Application.Home.GetProfile
 {
     public class GetProfileViewModel : IHaveCustomMapping
     {
+        public GetProfileViewModel()
+        {
+            Errors = new string[0];
+        }
+
         public string FirstName { get; set; }
 
         public string MiddleName { get; set; }
@@ -15,6 +20,8 @@ namespace Turbino.Application.Home.GetProfile
 
         [RegularExpression("^((0877|0887|089)([0-9]{6})){1,10}$")]
         public string PhoneNumber { get; set; }
+
+        public string[] Errors { get; set; }
 
         public void CreateMappings(Profile configuration)
         {

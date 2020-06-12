@@ -28,7 +28,6 @@
         [Route("/")]
         public async  Task<IActionResult> Index()
         {
-            await SeedRoles();
             IndexHolderViewModel tours = await Mediator.Send(new GetIndexQuery());
             return View(tours);
         }
@@ -55,8 +54,11 @@
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(string firstName, string lastName, string middleName, string phone)
         {
-            var state = this.ModelState.IsValid;
             GetProfileViewModel userData = await Mediator.Send(new UpdateUserProfileCommand() { UserName = User.Identity.Name, FirstName = firstName, MiddleName = middleName, LastName = lastName, PhoneNumber = phone });
+            if(userData.Errors.Length != 0)
+            {
+                ViewData["Errors"] = userData.Errors;
+            }
             return RedirectToAction("Profile", "Home", userData);
         }
 
@@ -67,22 +69,6 @@
         public IActionResult ContactUs()
         {
             return View();
-        }
-
-        private async Task SeedRoles()
-        {
-            if (!roleManager.Roles.Any())
-            {
-                await roleManager.CreateAsync(new TurbinoRole("Admin"));
-                await roleManager.CreateAsync(new TurbinoRole("User"));
-            }
-
-            if (!userManager.Users.Any())
-            {
-                TurbinoUser user = new TurbinoUser() { UserName = "admin", FirstName = "admin", LastName = "adminov" };
-                await userManager.CreateAsync(user, "fr3s7ed23");
-                await userManager.AddToRoleAsync(user, "Admin");
-            }
         }
     }
 }

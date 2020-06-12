@@ -10,7 +10,6 @@
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<INotificationService, NotificationService>();
-            services.AddTransient<IDateTime, MachineDateTime>();
             services.AddScoped<ImageUploader>();
             return services;
         }
