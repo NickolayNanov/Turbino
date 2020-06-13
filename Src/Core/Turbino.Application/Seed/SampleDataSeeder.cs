@@ -449,7 +449,7 @@
             if (!userManager.Users.Any())
             {
                 TurbinoUser user = new TurbinoUser() { UserName = "admin", FirstName = "admin", LastName = "adminov" };
-                await userManager.CreateAsync(user, "fr3s7ed23");
+                await userManager.CreateAsync(user, "123qweEWQ321");
                 await userManager.AddToRoleAsync(user, "Admin");
             }
         }
