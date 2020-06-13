@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-
-namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
+﻿namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
 {
+    using FluentValidation;
+
     public class GetAllDestinationsWithFilterValidator : AbstractValidator<GetAllDestinationsWithFilterQuery>
     {
         public GetAllDestinationsWithFilterValidator()

@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\Common\Turbino.Common\Turbino.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>

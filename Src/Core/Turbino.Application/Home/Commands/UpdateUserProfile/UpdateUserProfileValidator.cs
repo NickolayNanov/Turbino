@@ -1,8 +1,7 @@
-﻿using FluentValidation;
-using Turbino.Common.GlobalContants;
-
-namespace Turbino.Application.Home.Commands.UpdateUserProfile
+﻿namespace Turbino.Application.Home.Commands.UpdateUserProfile
 {
+    using FluentValidation;
+    using Turbino.Common.GlobalContants;
     public class UpdateUserProfileValidator : AbstractValidator<UpdateUserProfileCommand>
     {
         public UpdateUserProfileValidator()

@@ -1,8 +1,9 @@
-﻿using FluentValidation;
-using Turbino.Common.GlobalContants;
-
-namespace Turbino.Application.Tours.Commands.CreateTour
+﻿namespace Turbino.Application.Tours.Commands.CreateTour
 {
+    using FluentValidation;
+
+    using Turbino.Common.GlobalContants;
+
     public class CreateTourValidator : AbstractValidator<CreateTourCommand>
     {
         public CreateTourValidator()

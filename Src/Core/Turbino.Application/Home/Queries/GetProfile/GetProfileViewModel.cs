@@ -1,10 +1,12 @@
-﻿using AutoMapper;
-using System.ComponentModel.DataAnnotations;
-using Turbino.Application.Interfaces.Mapping;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Home.GetProfile
+﻿namespace Turbino.Application.Home.GetProfile
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Interfaces.Mapping;
+
+    using AutoMapper;
+
     public class GetProfileViewModel : IHaveCustomMapping
     {
         public GetProfileViewModel()

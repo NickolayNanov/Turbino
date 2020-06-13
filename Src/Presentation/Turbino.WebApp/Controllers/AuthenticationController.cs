@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Turbino.Application.Authentication.Login.Commands;
-using Turbino.Application.Authentication.Register.Commands.Create;
-using Turbino.Common.GlobalContants;
-using Turbino.Domain.Entities;
-
-namespace Turbino.WebApp.Controllers
+﻿namespace Turbino.WebApp.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Common.GlobalContants;
+    using Turbino.Application.Authentication.Login.Commands;
+    using Turbino.Application.Authentication.Register.Commands.Create;
+
     public class AuthenticationController : BaseController
     {
         private readonly SignInManager<TurbinoUser> signInManager;
@@ -36,11 +38,13 @@ namespace Turbino.WebApp.Controllers
         public async Task<IActionResult> Login(LoginTurbinoUserCommand command)
         {
             string[] errors = await Mediator.Send(command);
+
             if (errors.Length != 0)
             {
                 ViewData["Errors"] = errors;
                 return View(new LoginTurbinoUserCommand());
             }
+
             return Redirect("/");
         }
 
@@ -62,11 +66,13 @@ namespace Turbino.WebApp.Controllers
         public async Task<IActionResult> Register(CreateTurbinoUserCommand command)
         {
             string[] errors = await Mediator.Send(command);
+
             if (errors.Length > 0)
             {
                 ViewData["Errors"] = errors;
                 return View(new CreateTurbinoUserCommand());
             }
+
             return Redirect("/");
         }
 

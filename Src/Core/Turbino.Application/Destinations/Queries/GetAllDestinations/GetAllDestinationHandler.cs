@@ -1,15 +1,18 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Domain.Common;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Destinations.Queries.GetAllDestinations
+﻿namespace Turbino.Application.Destinations.Queries.GetAllDestinations
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Turbino.Domain.Common;
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Common.Interfaces;
+
+    using MediatR;
+    using AutoMapper;
+
     public class GetAllDestinationHandler : IRequestHandler<GetAllDestinationsListQuery, DestinationsListViewModel>
     {
         private readonly IMapper mapper;

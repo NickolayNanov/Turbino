@@ -1,9 +1,7 @@
-﻿using FluentValidation;
-using System;
-using Turbino.Domain.Interfaces;
-
-namespace Turbino.Application.Reservations.Commands.CreateReservation
+﻿namespace Turbino.Application.Reservations.Commands.CreateReservation
 {
+    using FluentValidation;
+
     public class CreateReservationValidator : AbstractValidator<CreateReservationCommand>
     {
         public CreateReservationValidator()

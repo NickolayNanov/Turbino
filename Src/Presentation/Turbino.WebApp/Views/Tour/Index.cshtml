@@ -196,25 +196,26 @@
 
 
 
-<div class="mr-5 d-flex flex-row-reverse">
-    @if (Model.Tours.Count >= 12)
-    {
-        <a asp-controller="Tour"
-           asp-action="Index"
-           asp-route-pageNumber="@(Model.PageIndex + 1)"
-           class="p-2 btn my-2 btn-primary ml-2">
-            Next
-        </a>
-    }
-    @if (Model.PageIndex - 1 >= 1)
-    {
-        <a asp-controller="Tour"
-           asp-action="Index"
-           asp-route-pageNumber="@(Model.PageIndex - 1)"
-           class="p-2 btn my-2 btn-primary ml-2">
-            Previous
-        </a>
-    }
+    <div class="mr-5 d-flex flex-row-reverse">
+        @if (Model.Tours.Count >= 12)
+        {
+            <a asp-controller="Tour"
+               asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               class="p-2 btn my-2 btn-primary ml-2">
+                Next
+            </a>
+        }
+        @if (Model.PageIndex - 1 >= 1)
+        {
+            <a asp-controller="Tour"
+               asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               class="p-2 btn my-2 btn-primary ml-2">
+                Previous
+            </a>
+        }
+    </div>
 </section><!-- End section 3 tours-->
 <!-- Bootstrap and Jquery scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>

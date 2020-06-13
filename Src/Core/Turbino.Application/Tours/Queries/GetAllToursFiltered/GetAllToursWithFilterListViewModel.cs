@@ -1,7 +1,7 @@
-﻿using Turbino.Application.Tours.Queries.GetAllDestinations;
-
-namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
+﻿namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
 {
+    using Turbino.Application.Tours.Queries.GetAllDestinations;
+
     public class GetAllToursWithFilterListViewModel : GetAllToursListViewModel
     {
     }

@@ -1,10 +1,12 @@
-﻿using AutoMapper;
-using System;
-using Turbino.Application.Interfaces.Mapping;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Reservations.Queries.GetAllReservationsByUser
+﻿namespace Turbino.Application.Reservations.Queries.GetAllReservationsByUser
 {
+    using System;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Interfaces.Mapping;
+
+    using AutoMapper;
+
     public class GetAllReservationsByUserViewModel : IHaveCustomMapping
     {
         public string DestinationName { get; set; }

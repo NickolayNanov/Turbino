@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using Turbino.Application.Tours.Queries.GetAllToursFiltered;
-
-namespace Turbino.Application.Tours.Queries.GetAllDestinations
+﻿namespace Turbino.Application.Tours.Queries.GetAllDestinations
 {
+    using System.Collections.Generic;
+
     public class GetAllToursListViewModel
     {
         public GetAllToursListViewModel()
@@ -10,8 +9,6 @@ namespace Turbino.Application.Tours.Queries.GetAllDestinations
             this.PageIndex = 1;
             Errors = new string[0];
         }
-
-        public IList<GetAllToursListModel> Tours { get; set; }
 
         public string TourName { get; set; }
 
@@ -30,5 +27,7 @@ namespace Turbino.Application.Tours.Queries.GetAllDestinations
         public bool HaveMoreTours { get; set; }
 
         public string[] Errors { get; set; }
+
+        public IList<GetAllToursListModel> Tours { get; set; }
     }
 }

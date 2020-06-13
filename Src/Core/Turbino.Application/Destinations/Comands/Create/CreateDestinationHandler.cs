@@ -1,15 +1,18 @@
-﻿using FluentValidation;
-using MediatR;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Domain.Entities;
-using Turbino.Infrastructure;
-
-namespace Turbino.Application.Destinations.Commands.Create
+﻿namespace Turbino.Application.Destinations.Commands.Create
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Turbino.Infrastructure;
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Common.Interfaces;
+
+    using MediatR;
+    using FluentValidation;
+    using FluentValidation.Results;
+
     public class CreateDestinationHandler : IRequestHandler<CreateDestinationCommand, string[]>
     {
         private readonly ITurbinoDbContext context;
@@ -25,7 +28,7 @@ namespace Turbino.Application.Destinations.Commands.Create
 
         public async Task<string[]> Handle(CreateDestinationCommand request, CancellationToken cancellationToken)
         {
-            var validation = await validator.ValidateAsync(request);
+            ValidationResult validation = await validator.ValidateAsync(request);
 
             if (!validation.IsValid)
             {
@@ -51,7 +54,7 @@ namespace Turbino.Application.Destinations.Commands.Create
             };
 
             destination.ImgUrl = uploader.UploadImage(request.ImgUrl, Guid.NewGuid().ToString());
-            var destinationId = context.Destinations.Add(destination).Entity.Id;
+            string destinationId = context.Destinations.Add(destination).Entity.Id;
 
             for (int i = 0; i < imgUrls.Length - 1; i++)
             {

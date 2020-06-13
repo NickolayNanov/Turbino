@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace Turbino.Application.Reviews.Commands
+﻿namespace Turbino.Application.Reviews.Commands
 {
+    using MediatR;
+
     public class CreateReviewCommand : IRequest
     {
         public string Name { get; set; }

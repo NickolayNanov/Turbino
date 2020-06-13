@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace Turbino.Application.Destinations.Queries.GetDestinationById
+﻿namespace Turbino.Application.Destinations.Queries.GetDestinationById
 {
+    using MediatR;
+
     public class GetDestinationByIdQuery : IRequest<DestinationViewModel>
     {
         public GetDestinationByIdQuery()

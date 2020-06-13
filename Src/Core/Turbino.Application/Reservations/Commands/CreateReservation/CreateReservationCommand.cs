@@ -1,8 +1,8 @@
-﻿using MediatR;
-using System;
-
-namespace Turbino.Application.Reservations.Commands.CreateReservation
+﻿namespace Turbino.Application.Reservations.Commands.CreateReservation
 {
+    using MediatR;
+    using System;
+
     public class CreateReservationCommand : IRequest<string[]>
     {
         public CreateReservationCommand() { }

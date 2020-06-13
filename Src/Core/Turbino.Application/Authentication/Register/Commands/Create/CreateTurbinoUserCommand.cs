@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace Turbino.Application.Authentication.Register.Commands.Create
+﻿namespace Turbino.Application.Authentication.Register.Commands.Create
 {
+    using MediatR;
+
     public class CreateTurbinoUserCommand : IRequest<string[]>
     {
         public string Username { get; set; }

@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace Turbino.Application.Tours.Queries.GetAllDestinations
+﻿namespace Turbino.Application.Tours.Queries.GetAllDestinations
 {
+    using MediatR;
+
     public class GetAllToursListQuery : IRequest<GetAllToursListViewModel>
     {
         public string TourName { get; set; }

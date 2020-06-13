@@ -1,12 +1,14 @@
-﻿using MediatR;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
-
-namespace Turbino.Application.Tours.Queries.SelectById
+﻿namespace Turbino.Application.Tours.Queries.SelectById
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using MediatR;
+
+    using Turbino.Application.Common.Interfaces;
+    using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
+
     public class GetTourByIdHandler : IRequestHandler<GetTourByIdQuery, TourViewModel>
     {
         private readonly ITurbinoDbContext context;

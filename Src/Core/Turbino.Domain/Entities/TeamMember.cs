@@ -1,8 +1,8 @@
-﻿using Turbino.Domain.Entities.Common;
-using Turbino.Domain.Enumerations;
-
-namespace Turbino.Domain.Entities
+﻿namespace Turbino.Domain.Entities
 {
+    using Turbino.Domain.Entities.Common;
+    using Turbino.Domain.Enumerations;
+
     public class TeamMember : BaseDeletableModel
     {
         public TeamMember() { }

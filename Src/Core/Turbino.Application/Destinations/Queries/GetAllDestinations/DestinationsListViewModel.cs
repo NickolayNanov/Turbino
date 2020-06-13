@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Turbino.Application.Destinations.Queries.GetAllDestinations
+﻿namespace Turbino.Application.Destinations.Queries.GetAllDestinations
 {
+    using System.Collections.Generic;
+
     public class DestinationsListViewModel
     {
         public DestinationsListViewModel()

@@ -1,10 +1,12 @@
-﻿using AutoMapper;
-using System.Linq;
-using Turbino.Application.Interfaces.Mapping;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Tours.Queries.GetAllDestinations
+﻿namespace Turbino.Application.Tours.Queries.GetAllDestinations
 {
+    using System.Linq;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Interfaces.Mapping;
+
+    using AutoMapper;
+
     public class GetAllToursListModel : IHaveCustomMapping
     {
         public string Id { get; set; }

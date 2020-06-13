@@ -1,12 +1,15 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Home.GetProfile
+﻿namespace Turbino.Application.Home.GetProfile
 {
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Turbino.Domain.Entities;
+
+    using MediatR;
+    using AutoMapper;
+
     public class GetProfileHandler : IRequestHandler<GetProfileQuery, GetProfileViewModel>
     {
         private readonly IMapper mapper;

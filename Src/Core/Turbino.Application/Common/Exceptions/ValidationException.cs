@@ -1,8 +1,8 @@
 ﻿namespace Turbino.Application.Common.Exceptions
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
     using FluentValidation.Results;
 
@@ -19,13 +19,13 @@
         public ValidationException(List<ValidationFailure> failures)
             : this()
         {
-            var propertyNames = failures
+            IEnumerable<string> propertyNames = failures
                 .Select(e => e.PropertyName)
                 .Distinct();
 
             foreach (var propertyName in propertyNames)
             {
-                var propertyFailures = failures
+                string[] propertyFailures = failures
                     .Where(e => e.PropertyName == propertyName)
                     .Select(e => e.ErrorMessage)
                     .ToArray();

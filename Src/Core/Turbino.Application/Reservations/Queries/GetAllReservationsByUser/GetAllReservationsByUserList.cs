@@ -1,9 +1,7 @@
-﻿using MediatR;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Turbino.Application.Reservations.Queries.GetAllReservationsByUser
+﻿namespace Turbino.Application.Reservations.Queries.GetAllReservationsByUser
 {
+    using System.Collections.Generic;
+
     public class GetAllReservationsByUserList
     {
         public GetAllReservationsByUserList()

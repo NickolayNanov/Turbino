@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
-
-namespace Turbino.Application.Tours.Queries.SelectById
+﻿namespace Turbino.Application.Tours.Queries.SelectById
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
     public class TourViewModel
     {
         public string Id { get; set; }

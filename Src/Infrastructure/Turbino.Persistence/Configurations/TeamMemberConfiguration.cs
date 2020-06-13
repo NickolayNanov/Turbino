@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Persistence.Configurations
+﻿namespace Turbino.Persistence.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using Turbino.Domain.Entities;
+
     public class TeamMemberConfiguration : IEntityTypeConfiguration<TeamMember>
     {
         public void Configure(EntityTypeBuilder<TeamMember> builder)

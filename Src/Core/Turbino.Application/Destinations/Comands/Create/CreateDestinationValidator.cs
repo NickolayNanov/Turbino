@@ -1,8 +1,8 @@
-﻿using FluentValidation;
-using Turbino.Common.GlobalContants;
-
-namespace Turbino.Application.Destinations.Commands.Create
+﻿namespace Turbino.Application.Destinations.Commands.Create
 {
+    using FluentValidation;
+
+    using Turbino.Common.GlobalContants;
     public class CreateDestinationValidator : AbstractValidator<CreateDestinationCommand>
     {
         public CreateDestinationValidator()

@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-
-namespace Turbino.Application.Authentication.Login.Commands
+﻿namespace Turbino.Application.Authentication.Login.Commands
 {
+    using FluentValidation;
+
     public class LoginTurbinoUserValidator : AbstractValidator<LoginTurbinoUserCommand>
     {
         public LoginTurbinoUserValidator()

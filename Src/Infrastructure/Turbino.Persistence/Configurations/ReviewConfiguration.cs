@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
     using Turbino.Domain.Entities;
 
     public class ReviewConfiguration : IEntityTypeConfiguration<Review>

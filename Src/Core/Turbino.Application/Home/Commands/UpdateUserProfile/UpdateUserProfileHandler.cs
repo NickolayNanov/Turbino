@@ -1,15 +1,19 @@
-﻿using AutoMapper;
-using FluentValidation;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Home.GetProfile;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Home.Commands.UpdateUserProfile
+﻿namespace Turbino.Application.Home.Commands.UpdateUserProfile
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Home.GetProfile;
+
+    using MediatR;
+    using AutoMapper;
+    using FluentValidation;
+    using FluentValidation.Results;
+
     public class UpdateUserProfileHandler : IRequestHandler<UpdateUserProfileCommand, GetProfileViewModel>
     {
         private readonly UserManager<TurbinoUser> userManager;
@@ -25,7 +29,7 @@ namespace Turbino.Application.Home.Commands.UpdateUserProfile
 
         public async Task<GetProfileViewModel> Handle(UpdateUserProfileCommand request, CancellationToken cancellationToken)
         {
-            var validation = await validator.ValidateAsync(request);           
+            ValidationResult validation = await validator.ValidateAsync(request);           
             TurbinoUser user = await userManager.FindByNameAsync(request.UserName);
 
             user.FirstName = request.FirstName;
@@ -37,6 +41,7 @@ namespace Turbino.Application.Home.Commands.UpdateUserProfile
             {
                 GetProfileViewModel model = mapper.Map<GetProfileViewModel>(user);
                 model.Errors = validation.Errors.Select(x => x.ErrorMessage).ToArray();
+
                 return model;
             }
             else

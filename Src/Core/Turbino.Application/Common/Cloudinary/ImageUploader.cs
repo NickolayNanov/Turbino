@@ -1,11 +1,13 @@
-﻿using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using System.IO;
-
-namespace Turbino.Infrastructure
+﻿namespace Turbino.Infrastructure
 {
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Configuration;
+
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
+
+    using System.IO;
+
     public class ImageUploader
     {
         private readonly IConfigurationSection CloudinarySection;
@@ -36,7 +38,7 @@ namespace Turbino.Infrastructure
 
             using (var ms = new MemoryStream(articleImg))
             {
-                var uploadParams = new ImageUploadParams()
+                ImageUploadParams uploadParams = new ImageUploadParams()
                 {
                     File = new FileDescription(articleTitle, ms),
                     Transformation = new Transformation(),
@@ -50,7 +52,7 @@ namespace Turbino.Infrastructure
 
         private Cloudinary SetCloudinary()
         {
-            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account
+            Account account = new Account
             {
                 Cloud = CloudinarySection["CloudName"],
                 ApiKey = CloudinarySection["CloudinaryApiKey"],

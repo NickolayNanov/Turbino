@@ -1,8 +1,7 @@
-﻿using MediatR;
-using Turbino.Application.Destinations.Queries.GetAllDestinations;
-
-namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
+﻿namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
 {
+    using MediatR;
+
     public class GetAllDestinationsWithFilterQuery : IRequest<GetAllDestinationsWithFilterListViewModel>
     {
         public string DestinationName { get; set; }

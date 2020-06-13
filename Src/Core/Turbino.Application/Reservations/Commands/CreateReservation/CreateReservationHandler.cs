@@ -1,14 +1,17 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Domain.Entities;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using FluentValidation;
-
-namespace Turbino.Application.Reservations.Commands.CreateReservation
+﻿namespace Turbino.Application.Reservations.Commands.CreateReservation
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Common.Interfaces;
+
+    using MediatR;
+    using FluentValidation;
+
     public class CreateReservationHandler : IRequestHandler<CreateReservationCommand, string[]>
     {
         private readonly ITurbinoDbContext context;
@@ -24,8 +27,8 @@ namespace Turbino.Application.Reservations.Commands.CreateReservation
 
         public async Task<string[]> Handle(CreateReservationCommand request, CancellationToken cancellationToken)
         {
-            var user = await userManager.FindByNameAsync(request.UserName);
-            var result = await validator.ValidateAsync(request);
+            TurbinoUser user = await userManager.FindByNameAsync(request.UserName);
+            FluentValidation.Results.ValidationResult result = await validator.ValidateAsync(request);
 
             if (result.IsValid)
             {
@@ -37,7 +40,7 @@ namespace Turbino.Application.Reservations.Commands.CreateReservation
                     DepartureDate = request.ArrivalDate.Value
                 };
 
-                var id = context.Reservations.Add(reservation).Entity.Id;
+                string id = context.Reservations.Add(reservation).Entity.Id;
                 await context.SaveChangesAsync(cancellationToken);
 
                 return null;

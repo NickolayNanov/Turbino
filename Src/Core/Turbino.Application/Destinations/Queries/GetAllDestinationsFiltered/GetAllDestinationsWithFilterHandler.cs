@@ -1,18 +1,22 @@
-﻿using AutoMapper;
-using FluentValidation;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Application.Destinations.Queries.GetAllDestinations;
-using Turbino.Domain.Common;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
+﻿namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Turbino.Domain.Common;
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Common.Interfaces;
+    using Turbino.Application.Destinations.Queries.GetAllDestinations;
+
+    using MediatR;
+    using AutoMapper;
+    using FluentValidation;
+    using FluentValidation.Results;
+
     public class GetAllDestinationsWithFilterHandler : IRequestHandler<GetAllDestinationsWithFilterQuery, GetAllDestinationsWithFilterListViewModel>
     {
         private readonly ITurbinoDbContext context;
@@ -28,7 +32,8 @@ namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
 
         public async Task<GetAllDestinationsWithFilterListViewModel> Handle(GetAllDestinationsWithFilterQuery request, CancellationToken cancellationToken)
         {
-            var validation = await validator.ValidateAsync(request);
+            ValidationResult validation = await validator.ValidateAsync(request);
+
             if (validation.IsValid)
             {
 

@@ -1,17 +1,20 @@
-﻿using AutoMapper;
-using FluentValidation;
-using MediatR;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Domain.Entities;
-using Turbino.Domain.Enumerations;
-using Turbino.Infrastructure;
-
-namespace Turbino.Application.Tours.Commands.CreateTour
+﻿namespace Turbino.Application.Tours.Commands.CreateTour
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Turbino.Infrastructure;
+    using Turbino.Domain.Entities;
+    using Turbino.Domain.Enumerations;
+    using Turbino.Application.Common.Interfaces;
+
+    using MediatR;
+    using AutoMapper;
+    using FluentValidation;
+    using FluentValidation.Results;
+
     public class CreateTourHandler : IRequestHandler<CreateTourCommand, string[]>
     {
         private readonly ITurbinoDbContext context;
@@ -30,12 +33,14 @@ namespace Turbino.Application.Tours.Commands.CreateTour
 
         public async Task<string[]> Handle(CreateTourCommand request, CancellationToken cancellationToken)
         {
-            var validation = await validator.ValidateAsync(request);
+            ValidationResult validation = await validator.ValidateAsync(request);
+
             if (!validation.IsValid)
             {
                 return validation.Errors.Select(x => x.ErrorMessage).ToArray();
             }
-            var destination = await context.Destinations.FindAsync(request.Location);
+
+            Destination destination = await context.Destinations.FindAsync(request.Location);
             string[] imgUrls = new string[]
             {
                 imageUploader.UploadImage(request.FirstImg, Guid.NewGuid().ToString()),
@@ -54,6 +59,7 @@ namespace Turbino.Application.Tours.Commands.CreateTour
 
             context.Tours.Add(tour);
             await context.SaveChangesAsync(cancellationToken);
+
             return new string[0];
         }
 

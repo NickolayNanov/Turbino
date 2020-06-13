@@ -1,13 +1,16 @@
-﻿using FluentValidation;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Authentication.Register.Commands.Create
+﻿namespace Turbino.Application.Authentication.Register.Commands.Create
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Turbino.Domain.Entities;
+
+    using MediatR;
+    using FluentValidation;
+    using FluentValidation.Results;
     public class CreateTurbinoUserHandler : IRequestHandler<CreateTurbinoUserCommand, string[]>
     {
         private readonly UserManager<TurbinoUser> userManager;
@@ -23,7 +26,7 @@ namespace Turbino.Application.Authentication.Register.Commands.Create
 
         public async Task<string[]> Handle(CreateTurbinoUserCommand request, CancellationToken cancellationToken)
         {
-            var validation = await validator.ValidateAsync(request);
+            ValidationResult validation = await validator.ValidateAsync(request);
 
             if (!validation.IsValid)
             {
@@ -38,7 +41,9 @@ namespace Turbino.Application.Authentication.Register.Commands.Create
                 FullName = request.FirstName,
                 UserName = request.Username
             };
-            var result = await userManager.CreateAsync(user, request.Password);
+
+            IdentityResult result = await userManager.CreateAsync(user, request.Password);
+
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, "User");
@@ -49,7 +54,6 @@ namespace Turbino.Application.Authentication.Register.Commands.Create
                 return result.Errors.Select(x => x.Description).ToArray();
             }
       
-
             return new string[0];
         }
 }

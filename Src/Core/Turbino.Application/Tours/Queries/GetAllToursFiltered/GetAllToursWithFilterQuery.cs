@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
+﻿namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
 {
+    using MediatR;
+
     public class GetAllToursWithFilterQuery : IRequest<GetAllToursWithFilterListViewModel>
     {
         public GetAllToursWithFilterQuery()

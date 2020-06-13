@@ -1,8 +1,9 @@
-﻿using FluentValidation;
-using Turbino.Common.GlobalContants;
-
-namespace Turbino.Application.Authentication.Register.Commands.Create
+﻿namespace Turbino.Application.Authentication.Register.Commands.Create
 {
+    using FluentValidation;
+
+    using Turbino.Common.GlobalContants;
+
     public class CreateTurbinoUserValidator : AbstractValidator<CreateTurbinoUserCommand>
     {
         public CreateTurbinoUserValidator()

@@ -1,15 +1,18 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Application.Destinations.Queries.GetAllDestinations;
-using Turbino.Application.Tours.Queries.GetAllDestinations;
-
-namespace Turbino.Application.Home.Queries.GetIndex
+﻿namespace Turbino.Application.Home.Queries.GetIndex
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Turbino.Application.Common.Interfaces;
+    using Turbino.Application.Tours.Queries.GetAllDestinations;
+    using Turbino.Application.Destinations.Queries.GetAllDestinations;
+
+    using MediatR;
+    using AutoMapper;
+
     public class GetIndexHandler : IRequestHandler<GetIndexQuery, IndexHolderViewModel>
     {
         private readonly ITurbinoDbContext context;

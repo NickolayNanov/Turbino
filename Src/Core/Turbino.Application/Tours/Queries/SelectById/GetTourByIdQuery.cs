@@ -1,7 +1,7 @@
-﻿using MediatR;
-
-namespace Turbino.Application.Tours.Queries.SelectById
+﻿namespace Turbino.Application.Tours.Queries.SelectById
 {
+    using MediatR;
+
     public class GetTourByIdQuery : IRequest<TourViewModel>
     {
         public GetTourByIdQuery()

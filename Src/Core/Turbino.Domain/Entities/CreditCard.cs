@@ -2,7 +2,6 @@
 {
     using Turbino.Domain.Entities.Common;
 
-
     public class CreditCard : BaseModel
     {
         public CreditCard(string cardNumber, string cvc, string cardOwner)

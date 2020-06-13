@@ -1,13 +1,17 @@
-﻿using FluentValidation;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Authentication.Login.Commands
+﻿namespace Turbino.Application.Authentication.Login.Commands
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Turbino.Domain.Entities;
+
+    using MediatR;
+    using FluentValidation;
+    using FluentValidation.Results;
+
     public class LoginTurbinoUserHandler : IRequestHandler<LoginTurbinoUserCommand, string[]>
     {
         private readonly SignInManager<TurbinoUser> signInManager;
@@ -23,10 +27,12 @@ namespace Turbino.Application.Authentication.Login.Commands
 
         public async Task<string[]> Handle(LoginTurbinoUserCommand request, CancellationToken cancellationToken)
         {
-            var validation = await validator.ValidateAsync(request);
+            ValidationResult validation = await validator.ValidateAsync(request);
+
             if (validation.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(request.Username, request.Password, true, false);
+                SignInResult result = await signInManager.PasswordSignInAsync(request.Username, request.Password, true, false);
+
                 if (!result.Succeeded)
                 {
                     return new string[] { "Invalid username or password!" };
@@ -36,7 +42,6 @@ namespace Turbino.Application.Authentication.Login.Commands
             {
                 return validation.Errors.Select(x => x.ErrorMessage).ToArray();
             }
-
 
             return new string[0];
         }

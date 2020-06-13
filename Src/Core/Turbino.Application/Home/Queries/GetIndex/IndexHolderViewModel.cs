@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-using Turbino.Application.Destinations.Queries.GetAllDestinations;
-using Turbino.Application.Tours.Queries.GetAllDestinations;
-
-namespace Turbino.Application.Home.Queries.GetIndex
+﻿namespace Turbino.Application.Home.Queries.GetIndex
 {
+    using Turbino.Application.Destinations.Queries.GetAllDestinations;
+    using Turbino.Application.Tours.Queries.GetAllDestinations;
     public class IndexHolderViewModel
     {
-        public GetAllToursListViewModel TourViewModel { get; set; }
-
-        public DestinationsListViewModel Destinations { get; set; }
-
-
         public string TourName { get; set; }
 
         public string Month { get; set; }
@@ -27,5 +20,8 @@ namespace Turbino.Application.Home.Queries.GetIndex
 
         public bool HaveMoreTours { get; set; }
 
+        public GetAllToursListViewModel TourViewModel { get; set; }
+
+        public DestinationsListViewModel Destinations { get; set; }
     }
 }

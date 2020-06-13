@@ -1,16 +1,17 @@
 ﻿namespace Turbino.Application.Seed
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Cryptography;
     using System.Threading;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Domain.Enumerations;
+    using Turbino.Common.GlobalContants;
 
     using Common.Interfaces;
-    using Microsoft.AspNetCore.Identity;
-    using Turbino.Common.GlobalContants;
-    using Turbino.Domain.Entities;
 
     public class SampleDataSeeder
     {
@@ -28,8 +29,258 @@
         public async Task SeedAllAsync(CancellationToken cancellationToken)
         {
             await SeedRolesAsync(cancellationToken);
-            await SeedManagersAsync(cancellationToken);
+            await SeedRolesAndAdminAsync();
             await SeedDestinationsAsync(cancellationToken);
+            await SeedToursAsync(cancellationToken);
+        }
+
+        private async Task SeedToursAsync(CancellationToken cancellationToken)
+        {
+            if (!context.Tours.Any())
+            {
+                List<Destination> destinations = context.Destinations.Take(3).ToList();
+
+                List<Tour> tours = new List<Tour>
+                {
+                    new Tour()
+                    {
+                        Name = "Delightful China",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1592029154/csm_AdobeStock_100408242_ec82805479_gwrv6k.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[0].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "WeedLand",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1592029387/shutterstock_1028628301_atc0y9.png",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[1].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Tsarevets",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1583854581/yz2emfvtgsqt8d5aw6zk.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[0].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Random Place on Earth",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1591982226/cr_s3nmaw.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[1].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Another Random Place",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1591982300/shutterstock_1153213027-1200x675_tzui5n.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[0].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Nice beach in California",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1591982405/california_x6wmyh.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[1].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "River",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1583854457/fzr8zytrvupznv3ghfge.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[0].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Park in USA",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1585988629/lwvhowvvurnobdejxbzr.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[1].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "A walk by horse",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1585988631/obfy5v9r6rbwqhuxqzo9.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[2].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Japan with love",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1591982353/japan_hscfsl.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[0].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Town in heaven",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1591982470/ny_xgbtyt.png",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[2].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "China and evryone else",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1591985063/dcf1e0ec17d14df8fac9a7a57c7af63d-china_rptgph.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[1].Id
+                    },
+                    new Tour()
+                    {
+                        Name = "Nature habitat",
+                        ImgUrl = "https://res.cloudinary.com/olympiacloudinary/image/upload/v1591982262/istock-546434836_npiig4.jpg",
+                        PricePerPerson = 100,
+                        RequiredAge = 18,
+                        Duration = 7,
+                        Location = "Somewhere in the world...",
+                        Dates = "March, April, June",
+                        Departure = "At the airport",
+                        NextDeparture = "Second airport",
+                        Accommodation = "All Inclusive",
+                        Included = "Travel Insurance, Non-stop flight to Amsterdam, Two days long City tour, Anne Frank Museum ticket",
+                        NotIncluded = "Reservation Fees (U$D25), Aerial Fees (U$D55)",
+                        Description = ApplicationConstants.DestinationDescription,
+                        TourType = TourType.Adventure,
+                        DestinationId = destinations[0].Id
+                    },
+                };
+
+                await context.Tours.AddRangeAsync(tours);
+                await context.SaveChangesAsync(cancellationToken);
+            }
         }
 
         private async Task SeedDestinationsAsync(CancellationToken cancellationToken)
@@ -186,22 +437,6 @@
                 await context.Destinations.AddRangeAsync(destinations);
                 await context.SaveChangesAsync(cancellationToken);
             }
-        }
-
-        private async Task SeedManagersAsync(CancellationToken cancellationToken)
-        {
-            //var managers = new[]
-            //{
-            //    new Manager { Id = Guid.NewGuid().ToString(), FirstName = "Ivan", LastName = "Ivanov", ReceptionDay = WeekDay.Monday, CreatedOn = DateTime.UtcNow },
-            //    new Manager { Id = Guid.NewGuid().ToString(), FirstName = "Petar", LastName = "Petrov", ReceptionDay = WeekDay.Monday, CreatedOn = DateTime.UtcNow },
-            //    new Manager { Id = Guid.NewGuid().ToString(), FirstName = "Sasho", LastName = "Trifonov", ReceptionDay = WeekDay.Monday, CreatedOn = DateTime.UtcNow },
-            //    new Manager { Id = Guid.NewGuid().ToString(), FirstName = "Lambi", LastName = "Kostov", ReceptionDay = WeekDay.Monday, CreatedOn = DateTime.UtcNow },
-            //    new Manager { Id = Guid.NewGuid().ToString(), FirstName = "Simeon", LastName = "Atanasov", ReceptionDay = WeekDay.Monday, CreatedOn = DateTime.UtcNow }
-            //};
-            //
-            //context.Managers.AddRange(managers);
-            await SeedRolesAndAdminAsync();
-            await context.SaveChangesAsync(cancellationToken);
         }
 
         private async Task SeedRolesAsync(CancellationToken cancellationToken)

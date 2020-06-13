@@ -3,11 +3,13 @@
     using System.Threading;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
+
     using MediatR;
 
     using Common.Interfaces;
     using Turbino.Domain.Entities;
-    using Microsoft.AspNetCore.Identity;
+
 
     public class SeedSampleDataCommand : IRequest
     {

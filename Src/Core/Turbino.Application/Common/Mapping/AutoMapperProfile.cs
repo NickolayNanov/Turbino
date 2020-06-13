@@ -3,6 +3,9 @@
 namespace Turbino.Application.Common.Mapping
 {
     using System.Reflection;
+    using System.Collections.Generic;
+
+    using Turbino.Application.Interfaces.Mapping;
 
     public class AutoMapperProfile : Profile
     {
@@ -19,7 +22,7 @@ namespace Turbino.Application.Common.Mapping
 
         private void LoadStandardMappings()
         {
-            var mapsFrom = MapperProfileHelper.LoadStandardMappings(Assembly.GetExecutingAssembly());
+            IList<Map> mapsFrom = MapperProfileHelper.LoadStandardMappings(Assembly.GetExecutingAssembly());
 
             foreach (var map in mapsFrom)
             {
@@ -29,7 +32,7 @@ namespace Turbino.Application.Common.Mapping
 
         private void LoadCustomMappings()
         {
-            var mapsFrom = MapperProfileHelper.LoadCustomMappings(Assembly.GetExecutingAssembly());
+            IList<IHaveCustomMapping> mapsFrom = MapperProfileHelper.LoadCustomMappings(Assembly.GetExecutingAssembly());
 
             foreach (var map in mapsFrom)
             {
