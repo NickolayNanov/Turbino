@@ -10,8 +10,10 @@
     [Authorize]
     public class ReservationController : BaseController
     {
+        private const string ReservationsIndexRoute = "Reservations";
+
         [HttpGet]
-        [Route("Reservations")]
+        [Route(ReservationsIndexRoute)]
         public async Task<IActionResult> Index()
         {
             GetAllReservationsByUserList reservations = await Mediator.Send(new GetAllReservationsByUserQuery() { Username = User.Identity.Name });

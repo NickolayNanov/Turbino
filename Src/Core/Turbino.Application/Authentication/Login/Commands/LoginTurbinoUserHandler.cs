@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Identity;
 
     using Turbino.Domain.Entities;
+    using Turbino.Common.GlobalContants;
 
     using MediatR;
     using FluentValidation;
@@ -35,7 +36,7 @@
 
                 if (!result.Succeeded)
                 {
-                    return new string[] { "Invalid username or password!" };
+                    return new string[] { WebConstants.InvalidLoginAttempt };
                 }
             }
             else

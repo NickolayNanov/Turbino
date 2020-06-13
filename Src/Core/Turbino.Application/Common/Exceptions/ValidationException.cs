@@ -23,7 +23,7 @@
                 .Select(e => e.PropertyName)
                 .Distinct();
 
-            foreach (var propertyName in propertyNames)
+            foreach (string propertyName in propertyNames)
             {
                 string[] propertyFailures = failures
                     .Where(e => e.PropertyName == propertyName)

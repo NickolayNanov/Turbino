@@ -43,12 +43,12 @@
             RuleFor(c => c.Password)
                 .MinimumLength(6)
                 .When(x => !string.IsNullOrEmpty(x.Password))
-                .WithMessage(string.Format("Password must me at least 6 characters long!"));
+                .WithMessage(string.Format(WebConstants.InvalidPasswordLength));
 
             RuleFor(c => c.ConfirmPassword)
                 .MinimumLength(6)
                 .When(x => !string.IsNullOrEmpty(x.ConfirmPassword))
-                .WithMessage(string.Format("Confirm Password must me at least 6 characters long!"));
+                .WithMessage(string.Format(WebConstants.InvalidConfirmPasswordLength));
 
             RuleFor(c => c.ConfirmPassword)
                 .NotNull()
@@ -57,7 +57,7 @@
             RuleFor(c => c.ConfirmPassword)
                 .Equal(c => c.Password)
                 .When(x => string.IsNullOrEmpty(x.ConfirmPassword))
-                .WithMessage("Confirm Password must equal the password!");
+                .WithMessage(WebConstants.NotEqualPasswords);
         }
     }
 }

@@ -9,6 +9,6 @@
             this.Reviews = new List<GetAllReviewsByTourIdViewModel>();
         }
 
-        public ICollection<GetAllReviewsByTourIdViewModel> Reviews { get; set; }
+        public virtual ICollection<GetAllReviewsByTourIdViewModel> Reviews { get; set; }
     }
 }

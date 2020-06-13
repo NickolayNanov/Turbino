@@ -38,10 +38,6 @@
 
         public string Content { get; set; }
 
-        public IList<string> Included { get; set; }
-
-        public IList<string> NotIncluded { get; set; }
-
         public GetAllReviewsByTourIdListViewModel Reviews { get; set; }
 
         public string ReserverName { get; set; }
@@ -49,5 +45,9 @@
         public DateTime? ArrivalDate { get; set; }
 
         public DateTime? DateOfLeaving { get; set; }
+
+        public virtual IList<string> Included { get; set; }
+
+        public virtual IList<string> NotIncluded { get; set; }
     }
 }

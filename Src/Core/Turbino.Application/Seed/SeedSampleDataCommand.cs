@@ -30,8 +30,7 @@
 
         public async Task<Unit> Handle(SeedSampleDataCommand request, CancellationToken cancellationToken)
         {
-            var seeder = new SampleDataSeeder(context, roleManager, userManager);
-
+            SampleDataSeeder seeder = new SampleDataSeeder(context, roleManager, userManager);
             await seeder.SeedAllAsync(cancellationToken);
 
             return Unit.Value;

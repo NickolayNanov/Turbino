@@ -15,8 +15,11 @@
 
     public class HomeController : BaseController
     {
+        private const string ProfileRoute = "Profile";
+        private const string IndexRoute = "/";
+
         [HttpGet]
-        [Route("/")]
+        [Route(IndexRoute)]
         public async  Task<IActionResult> Index()
         {
             IndexHolderViewModel tours = await Mediator.Send(new GetIndexQuery());
@@ -35,7 +38,7 @@
         }
 
         [HttpGet]
-        [Route("Profile")]
+        [Route(ProfileRoute)]
         public async Task<IActionResult> Profile()
         {
             GetProfileViewModel userData = await Mediator.Send(new GetProfileQuery() { Username = User.Identity.Name });

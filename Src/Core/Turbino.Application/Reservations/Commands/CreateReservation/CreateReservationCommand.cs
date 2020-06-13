@@ -1,7 +1,7 @@
 ﻿namespace Turbino.Application.Reservations.Commands.CreateReservation
 {
-    using MediatR;
     using System;
+    using MediatR;
 
     public class CreateReservationCommand : IRequest<string[]>
     {

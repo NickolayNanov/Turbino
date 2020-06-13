@@ -9,6 +9,6 @@
             Reservations = new List<GetAllReservationsByUserViewModel>();
         }
 
-        public IList<GetAllReservationsByUserViewModel> Reservations { get; set; }
+        public virtual IList<GetAllReservationsByUserViewModel> Reservations { get; set; }
     }
 }

@@ -13,6 +13,7 @@
     using FluentValidation.Results;
     public class CreateTurbinoUserHandler : IRequestHandler<CreateTurbinoUserCommand, string[]>
     {
+        private const string UserRole = "User";
         private readonly UserManager<TurbinoUser> userManager;
         private readonly SignInManager<TurbinoUser> signInManager;
         private readonly IValidator<CreateTurbinoUserCommand> validator;
@@ -46,7 +47,7 @@
 
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, "User");
+                await userManager.AddToRoleAsync(user, UserRole);
                 await signInManager.SignInAsync(user, true);
             }
             else

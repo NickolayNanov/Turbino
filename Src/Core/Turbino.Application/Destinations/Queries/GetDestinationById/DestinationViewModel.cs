@@ -26,7 +26,7 @@
 
         public string ImgUrl { get; set; }
 
-        public IList<string> Galery { get; set; }
+        public virtual IList<string> Galery { get; set; }
 
         public static DestinationViewModel Create(Destination destination)
         {

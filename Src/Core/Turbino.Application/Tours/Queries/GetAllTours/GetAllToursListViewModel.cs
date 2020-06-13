@@ -28,6 +28,6 @@
 
         public string[] Errors { get; set; }
 
-        public IList<GetAllToursListModel> Tours { get; set; }
+        public virtual IList<GetAllToursListModel> Tours { get; set; }
     }
 }

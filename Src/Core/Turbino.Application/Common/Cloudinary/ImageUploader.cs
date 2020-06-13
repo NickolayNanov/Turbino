@@ -19,7 +19,7 @@
 
         public string UploadImage(IFormFile fileform, string articleTitle)
         {
-            var cloudinary = SetCloudinary();
+            Cloudinary cloudinary = SetCloudinary();
 
             if (fileform == null)
             {
@@ -28,7 +28,7 @@
 
             byte[] articleImg;
 
-            using (var memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream())
             {
                 fileform.CopyTo(memoryStream);
                 articleImg = memoryStream.ToArray();
@@ -36,7 +36,7 @@
 
             ImageUploadResult uploadResult;
 
-            using (var ms = new MemoryStream(articleImg))
+            using (MemoryStream ms = new MemoryStream(articleImg))
             {
                 ImageUploadParams uploadParams = new ImageUploadParams()
                 {

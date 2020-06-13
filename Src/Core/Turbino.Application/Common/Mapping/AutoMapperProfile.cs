@@ -24,7 +24,7 @@ namespace Turbino.Application.Common.Mapping
         {
             IList<Map> mapsFrom = MapperProfileHelper.LoadStandardMappings(Assembly.GetExecutingAssembly());
 
-            foreach (var map in mapsFrom)
+            foreach (Map map in mapsFrom)
             {
                 CreateMap(map.Source, map.Destination).ReverseMap();
             }
@@ -34,7 +34,7 @@ namespace Turbino.Application.Common.Mapping
         {
             IList<IHaveCustomMapping> mapsFrom = MapperProfileHelper.LoadCustomMappings(Assembly.GetExecutingAssembly());
 
-            foreach (var map in mapsFrom)
+            foreach (IHaveCustomMapping map in mapsFrom)
             {
                 map.CreateMappings(this);
             }

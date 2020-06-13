@@ -1,6 +1,7 @@
 ﻿namespace Turbino.Application.Destinations.Queries.GetAllDestinationsFiltered
 {
     using FluentValidation;
+    using Turbino.Common.GlobalContants;
 
     public class GetAllDestinationsWithFilterValidator : AbstractValidator<GetAllDestinationsWithFilterQuery>
     {
@@ -8,7 +9,7 @@
         {
             RuleFor(x => x.DestinationName)
                 .NotEmpty()
-                .WithMessage("The name of the destination cannot be empty!");
+                .WithMessage(string.Format(ApplicationConstants.RequiredErrorMsg, nameof(GetAllDestinationsWithFilterQuery.DestinationName)));
         }
     }
 }

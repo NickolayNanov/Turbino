@@ -65,15 +65,15 @@
 
         public IFormFile MainImg { get; set; }
 
-        public IList<string> Included { get; set; }
+        public virtual IList<string> Included { get; set; }
 
-        public IEnumerable<string> IncludeOptions { get; set; }
+        public virtual IEnumerable<string> IncludeOptions { get; set; }
 
-        public IEnumerable<string> NotIncludeOption { get; set; }
+        public virtual IEnumerable<string> NotIncludeOption { get; set; }
 
-        public IEnumerable<DestinationDto> Destinations { get; set; }
+        public virtual IEnumerable<DestinationDto> Destinations { get; set; }
 
-        public IList<string> NotIncluded { get; set; }
+        public virtual IList<string> NotIncluded { get; set; }
 
         public void CreateMappings(Profile configuration)
         {

@@ -16,7 +16,7 @@
 
         public Task Process(TRequest request, CancellationToken cancellationToken)
         {
-            var name = typeof(TRequest).Name;
+            string name = typeof(TRequest).Name;
 
             this.logger.LogInformation("Application Request: {Name} {@Request}", name, request);
 

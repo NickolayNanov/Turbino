@@ -8,6 +8,7 @@
 
     using Turbino.Application.Common.Interfaces;
     using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
+    using Turbino.Domain.Entities;
 
     public class GetTourByIdHandler : IRequestHandler<GetTourByIdQuery, TourViewModel>
     {
@@ -22,8 +23,8 @@
 
         public async Task<TourViewModel> Handle(GetTourByIdQuery request, CancellationToken cancellationToken)
         {
-            var tour = await context.Tours.FindAsync(request.TourId);
-            var destination = await context.Destinations.FindAsync(tour.DestinationId);
+            Tour tour = await context.Tours.FindAsync(request.TourId);
+            Destination destination = await context.Destinations.FindAsync(tour.DestinationId);
 
             TourViewModel model = new TourViewModel()
             {

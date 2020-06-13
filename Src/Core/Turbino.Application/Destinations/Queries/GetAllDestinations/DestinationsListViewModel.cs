@@ -20,6 +20,6 @@
 
         public bool HaveMoreDestinations { get; set; }
 
-        public IList<DestinationsAllListModel> Destinations { get; set; }
+        public virtual IList<DestinationsAllListModel> Destinations { get; set; }
     }
 }

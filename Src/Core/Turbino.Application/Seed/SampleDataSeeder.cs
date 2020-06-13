@@ -28,7 +28,6 @@
 
         public async Task SeedAllAsync(CancellationToken cancellationToken)
         {
-            await SeedRolesAsync(cancellationToken);
             await SeedRolesAndAdminAsync();
             await SeedDestinationsAsync(cancellationToken);
             await SeedToursAsync(cancellationToken);
@@ -437,18 +436,6 @@
                 await context.Destinations.AddRangeAsync(destinations);
                 await context.SaveChangesAsync(cancellationToken);
             }
-        }
-
-        private async Task SeedRolesAsync(CancellationToken cancellationToken)
-        {
-            //var roles = new[]
-            //{
-            //    new TurbinoRole { Id = Guid.NewGuid().ToString(), Name = "Administrator", NormalizedName = "ADMINISTRATOR" },
-            //    new TurbinoRole { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER" },
-            //};
-            //
-            //context.TurbinoRoles.AddRange(roles);
-            await context.SaveChangesAsync(cancellationToken);
         }
 
         private async Task SeedRolesAndAdminAsync()
