@@ -161,7 +161,7 @@
                             {
                                 <i class="fas fa-star"></i>
                             }
-                            <span class="tiny white">@Model.Tours[i].Reviews reviews</span>
+                            <span class="tiny white">@Model.Tours[i].Reviews review(s)</span>
                         </div>
                         <div class="bottom-tour-background"></div>
                         <img src="@Model.Tours[i].ImgUrl" alt="" />
@@ -175,7 +175,6 @@
                                 <h6 class="primary-color text-right ">$@Model.Tours[i].Price</h6>
                             </div>
                             <div>
-                                <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a>
                                 <a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">@Model.Tours[i].Type</a>
                             </div>
                         </div>
@@ -197,25 +196,26 @@
 
 
 
-<div class="mr-5 d-flex flex-row-reverse">
-    @if (Model.Tours.Count >= 12)
-    {
-        <a asp-controller="Tour"
-           asp-action="Index"
-           asp-route-pageNumber="@(Model.PageIndex + 1)"
-           class="p-2 btn my-2 btn-primary ml-2">
-            Next
-        </a>
-    }
-    @if (Model.PageIndex - 1 >= 1)
-    {
-        <a asp-controller="Tour"
-           asp-action="Index"
-           asp-route-pageNumber="@(Model.PageIndex - 1)"
-           class="p-2 btn my-2 btn-primary ml-2">
-            Previous
-        </a>
-    }
+    <div class="mr-5 d-flex flex-row-reverse">
+        @if (Model.Tours.Count >= 12)
+        {
+            <a asp-controller="Tour"
+               asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex + 1)"
+               class="p-2 btn my-2 btn-primary ml-2">
+                Next
+            </a>
+        }
+        @if (Model.PageIndex - 1 >= 1)
+        {
+            <a asp-controller="Tour"
+               asp-action="Index"
+               asp-route-pageNumber="@(Model.PageIndex - 1)"
+               class="p-2 btn my-2 btn-primary ml-2">
+                Previous
+            </a>
+        }
+    </div>
 </section><!-- End section 3 tours-->
 <!-- Bootstrap and Jquery scripts -->
 <script src="js/jquery-3.1.1.min.js"></script>

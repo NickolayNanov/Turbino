@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
-
-namespace Turbino.Application.Tours.Queries.SelectById
+﻿namespace Turbino.Application.Tours.Queries.SelectById
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Turbino.Application.Reviews.Queries.GetAllReviewsByTourId;
     public class TourViewModel
     {
         public string Id { get; set; }
@@ -38,10 +38,6 @@ namespace Turbino.Application.Tours.Queries.SelectById
 
         public string Content { get; set; }
 
-        public IList<string> Included { get; set; }
-
-        public IList<string> NotIncluded { get; set; }
-
         public GetAllReviewsByTourIdListViewModel Reviews { get; set; }
 
         public string ReserverName { get; set; }
@@ -49,5 +45,9 @@ namespace Turbino.Application.Tours.Queries.SelectById
         public DateTime? ArrivalDate { get; set; }
 
         public DateTime? DateOfLeaving { get; set; }
+
+        public virtual IList<string> Included { get; set; }
+
+        public virtual IList<string> NotIncluded { get; set; }
     }
 }

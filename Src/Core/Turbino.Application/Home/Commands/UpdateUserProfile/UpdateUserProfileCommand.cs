@@ -1,8 +1,9 @@
-﻿using MediatR;
-using Turbino.Application.Home.GetProfile;
-
-namespace Turbino.Application.Home.Commands.UpdateUserProfile
+﻿namespace Turbino.Application.Home.Commands.UpdateUserProfile
 {
+    using MediatR;
+
+    using Turbino.Application.Home.GetProfile;
+
     public class UpdateUserProfileCommand : IRequest<GetProfileViewModel>
     {
         public string UserName { get; set; }

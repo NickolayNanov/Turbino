@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Destinations.Queries.GetDestinationById
+﻿namespace Turbino.Application.Destinations.Queries.GetDestinationById
 {
+    using System;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using Turbino.Domain.Entities;
+    using System.Collections.Generic;
+
     public class DestinationViewModel
     {
         public string Id { get; set; }
@@ -26,12 +26,12 @@ namespace Turbino.Application.Destinations.Queries.GetDestinationById
 
         public string ImgUrl { get; set; }
 
+        public virtual IList<string> Galery { get; set; }
+
         public static DestinationViewModel Create(Destination destination)
         {
             return Projection.Compile().Invoke(destination);
         }
-
-        public IList<string> Galery { get; set; }
 
         private static Expression<Func<Destination, DestinationViewModel>> Projection
         {

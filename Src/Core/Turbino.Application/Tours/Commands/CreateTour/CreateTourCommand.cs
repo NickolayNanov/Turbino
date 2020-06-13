@@ -1,13 +1,16 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using Turbino.Application.Interfaces.Mapping;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Tours.Commands.CreateTour
+﻿namespace Turbino.Application.Tours.Commands.CreateTour
 {
-    public class CreateTourCommand : IRequest, IHaveCustomMapping
+    using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Http;
+
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Interfaces.Mapping;
+
+    using MediatR;
+    using AutoMapper;
+
+    public class CreateTourCommand : IRequest<string[]>, IHaveCustomMapping
     {
         public string Name { get; set; }
 
@@ -16,8 +19,6 @@ namespace Turbino.Application.Tours.Commands.CreateTour
         public int? RequiredAge { get; set; }
 
         public int? Duration { get; set; }
-
-        public IEnumerable<DestinationDto> Destinations { get; set; }
 
         public string Location { get; set; }
 
@@ -31,33 +32,31 @@ namespace Turbino.Application.Tours.Commands.CreateTour
 
         public string Accommodation { get; set; }
 
-        public List<string> Included { get; set; }
-
-        public IEnumerable<string> IncludeOptions { get; set; }
-
-        public IEnumerable<string> NotIncludeOption { get; set; }
-
-        public List<string> NotIncluded { get; set; }
-
         public string MainHeader { get; set; }
+
         public string MainHeaderParagraph { get; set; }
 
         public string FirstHeader { get; set; }
+
         public string FirstHeaderParagraph { get; set; }
 
         public string SecondHeader { get; set; }
+
         public string SecondHeaderParagraph { get; set; }
 
         public string ThirdHeader { get; set; }
         public string ThirdHeaderParagraph { get; set; }
 
         public string ForthHeader { get; set; }
+
         public string ForthHeaderParagraph { get; set; }
 
         public string FifthHeader { get; set; }
+
         public string FifthHeaderParagraph { get; set; }
 
         public string SixthHeader { get; set; }
+
         public string SixthHeaderParagraph { get; set; }
 
         public IFormFile FirstImg { get; set; }
@@ -65,6 +64,16 @@ namespace Turbino.Application.Tours.Commands.CreateTour
         public IFormFile SecondImg { get; set; }
 
         public IFormFile MainImg { get; set; }
+
+        public virtual IList<string> Included { get; set; }
+
+        public virtual IEnumerable<string> IncludeOptions { get; set; }
+
+        public virtual IEnumerable<string> NotIncludeOption { get; set; }
+
+        public virtual IEnumerable<DestinationDto> Destinations { get; set; }
+
+        public virtual IList<string> NotIncluded { get; set; }
 
         public void CreateMappings(Profile configuration)
         {

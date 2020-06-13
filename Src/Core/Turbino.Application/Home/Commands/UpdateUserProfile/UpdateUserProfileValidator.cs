@@ -1,18 +1,18 @@
-﻿using FluentValidation;
-
-namespace Turbino.Application.Home.Commands.UpdateUserProfile
+﻿namespace Turbino.Application.Home.Commands.UpdateUserProfile
 {
+    using FluentValidation;
+    using Turbino.Common.GlobalContants;
     public class UpdateUserProfileValidator : AbstractValidator<UpdateUserProfileCommand>
     {
         public UpdateUserProfileValidator()
         {
             RuleFor(p => p.FirstName)
-                .NotEmpty()
-                .NotNull();
+                .NotNull()
+                .WithMessage(string.Format(ApplicationConstants.RequiredErrorMsg, nameof(UpdateUserProfileCommand.FirstName)));
 
             RuleFor(p => p.LastName)
-                .NotEmpty()
-                .NotNull();
+                .NotNull()
+                .WithMessage(string.Format(ApplicationConstants.RequiredErrorMsg, nameof(UpdateUserProfileCommand.LastName)));
         }
     }
 }

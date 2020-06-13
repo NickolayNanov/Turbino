@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Turbino.WebApp.Models
+﻿namespace Turbino.WebApp.Models
 {
     public class ErrorViewModel
     {

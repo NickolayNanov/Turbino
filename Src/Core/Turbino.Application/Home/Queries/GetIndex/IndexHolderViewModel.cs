@@ -1,14 +1,9 @@
-﻿namespace Turbino.Application.Tours.Queries.GetAllToursFiltered
+﻿namespace Turbino.Application.Home.Queries.GetIndex
 {
-    using MediatR;
-
-    public class GetAllToursWithFilterQuery : IRequest<GetAllToursWithFilterListViewModel>
+    using Turbino.Application.Destinations.Queries.GetAllDestinations;
+    using Turbino.Application.Tours.Queries.GetAllDestinations;
+    public class IndexHolderViewModel
     {
-        public GetAllToursWithFilterQuery()
-        {
-            this.PageIndex = 1;
-        }
-
         public string TourName { get; set; }
 
         public string Month { get; set; }
@@ -24,5 +19,9 @@
         public int? PageIndex { get; set; }
 
         public bool HaveMoreTours { get; set; }
+
+        public GetAllToursListViewModel TourViewModel { get; set; }
+
+        public DestinationsListViewModel Destinations { get; set; }
     }
 }

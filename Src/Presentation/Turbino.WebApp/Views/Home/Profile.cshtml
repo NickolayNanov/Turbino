@@ -15,6 +15,13 @@
           method="post"
           asp-controller="Home"
           asp-action="UpdateProfile">
+        @if (Model.Errors.Length != 0)
+        {
+            @foreach (var error in Model.Errors)
+            {
+                <p class="text-danger">@error</p>
+            }
+        }
         <div class="form-group row">
             <div class="col-sm-12">
                 <div class="input-group">

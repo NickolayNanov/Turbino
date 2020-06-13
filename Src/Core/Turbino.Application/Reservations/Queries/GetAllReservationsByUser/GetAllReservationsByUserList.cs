@@ -1,9 +1,7 @@
-﻿using MediatR;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Turbino.Application.Reservations.Queries.GetAllReservationsByUser
+﻿namespace Turbino.Application.Reservations.Queries.GetAllReservationsByUser
 {
+    using System.Collections.Generic;
+
     public class GetAllReservationsByUserList
     {
         public GetAllReservationsByUserList()
@@ -11,6 +9,6 @@ namespace Turbino.Application.Reservations.Queries.GetAllReservationsByUser
             Reservations = new List<GetAllReservationsByUserViewModel>();
         }
 
-        public IList<GetAllReservationsByUserViewModel> Reservations { get; set; }
+        public virtual IList<GetAllReservationsByUserViewModel> Reservations { get; set; }
     }
 }

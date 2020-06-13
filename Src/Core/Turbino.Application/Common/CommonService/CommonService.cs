@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Application.Tours.Commands.CreateTour;
-
-namespace Turbino.Application.Common.CommonService
+﻿namespace Turbino.Application.Common.CommonService
 {
+    using System;
+    using System.Linq;
+
+    using Turbino.Application.Common.Interfaces;
+    using Turbino.Application.Tours.Commands.CreateTour;
+
     public class CommonService : ICommonService
     {
         private readonly ITurbinoDbContext context;

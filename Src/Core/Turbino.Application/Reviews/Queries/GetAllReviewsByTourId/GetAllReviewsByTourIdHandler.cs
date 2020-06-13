@@ -1,13 +1,17 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-
-namespace Turbino.Application.Reviews.Queries.GetAllReviewsByTourId
+﻿namespace Turbino.Application.Reviews.Queries.GetAllReviewsByTourId
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Turbino.Application.Common.Interfaces;
+
+    using MediatR;
+    using AutoMapper;
+
+
     public class GetAllReviewsByTourIdHandler : IRequestHandler<GetAllReviewsByTourIdQuery, GetAllReviewsByTourIdListViewModel>
     {
         private readonly ITurbinoDbContext context;

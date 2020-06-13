@@ -1,14 +1,17 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Domain.Entities;
-using Turbino.Domain.Enumerations;
-
-namespace Turbino.Application.Reviews.Commands
+﻿namespace Turbino.Application.Reviews.Commands
 {
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+
+    using Turbino.Application.Common.Interfaces;
+    using Turbino.Domain.Entities;
+    using Turbino.Domain.Enumerations;
+
+    using MediatR;
+
     public class CreateReviewHandler : IRequestHandler<CreateReviewCommand, Unit>
     {
         private readonly ITurbinoDbContext context;
@@ -22,7 +25,7 @@ namespace Turbino.Application.Reviews.Commands
 
         public async Task<Unit> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
         {
-            var author = await userManager.FindByNameAsync(request.AuthorName);
+            TurbinoUser author = await userManager.FindByNameAsync(request.AuthorName);
 
             Review review = new Review()
             {

@@ -1,19 +1,19 @@
 ﻿namespace Turbino.WebApp
 {
+    using System;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using FluentValidation.AspNetCore;
 
-    using Application;
-    using Infrastructure;
-    using Persistence;
     using Turbino.Infrastructure;
     using Turbino.Application.Common.Interfaces;
-    using Turbino.WebApp.Middleware;
-    using Microsoft.AspNetCore.Authentication.Cookies;
+
+    using Application;
+    using Persistence;
+    using FluentValidation.AspNetCore;
 
     public class Startup
     {
@@ -36,14 +36,22 @@
                 .AddDbContextCheck<TurbinoDbContext>();
 
             services.AddHttpContextAccessor();
-            
+
             services
                .AddMvc(options => options.EnableEndpointRouting = false)
-               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ITurbinoDbContext>())
-               /*.AddRazorPagesOptions(opt => opt.Conventions.addpage("/Authentication/Login"))*/;
+               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ITurbinoDbContext>());
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Authentication/Login";
+                options.AccessDeniedPath = "/Home/Error";
+                options.SlidingExpiration = true;
+            });
 
             services.AddControllersWithViews();
-
             services.AddRazorPages();
         }
 
@@ -60,7 +68,6 @@
                 app.UseHsts();
             }
 
-            app.UseCustomExceptionHandler();
             app.UseHealthChecks("/health");
 
             app.UseHttpsRedirection();

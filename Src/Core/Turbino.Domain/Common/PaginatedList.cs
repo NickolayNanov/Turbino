@@ -1,7 +1,7 @@
 ﻿namespace Turbino.Domain.Common
 {
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
 
     public class PaginatedList<SourceType> : List<SourceType>
     {

@@ -1,33 +1,29 @@
 ﻿namespace Turbino.WebApp.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
 
     using Models;
-    using System.Threading.Tasks;
+
     using Turbino.Domain.Entities;
-    using Microsoft.AspNetCore.Identity;
-    using System.Linq;
     using Turbino.Application.Home.GetProfile;
+    using Turbino.Application.Home.Queries.GetIndex;
     using Turbino.Application.Home.Commands.UpdateUserProfile;
 
     public class HomeController : BaseController
     {
-        private readonly RoleManager<TurbinoRole> roleManager;
-        private readonly UserManager<TurbinoUser> userManager;
-
-        public HomeController(RoleManager<TurbinoRole> roleManager, UserManager<TurbinoUser> userManager)
-        {
-            this.roleManager = roleManager;
-            this.userManager = userManager;
-        }
+        private const string ProfileRoute = "Profile";
+        private const string IndexRoute = "/";
 
         [HttpGet]
-        [Route("/")]
+        [Route(IndexRoute)]
         public async  Task<IActionResult> Index()
         {
-            await SeedRoles();
-            return this.View();
+            IndexHolderViewModel tours = await Mediator.Send(new GetIndexQuery());
+            return View(tours);
         }
 
         public IActionResult Privacy()
@@ -42,35 +38,36 @@
         }
 
         [HttpGet]
-        [Route("Profile")]
+        [Route(ProfileRoute)]
         public async Task<IActionResult> Profile()
         {
-            var userData = await Mediator.Send(new GetProfileQuery() { Username = User.Identity.Name });
+            GetProfileViewModel userData = await Mediator.Send(new GetProfileQuery() { Username = User.Identity.Name });
             return View(userData);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(string firstName, string lastName, string middleName, string phone)
         {
-            var state = this.ModelState.IsValid;
             GetProfileViewModel userData = await Mediator.Send(new UpdateUserProfileCommand() { UserName = User.Identity.Name, FirstName = firstName, MiddleName = middleName, LastName = lastName, PhoneNumber = phone });
+            
+            if(userData.Errors.Length != 0)
+            {
+                ViewData["Errors"] = userData.Errors;
+            }
+
             return RedirectToAction("Profile", "Home", userData);
         }
 
-        private async Task SeedRoles()
+        [HttpGet]
+        public IActionResult AboutUs()
         {
-            if (!roleManager.Roles.Any())
-            {
-                await roleManager.CreateAsync(new TurbinoRole("Admin"));
-                await roleManager.CreateAsync(new TurbinoRole("User"));
-            }
+            return View();
+        }
 
-            if (!userManager.Users.Any())
-            {
-                TurbinoUser user = new TurbinoUser() { UserName = "admin", FirstName = "admin", LastName = "adminov" };
-                await userManager.CreateAsync(user, "fr3s7ed23");
-                await userManager.AddToRoleAsync(user, "Admin");
-            }
+        [HttpGet]
+        public IActionResult ContactUs()
+        {
+            return View();
         }
     }
 }

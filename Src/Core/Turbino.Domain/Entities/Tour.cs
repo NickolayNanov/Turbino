@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using Turbino.Domain.Entities.Common;
-using Turbino.Domain.Enumerations;
-
-namespace Turbino.Domain.Entities
+﻿namespace Turbino.Domain.Entities
 {
+    using System.Collections.Generic;
+
+    using Turbino.Domain.Entities.Common;
+    using Turbino.Domain.Enumerations;
+
     public class Tour : BaseModel
     {
         public Tour()

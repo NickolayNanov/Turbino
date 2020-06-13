@@ -42,7 +42,8 @@ namespace Turbino.Persistence.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     MiddleName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,11 +60,37 @@ namespace Turbino.Persistence.Migrations
                     LastModifiedBy = table.Column<string>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
-                    TimesVisited = table.Column<int>(nullable: false)
+                    TimesVisited = table.Column<int>(nullable: false),
+                    ImgUrl = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    SpokenLanguage = table.Column<string>(nullable: true),
+                    Visa = table.Column<string>(nullable: true),
+                    Currency = table.Column<string>(nullable: true),
+                    SquareArea = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Destinations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeamMembers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    FullName = table.Column<string>(nullable: false),
+                    ProfilePictureUrl = table.Column<string>(nullable: false),
+                    JobTitle = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamMembers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,7 +200,7 @@ namespace Turbino.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CreditCards",
+                name: "CreditCard",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -184,15 +211,64 @@ namespace Turbino.Persistence.Migrations
                     CardNumber = table.Column<string>(nullable: false),
                     Cvc = table.Column<string>(nullable: false),
                     CardOwner = table.Column<string>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CreditCards", x => x.Id);
+                    table.PrimaryKey("PK_CreditCard", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CreditCards_AspNetUsers_UserId",
+                        name: "FK_CreditCard_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DestinationImages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    DestinationId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DestinationImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DestinationImages_Destinations_DestinationId",
+                        column: x => x.DestinationId,
+                        principalTable: "Destinations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -206,11 +282,22 @@ namespace Turbino.Persistence.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    From = table.Column<DateTime>(nullable: false),
-                    To = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    PricePerPerson = table.Column<decimal>(nullable: false),
+                    RequiredAge = table.Column<int>(nullable: false),
+                    Duration = table.Column<int>(nullable: false),
+                    Location = table.Column<string>(nullable: true),
+                    Dates = table.Column<string>(nullable: true),
+                    Departure = table.Column<string>(nullable: true),
+                    NextDeparture = table.Column<string>(nullable: true),
+                    Accommodation = table.Column<string>(nullable: true),
+                    Included = table.Column<string>(nullable: true),
+                    NotIncluded = table.Column<string>(nullable: true),
                     TourType = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    DestinationId = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: true),
+                    DestinationId = table.Column<string>(nullable: false),
+                    ImgUrl = table.Column<string>(nullable: true),
+                    Rating = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,7 +345,9 @@ namespace Turbino.Persistence.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<string>(nullable: false),
                     TourId = table.Column<string>(nullable: false),
-                    ReservedOn = table.Column<DateTime>(nullable: false)
+                    ReservedOn = table.Column<DateTime>(nullable: false),
+                    DepartureDate = table.Column<DateTime>(nullable: false),
+                    DateOfLeaving = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -275,6 +364,66 @@ namespace Turbino.Persistence.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    ReviewerName = table.Column<string>(nullable: true),
+                    ReviewerEmail = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: false),
+                    Rating = table.Column<int>(nullable: false),
+                    TourId = table.Column<string>(nullable: true),
+                    AuthorId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Tours_TourId",
+                        column: x => x.TourId,
+                        principalTable: "Tours",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TourImages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    TourId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TourImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TourImages_Tours_TourId",
+                        column: x => x.TourId,
+                        principalTable: "Tours",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -317,9 +466,14 @@ namespace Turbino.Persistence.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CreditCards_UserId",
-                table: "CreditCards",
+                name: "IX_CreditCard_UserId",
+                table: "CreditCard",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DestinationImages_DestinationId",
+                table: "DestinationImages",
+                column: "DestinationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservations_TourId",
@@ -332,6 +486,21 @@ namespace Turbino.Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_AuthorId",
+                table: "Reviews",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_TourId",
+                table: "Reviews",
+                column: "TourId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TourImages_TourId",
+                table: "TourImages",
+                column: "TourId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tours_DestinationId",
                 table: "Tours",
                 column: "DestinationId");
@@ -340,6 +509,11 @@ namespace Turbino.Persistence.Migrations
                 name: "IX_UserDestinations_DestinationId",
                 table: "UserDestinations",
                 column: "DestinationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_RoleId",
+                table: "UserRoles",
+                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -360,19 +534,34 @@ namespace Turbino.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CreditCards");
+                name: "CreditCard");
+
+            migrationBuilder.DropTable(
+                name: "DestinationImages");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
 
             migrationBuilder.DropTable(
+                name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "TeamMembers");
+
+            migrationBuilder.DropTable(
+                name: "TourImages");
+
+            migrationBuilder.DropTable(
                 name: "UserDestinations");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "UserRoles");
 
             migrationBuilder.DropTable(
                 name: "Tours");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

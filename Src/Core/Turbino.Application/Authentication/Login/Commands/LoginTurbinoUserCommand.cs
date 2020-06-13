@@ -1,8 +1,8 @@
-﻿using MediatR;
-
-namespace Turbino.Application.Authentication.Login.Commands
+﻿namespace Turbino.Application.Authentication.Login.Commands
 {
-    public class LoginTurbinoUserCommand : IRequest
+    using MediatR;
+
+    public class LoginTurbinoUserCommand : IRequest<string[]>
     {
         public string Username { get; set; }
 

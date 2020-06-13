@@ -1,10 +1,12 @@
-﻿using AutoMapper;
-using System;
-using Turbino.Application.Interfaces.Mapping;
-using Turbino.Domain.Entities;
-
-namespace Turbino.Application.Reviews.Queries.GetAllReviewsByTourId
+﻿namespace Turbino.Application.Reviews.Queries.GetAllReviewsByTourId
 {
+    using System;
+
+    using Turbino.Application.Interfaces.Mapping;
+    using Turbino.Domain.Entities;
+
+    using AutoMapper;
+
     public class GetAllReviewsByTourIdViewModel : IHaveCustomMapping
     {
         public string AuthorName { get; set; }

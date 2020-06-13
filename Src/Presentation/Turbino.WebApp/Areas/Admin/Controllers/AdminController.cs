@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Turbino.Application.Common.CommonService;
-using Turbino.Application.Destinations.Commands.Create;
-using Turbino.Application.Tours.Commands.CreateTour;
-using Turbino.WebApp.Controllers;
-
-namespace Turbino.WebApp.Areas.Admin.Controllers
+﻿namespace Turbino.WebApp.Areas.Admin.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    using Turbino.WebApp.Controllers;
+    using Turbino.Application.Common.CommonService;
+    using Turbino.Application.Tours.Commands.CreateTour;
+    using Turbino.Application.Destinations.Commands.Create;
+
     [Area("Admin")]
     [Route("Admin")]
     [Authorize(Roles = "Admin")]
@@ -38,7 +40,14 @@ namespace Turbino.WebApp.Areas.Admin.Controllers
         [Route("CreateDestination")]
         public async Task<IActionResult> CreateDestination(CreateDestinationCommand command)
         {
-            await Mediator.Send(command);
+            string[] errors = await Mediator.Send(command);
+
+            if (errors.Length != 0)
+            {
+                ViewData["Errors"] = errors;
+                return View(new CreateDestinationCommand());
+            }
+
             return Redirect("/Destinations");
         }
 
@@ -53,7 +62,14 @@ namespace Turbino.WebApp.Areas.Admin.Controllers
         [Route("CreateTour")]
         public async Task<IActionResult> CreateTour(CreateTourCommand command)
         {
-            await Mediator.Send(command);
+            string[] errors = await Mediator.Send(command);
+
+            if(errors.Length != 0)
+            {
+                ViewData["Errors"] = errors;
+                return View(commonService.GetCommand());
+            }
+
             return Redirect("/Tours");
         }
     }

@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "ContactUs";
+}
+
+<div class="tour-title not-fixed ">
+
+    <img class="w-100 h-100" src="../assets/images/toronto.jpg" alt="">
+    <h1 class="white text-center front shadow-text center-text">Contact Us</h1>
+    <img class="curve2 front" src="../assets/svgs/curvegrey.svg" alt="">
+
+</div>
+<!-- End section 1-->
+<!-- Section 2 about us-->
+
+<section id="pagesection">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-5 col-12 mb-5 text-left">
+                <h3 class="black bold front mb-2 mt-2 ">Feel free to<br> connect with us</h3>
+                <h5 class="primary-color section-title mb-3">Open Hours: 09:00 A.M. 18.00 P.M</h5>
+                <div class="separator"></div>
+                <p class=" text-block">
+                    Our offices are open within these hours of the day. Feel free to contact us and to ask any 
+                    questions you have. In addition if you want you can send us an email on <strong>nickolaynanov17@gmail.com</strong>
+                    or call us on (+359) 111111111. Thank you for choosing Turbino for your dreamed vacation.
+                </p>
+                <p></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 offset-md-2 text-center  col-10 offset-1 mt-5">
+                <div class="text-center white-popup">
+
+                    <a href="https://www.facebook.com/">
+                        <i class="fab fa-facebook-f"></i>
+                    </a> &nbsp;
+
+                    <a href="https://twitter.com">
+                        <i class="fab fa-twitter"></i>
+                    </a>&nbsp;
+
+                    <a href="https://plus.google.com/">
+                        <i class="fab fa-google-plus-g"></i>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="map-fullwidth">
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            var uluru = { lat: 43.074208, lng: 25.651683 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 14,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAX6LW8_BIKXNVzx205L88xRdjfaf5dpfg&callback=initMap">
+    </script>
+</section>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/popper.min.js"></script>
+
+<!-- Aditional scripts -->
+<script src="../js/jquery.magnific-popup.min.js"></script>
+<script src="../js/smooth-scroll.min.js"></script>
+<script src="../js/instafeed.min.js"></script>
+<script src="js/ofi.js"></script>
+
+<!-- Main scripts -->
+<script src="js/main.js"></script>
+
+<!-- Stylesheets -->
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link rel="stylesheet" href="../css/font-awesome-animation.min.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/style.css" type="text/css">
+                            

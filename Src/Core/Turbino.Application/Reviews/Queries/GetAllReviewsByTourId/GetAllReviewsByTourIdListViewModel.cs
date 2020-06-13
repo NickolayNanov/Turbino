@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Turbino.Application.Reviews.Queries.GetAllReviewsByTourId
+﻿namespace Turbino.Application.Reviews.Queries.GetAllReviewsByTourId
 {
+    using System.Collections.Generic;
+
     public class GetAllReviewsByTourIdListViewModel
     {
         public GetAllReviewsByTourIdListViewModel()
@@ -9,6 +9,6 @@ namespace Turbino.Application.Reviews.Queries.GetAllReviewsByTourId
             this.Reviews = new List<GetAllReviewsByTourIdViewModel>();
         }
 
-        public ICollection<GetAllReviewsByTourIdViewModel> Reviews { get; set; }
+        public virtual ICollection<GetAllReviewsByTourIdViewModel> Reviews { get; set; }
     }
 }

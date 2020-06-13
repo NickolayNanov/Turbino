@@ -1,26 +1,40 @@
-﻿using MediatR;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Turbino.Application.Common.Interfaces;
-using Turbino.Domain.Entities;
-using Turbino.Infrastructure;
-
-namespace Turbino.Application.Destinations.Commands.Create
+﻿namespace Turbino.Application.Destinations.Commands.Create
 {
-    public class CreateDestinationHandler : IRequestHandler<CreateDestinationCommand, Unit>
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    using Turbino.Infrastructure;
+    using Turbino.Domain.Entities;
+    using Turbino.Application.Common.Interfaces;
+
+    using MediatR;
+    using FluentValidation;
+    using FluentValidation.Results;
+
+    public class CreateDestinationHandler : IRequestHandler<CreateDestinationCommand, string[]>
     {
         private readonly ITurbinoDbContext context;
+        private readonly IValidator<CreateDestinationCommand> validator;
         private readonly ImageUploader uploader;
 
-        public CreateDestinationHandler(ITurbinoDbContext context, ImageUploader uploader)
+        public CreateDestinationHandler(ITurbinoDbContext context, IValidator<CreateDestinationCommand> validator, ImageUploader uploader)
         {
             this.context = context;
+            this.validator = validator;
             this.uploader = uploader;
         }
 
-        public async Task<Unit> Handle(CreateDestinationCommand request, CancellationToken cancellationToken)
+        public async Task<string[]> Handle(CreateDestinationCommand request, CancellationToken cancellationToken)
         {
+            ValidationResult validation = await validator.ValidateAsync(request);
+
+            if (!validation.IsValid)
+            {
+                return validation.Errors.Select(x => x.ErrorMessage).ToArray();
+            }
+
             string[] imgUrls = new string[]
             {
                 uploader.UploadImage(request.FirstImg, Guid.NewGuid().ToString()),
@@ -40,7 +54,7 @@ namespace Turbino.Application.Destinations.Commands.Create
             };
 
             destination.ImgUrl = uploader.UploadImage(request.ImgUrl, Guid.NewGuid().ToString());
-            var destinationId = context.Destinations.Add(destination).Entity.Id;
+            string destinationId = context.Destinations.Add(destination).Entity.Id;
 
             for (int i = 0; i < imgUrls.Length - 1; i++)
             {
@@ -48,7 +62,7 @@ namespace Turbino.Application.Destinations.Commands.Create
             }
 
             await context.SaveChangesAsync(cancellationToken);
-            return Unit.Value;
+            return new string[0];
         }
 
         private string CreateDescription(CreateDestinationCommand request, string[] imgUrls)

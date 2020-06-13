@@ -1,12 +1,13 @@
 ﻿namespace Turbino.Application.Common.Logging
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using FluentValidation;
+    using System.Collections.Generic;
+
     using MediatR;
-    using ValidationException = Exceptions.ValidationException;
+    using FluentValidation;
+    using FluentValidation.Results;
 
     public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
@@ -20,18 +21,13 @@
 
         public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            var context = new ValidationContext(request);
+            ValidationContext context = new ValidationContext(request);
 
-            var failures = validators
+            List<ValidationFailure> failures = validators
                 .Select(v => v.Validate(context))
                 .SelectMany(result => result.Errors)
                 .Where(f => f != null)
                 .ToList();
-
-            if (failures.Count != 0)
-            {
-                throw new ValidationException(failures);
-            }
 
             return next();
         }

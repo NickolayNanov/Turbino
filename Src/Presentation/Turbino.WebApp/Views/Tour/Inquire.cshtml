@@ -4,7 +4,7 @@
 }
 <div class="tour-title">
     <img class="w-100 h-100" src="../assets/images/amsterdamtitle.jpg" alt="">
-    <h1 class="white text-center shadow-text center-text">Amsterdam with love</h1>
+    <h1 class="white text-center shadow-text center-text">@Model.Name</h1>
 
     <div>
         <a class="smooth-scroll" href="#read-tour">
@@ -27,8 +27,8 @@
 
                     <h4 class="black bold mt-3 px-4 pb-2 text-center">Book this tour</h4>
 
-                    <form asp-controller="Reservation"
-                          asp-action="Reserve"
+                    <form asp-controller="Tour"
+                          asp-action="Book"
                           method="post"
                           asp-route-tourId="@Model.Id"
                           asp-route-arrivalDate="@Model.ArrivalDate"
@@ -46,10 +46,9 @@
                             <div class="input-group">
                                 <input asp-for="@Model.ArrivalDate" type="date" id="datepicker" placeholder="Choose your Date" class="form-control">
                                 @*<div class="input-group-append">
-                    <div class="input-group-text"><i class="fas fa-calendar"></i> </div>
-                </div>*@
+                        <div class="input-group-text"><i class="fas fa-calendar"></i> </div>
+                    </div>*@
                             </div>
-
                         </div>
 
                         <div class="form-group text-center departure">
@@ -57,8 +56,8 @@
                             <div class="input-group">
                                 <input asp-for="@Model.DateOfLeaving" type="date" id="datepicker" placeholder="Choose your Date of leaving" class="form-control">
                                 @*<div class="input-group-append">
-                    <div class="input-group-text"><i class="fas fa-calendar"></i> </div>
-                </div>*@
+                        <div class="input-group-text"><i class="fas fa-calendar"></i> </div>
+                    </div>*@
                             </div>
 
                         </div>
@@ -69,7 +68,13 @@
                             </div>
                         </div>
                     </form>
-
+                    @if (ViewData["Error"] != null)
+                    {
+                        @foreach (var error in (string[])ViewData["Error"])
+                        {
+                            <p class="text-danger">@error</p>
+                        }
+                    }
                 </div>
 
                 <div class="more-info mx-auto my-4">

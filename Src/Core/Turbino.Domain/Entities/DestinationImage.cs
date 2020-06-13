@@ -1,7 +1,7 @@
-﻿using Turbino.Domain.Entities.Common;
-
-namespace Turbino.Domain.Entities
+﻿namespace Turbino.Domain.Entities
 {
+    using Turbino.Domain.Entities.Common;
+
     public class DestinationImage : BaseDeletableModel
     {
         public DestinationImage(string destinationId, string url)

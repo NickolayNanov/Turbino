@@ -26,6 +26,13 @@
                    placeholder="@nameof(Model.Password)...">
 
             <button type="submit" class="btn btn-primary mb-2 mx-4 mx-md-0 mr-lg-2 py-2 form-control-inline3">Login</button>
+            @if (ViewData["Errors"] != null)
+            {
+                @foreach (var error in (string[])ViewData["Errors"])
+                {
+                    <p class="text-danger">@error</p>
+                }
+            }
         </form>
     </div>
 </section>

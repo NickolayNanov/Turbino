@@ -22,13 +22,13 @@
         {
             timer.Start();
 
-            var response = await next();
+            TResponse response = await next();
 
             timer.Stop();
 
             if (timer.ElapsedMilliseconds > 500)
             {
-                var name = typeof(TRequest).Name;
+                string name = typeof(TRequest).Name;
 
                 logger.LogWarning("Application Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}", name, timer.ElapsedMilliseconds, request);
             }

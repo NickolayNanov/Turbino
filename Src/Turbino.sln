@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{8D15D529-CF58-4D93-8A54-E023869CD899}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A5423622-3530-482C-B89F-B1E1E7C76C6E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.Common", "Common\Turbino.Common\Turbino.Common.csproj", "{26D103A0-E6C8-4417-922A-2856B5233E5E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Turbino.Application", "Core\Turbino.Application\Turbino.Application.csproj", "{357EB5EC-B3D7-4CFD-8DF8-FD8AA1C3097D}"

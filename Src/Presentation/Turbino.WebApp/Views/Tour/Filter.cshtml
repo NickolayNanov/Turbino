@@ -36,7 +36,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <select asp-for="@Model.Month" class="form-control" id="inlineFormInputName1">
-                                        <option selected>Any month</option>
+                                        <option selected value="@null">Any month</option>
                                         <option value="January">January</option>
                                         <option value="February">February</option>
                                         <option value="March">March</option>
@@ -118,11 +118,35 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn col-sm-12 my-2 btn-primary">Search</button>
+                        @if (!string.IsNullOrEmpty(Model.TourName) 
+                            || !string.IsNullOrEmpty(Model.DestinationName) 
+                            || !string.IsNullOrEmpty(Model.PriceStr) 
+                            || Model.SortOrder != 0 
+                            || Model.TourName != "Tour Type")
+                        {
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <a asp-controller="Tour" asp-action="Index" class="btn col-sm-12 my-2 btn-primary">Remove Filter</a>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn col-sm-12 my-2 btn-primary">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                        @if (ViewData["Errors"] != null)
+                        {
+                            @foreach (var error in (string[])ViewData["Errors"])
+                            {
+                                <p class="text-danger">@error</p>
+                            }
+                        }
                     </form>
                 </div>
 
@@ -173,8 +197,7 @@
                                 <h6 class="primary-color text-right ">$@Model.Tours[i].Price</h6>
                             </div>
                             <div>
-                                <a class="btn btn-primary px-3 ml-3 mr-1 my-1 btn-sm float-left" href="#" role="button">adventure</a>
-                                <a class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">@Model.Tours[i].Type</a>
+                                <button class="btn btn-primary mx-1 px-3 mx-2 my-1 btn-sm float-left" href="#" role="button">@Model.Tours[i].Type</button>
                             </div>
                         </div>
                     </div>

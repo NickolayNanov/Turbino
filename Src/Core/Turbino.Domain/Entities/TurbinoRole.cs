@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+
     using Microsoft.AspNetCore.Identity;
 
     public class TurbinoRole : IdentityRole<string>
@@ -15,6 +16,7 @@
             : base(name)
         {
             this.Id = Guid.NewGuid().ToString();
+            this.RoleUsers = new HashSet<TurbinoUserRole>();
         }
 
         public virtual ICollection<TurbinoUserRole> RoleUsers { get; set; }
