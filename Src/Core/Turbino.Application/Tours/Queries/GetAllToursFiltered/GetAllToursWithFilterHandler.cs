@@ -37,7 +37,7 @@
         {
             GetAllToursWithFilterListViewModel model = null;
 
-            if (!isValid(request))
+            if (!IsValid(request))
             {
                 model = new GetAllToursWithFilterListViewModel
                 {
@@ -92,8 +92,7 @@
 
             if (request.TourType != DefaultTourType)
             {
-                TourType type;
-                Enum.TryParse<TourType>(request.TourType, out type);
+                Enum.TryParse(request.TourType, out TourType type);
                 tours = tours.Where(t => t.TourType == type);
             }
 
@@ -130,7 +129,7 @@
             return tours;
         }
 
-        private bool isValid(GetAllToursWithFilterQuery request)
+        private bool IsValid(GetAllToursWithFilterQuery request)
         {
             if ((request.PriceStr == DefaultPrice
                 && string.IsNullOrEmpty(request.DestinationName)
