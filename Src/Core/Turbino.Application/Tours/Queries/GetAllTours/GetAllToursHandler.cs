@@ -15,6 +15,7 @@
 
     public class GetAllToursHandler : IRequestHandler<GetAllToursListQuery, GetAllToursListViewModel>
     {
+        private const int PageSize = 12;
         private readonly ITurbinoDbContext context;
         private readonly IMapper mapper;
 
@@ -30,10 +31,10 @@
             {
                 Tours = await this.mapper
                                     .ProjectTo<GetAllToursListModel>(
-                                        PaginatedList<Tour>.Create(context.Tours.AsNoTracking(), request.PageIndex ?? 1, 12))
+                                        PaginatedList<Tour>.Create(context.Tours.AsNoTracking(), request.PageIndex ?? 1, PageSize))
                                             .ToListAsync(),
                 PageIndex = request.PageIndex,
-                HaveMoreTours = context.Tours.Count() > (request.PageIndex ?? 1) * 12
+                HaveMoreTours = context.Tours.Count() > (request.PageIndex ?? 1) * PageSize
             };
         }
     }

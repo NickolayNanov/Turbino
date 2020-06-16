@@ -23,6 +23,7 @@
         private const string DefaultPrice = "$1000 - $2500";
         private const string DefaultMoth = "Any month";
         private const string DefaultTourType = "Tour Type";
+        private const int PageSize = 12;
         private readonly ITurbinoDbContext context;
         private readonly IMapper mapper;
 
@@ -61,7 +62,7 @@
                 {
                     Tours = await this.mapper.ProjectTo<GetAllToursListModel>(
                                                             PaginatedList<Tour>.Create(tours,
-                                                                request.PageIndex ?? 1, 12)).ToListAsync(),
+                                                                request.PageIndex ?? 1, PageSize)).ToListAsync(),
                     PageIndex = request.PageIndex ?? 0,
                     TourName = request.TourName,
                     DestinationName = request.DestinationName,
@@ -69,8 +70,8 @@
                     Month = request.Month,
                     PriceStr = request.PriceStr,
                     SortOrder = request.SortOrder,
-                    HaveMoreTours = tours.Skip((request.PageIndex == null ? 1 : request.PageIndex.Value) * 12)
-                                         .Take((request.PageIndex == null ? 1 : request.PageIndex.Value + 1) * 12).Count() >= 0
+                    HaveMoreTours = tours.Skip((request.PageIndex == null ? 1 : request.PageIndex.Value) * PageSize)
+                                         .Take((request.PageIndex == null ? 1 : request.PageIndex.Value + 1) * PageSize).Count() >= 0
                 };
             }
 
